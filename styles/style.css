@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'Goudy Mediaeval Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Goudy Mediaeval Regular'), url('../resource/font/GoudyMediaeval-Regular.woff') format('woff');
+}
+    
+@font-face {
+    font-family: 'Goudy Mediaeval Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Goudy Mediaeval Bold'), url('../resource/font/GoudyMediaeval-DemiBold.woff') format('woff');
+}
+    
+@font-face {
+    font-family: 'Goudy Medieval Alternate Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Goudy Medieval Alternate Regular'), url('../resource/font/GoudyMedieval-Alternate.woff') format('woff');
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    max-width: 100vw;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: burlywood ;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-image: url("../resource/assets/background.jpg");
+}
+
+.splash-box {
+    width: 85%;
+    height: 50vh; 
+    display: flex;
+    flex-direction: row;
+    animation: load 6s none;
+}
+
+.sign-board {
+    border-width: 50px;
+    border-style: solid;
+    border-image: url("../resource/assets/iron-border.png") 25% round ;
+    background-image: url("../resource/assets/wood-background.jpg") ;
+}
+
+.rotated {
+    rotate: 0 0 1 5deg;
+}
+
+@keyframes load {
+    0% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+.next-page {
+    font-size: 16px; 
+    font-family: 'Goudy Medieval Alternate Regular', 'Times New Roman', 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+    align-self: self-start;
+}
+
+.title {
+    font-size: 100px;
+    font-family: 'Goudy Medieval Alternate Regular', 'Times New Roman', 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+}
