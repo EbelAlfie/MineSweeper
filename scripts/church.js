@@ -15,25 +15,22 @@ class Church {
     createChurch() {
         let room = new Image();
         room.onload = () => {
-            // this.context.drawImage(room, 
-            //     0, 0,
-            //     30, 30, 
-            //     100, 100,
-            //     100, 100
-            // ); 
+            this.context.drawImage(room, 
+                0, 0, 300, 200
+            ); 
         }
         room.src = this.map ;
     }
 
     populateChurch() {
-        let mainChar = new Entity({
+        var mainChar = new Entity({
             x: 0,
             y: 0,
             body: "../resource/assets/charachips/mc.png"
         });
         setTimeout(() => {
-            mainChar.sprite.render(this.context); 
-        }, 200);
+            mainChar.draw(this.context), 200
+        }) ;
     }
 }
 
