@@ -16,8 +16,12 @@ body {
 .floor {
     display: flex;
     flex-direction: row;
-    overflow: hidden;
     position: relative ;
-    image-rendering: pixelated;
     transform: scale(3);
+}
+
+.screen {
+    image-rendering: pixelated;
+    overflow: visible;
+    outline: auto;
 }
