@@ -2,7 +2,6 @@ import Entity from "./entity.js"
 import * as GameObj from "./gameobj.js"
  
 class Church {
-    isInitialized = false ;
     room = new Image() ;
     height = null ;
     width = null ;
@@ -16,35 +15,32 @@ class Church {
         this.currentY = -10 ;
     }
 
-    create() {//console.log(`${this.canvas.width} ${this.canvas.height}`); 
-        this.#createChurch() ;
+    createChurch() {//console.log(`${this.canvas.width} ${this.canvas.height}`); 
         this.#populateChurch() ;
-        this.isInitialized = true ;
+        this.#startTime() ;
     }
 
-    #createChurch() {
-        this.room.onload = () => {
-            this.context.drawImage(this.room, 
-                this.currentX, this.currentY
-            ); 
-        }
+    #populateChurch() {
         this.room.src = this.map ;
-    }
-
-    async #populateChurch() {
         this.mainChar = new Entity(GameObj.mainChar);
         this.mainChar.createSprite() ;
-        setTimeout( () => { this.mainChar.draw(this.context) }, 200) ;
     }
 
-    #regenerateEnvironment() {
-        this.context.clearRect(0, 0, 400, 400) ;
-        this.context.drawImage(this.room, this.currentX, this.currentY) ;
-    }
+    #startTime() {
+        const time = () => {
+            this.context.clearRect(0, 0, 400, 400) ;
+            this.context.drawImage(this.room, 
+                this.currentX, this.currentY
+            );
+            this.mainChar.draw(this.context) ;
 
+            requestAnimationFrame(() => time()) ;
+        }
+        time() ;
+    }
+    
     /** Character movement influenced by arrow key goes here */
     handleKeyPress(key) { 
-        if (!this.isInitialized) return ;
         switch(key) { //move mapnya?
             case "ArrowUp":
                 if (!this.validateNorthPosition(this.mainChar.y)) return ;
@@ -67,9 +63,7 @@ class Church {
                 this.currentX -= this.mainChar.step ;
                 break;
             default: break;
-        }
-        this.#regenerateEnvironment() ;
-        this.mainChar.draw(this.context) ;
+        }        
     }
 
     /** validate char and map relative to top */

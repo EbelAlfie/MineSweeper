@@ -9,12 +9,11 @@ function main() {
         space: document.querySelector(".floor"),
         map: GameObj.churchObj
     });
-    church.create() ;
+    church.createChurch() ;
     setupKeyActions() ;
 }
 
-
-function setupKeyActions() {
+function setupKeyActions() { //debounce? 
     document.onkeydown = (event) => {
         church.handleKeyPress(event.key);
     }
