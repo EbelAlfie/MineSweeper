@@ -1,6 +1,7 @@
 import Sprite from "./sprite.js"
 
 class Entity {
+    step = 8 ;
     constructor(obj) {
         this.x = obj.x ; 
         this.y = obj.y ; 
@@ -8,7 +9,18 @@ class Entity {
             gameObj: this,
             body: obj.body
         }) ;
+    }
+
+    createSprite() {
+        let isLoaded = false ;
+        this.sprite.onload = (event) => {
+            isLoaded = true ;
+        }
+        this.sprite.onerror = () => {
+            isLoaded = false ;
+        }
         this.sprite.create() ;
+        return isLoaded ;
     }
 
     draw(context) {
@@ -16,6 +28,8 @@ class Entity {
         const x = this.x ;
         const y = this.y ;
         const animation = this.sprite.currentAnim ;
+        this.sprite.currentFrame = (this.sprite.currentFrame + 1) % animation.frames ;
+        
         context.drawImage(
             this.sprite,
             animation.anim[this.sprite.currentFrame][0], animation.anim[this.sprite.currentFrame][1], //x, y top left
@@ -23,27 +37,26 @@ class Entity {
             x, y, //dest x, y (char pos)
             25, 32 //request space dest
         ) ; 
-        this.sprite.currentFrame = (this.sprite.currentFrame + 1) % animation.frames ;
     }
 
     /** Move object Up */
     moveNorth() {
-        this.y -= 1 ;
+        this.y -= this.step ;
         this.sprite.setCurrentAnim("walkNorth") ;
     }
     /** Move object Down */
     moveSouth() {
-        this.y += 1 ;
+        this.y += this.step ;
         this.sprite.setCurrentAnim("walkSouth") ;
     }
     /** Move object Left */
     moveWest() {
-        this.x -= 1 ;
+        this.x -= this.step ;
         this.sprite.setCurrentAnim("walkWest") ;
     }
     /** Move object Right */
     moveEast() {
-        this.x += 1 ; 
+        this.x += this.step ; 
         this.sprite.setCurrentAnim("walkEast") ;
     }
 }

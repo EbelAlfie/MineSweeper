@@ -1,11 +1,13 @@
 import Church from "./church.js"
+import * as GameObj from "./gameobj.js"
+
 let church ;
 main() ;
 
 function main() {
     church = new Church({
         space: document.querySelector(".floor"),
-        map: "../resource/assets/mapchips/map.png"
+        map: GameObj.churchObj 
     });
     church.create() ;
     setupKeyActions() ;

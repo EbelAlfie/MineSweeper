@@ -3,10 +3,17 @@ import * as GameObj from "./gameobj.js"
  
 class Church {
     isInitialized = false ;
+    room = new Image() ;
+    height = null ;
+    width = null ;
     constructor(church) {
         this.canvas = church.space.querySelector(".screen");
         this.context = this.canvas.getContext("2d") ;
-        this.map = church.map;
+        this.map = church.map.img ;
+        this.height = church.map.height ;
+        this.width = church.map.width ;
+        this.currentX = -180 ;
+        this.currentY = -10 ;
     }
 
     create() {
@@ -16,43 +23,72 @@ class Church {
     }
 
     #createChurch() {
-        let room = new Image();
-        room.onload = () => {
-            this.context.drawImage(room, 
-                0, 0, 300, 200
+        this.room.onload = () => {
+            this.context.drawImage(this.room, 
+                this.currentX, this.currentY
             ); 
         }
-        room.src = this.map ;
+        this.room.src = this.map ;
     }
 
-    #populateChurch() {
+    async #populateChurch() {
         this.mainChar = new Entity(GameObj.mainChar);
-        setTimeout(() => {
-            this.mainChar.draw(this.context)
-        }, 200) ;
+        this.mainChar.createSprite() ;
+        setTimeout( () => { this.mainChar.draw(this.context) }, 200) ;
+    }
+
+    #regenerateEnvironment() {
+        this.context.clearRect(0, 0, 400, 400) ;
+        this.context.drawImage(this.room, this.currentX, this.currentY) ;
     }
 
     /** Character movement influenced by arrow key goes here */
     handleKeyPress(key) { 
         if (!this.isInitialized) return ;
-        console.log(key) ;
-        switch(key) {
+        switch(key) { //move mapnya?
             case "ArrowUp":
+                if (!this.validateNorthPosition(this.mainChar.y)) return ;
                 this.mainChar.moveNorth() ;
+                this.currentY += this.mainChar.step ;
                 break;
             case "ArrowDown":
+                if (!this.validateSouthPosition(this.mainChar.y)) return ;
                 this.mainChar.moveSouth() ;
+                this.currentY -= this.mainChar.step;
                 break;
             case "ArrowLeft":
+                if (!this.validateWestPosition(this.mainChar.x)) return ;
                 this.mainChar.moveWest() ;
+                this.currentX += this.mainChar.step;
                 break;
             case "ArrowRight":
+                if (!this.validateEastPosition(this.mainChar.x)) return ;
                 this.mainChar.moveEast() ;
+                this.currentX -= this.mainChar.step ;
                 break;
             default: break;
         }
+        this.#regenerateEnvironment() ;
         this.mainChar.draw(this.context) ;
     }
+
+    /** validate char and map relative to top */
+    validateNorthPosition(y) { return this.checkNorthPosition(y); }
+    /** validate char and map relative to bottom */
+    validateSouthPosition(y) { return this.checkSouthPosition(y); }
+    /** validate char and map relative to left */
+    validateWestPosition(x) { return this.checkWestPosition(x); }
+    /** validate char and map relative to right */
+    validateEastPosition(x) { return this.checkEastPosition(x); }
+    
+    /** true if y small than canvas height */
+    checkNorthPosition(y) { return y > 40; }
+    /** true if y larger than canvas height */
+    checkSouthPosition(y) { return y <= this.height; }
+    /** true if x smaller than canvas start */
+    checkWestPosition(x) { return x > 0; }
+    /** true if x larger than canvas start */
+    checkEastPosition(x) { return x <= this.width; }
 }
 
 export default Church

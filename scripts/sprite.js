@@ -1,6 +1,7 @@
 class Sprite extends Image {
     currentFrame = 0 ;
     currentAnim = null ;
+
     constructor(params) {
         super() ;
         this.char = params.gameObj ; //char props
@@ -10,7 +11,8 @@ class Sprite extends Image {
 
     /** Must be called before drawing */
     create() {
-        this.src = this.img ; 
+        this.src = this.img ;
+        this.setCurrentAnim("default") ; 
     }
 
     setCurrentAnim(anim) {

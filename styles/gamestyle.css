@@ -14,8 +14,6 @@ body {
 }
 
 .floor {
-    display: flex;
-    flex-direction: row;
     position: relative ;
     transform: scale(3);
 }
