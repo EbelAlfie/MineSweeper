@@ -1,9 +1,9 @@
 import Church from "./church.js"
-
+let church ;
 main() ;
 
 function main() {
-    let church = new Church({
+    church = new Church({
         space: document.querySelector(".floor"),
         map: "../resource/assets/mapchips/map.png"
     });
@@ -13,4 +13,7 @@ function main() {
 
 
 function setupKeyActions() {
+    document.onkeydown = (event) => {
+        church.handleKeyPress(event.key) ;     
+    }
 }
