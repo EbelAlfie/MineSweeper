@@ -7,7 +7,7 @@ main() ;
 function main() {
     church = new Church({
         space: document.querySelector(".floor"),
-        map: GameObj.churchObj 
+        map: GameObj.churchObj
     });
     church.create() ;
     setupKeyActions() ;
@@ -16,6 +16,6 @@ function main() {
 
 function setupKeyActions() {
     document.onkeydown = (event) => {
-        church.handleKeyPress(event.key) ;     
+        church.handleKeyPress(event.key);
     }
 }

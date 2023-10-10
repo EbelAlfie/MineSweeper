@@ -16,7 +16,7 @@ class Church {
         this.currentY = -10 ;
     }
 
-    create() {
+    create() {//console.log(`${this.canvas.width} ${this.canvas.height}`); 
         this.#createChurch() ;
         this.#populateChurch() ;
         this.isInitialized = true ;

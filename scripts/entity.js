@@ -41,22 +41,22 @@ class Entity {
 
     /** Move object Up */
     moveNorth() {
-        this.y -= this.step ;
+        //this.y -= this.step ;
         this.sprite.setCurrentAnim("walkNorth") ;
     }
     /** Move object Down */
     moveSouth() {
-        this.y += this.step ;
+        //this.y += this.step ;
         this.sprite.setCurrentAnim("walkSouth") ;
     }
     /** Move object Left */
     moveWest() {
-        this.x -= this.step ;
+        //this.x -= this.step ;
         this.sprite.setCurrentAnim("walkWest") ;
     }
     /** Move object Right */
     moveEast() {
-        this.x += this.step ; 
+        //this.x += this.step ; 
         this.sprite.setCurrentAnim("walkEast") ;
     }
 }
