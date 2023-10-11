@@ -16,19 +16,20 @@ class Church {
         this.currentY = -10 ;
     }
 
-    createChurch() {//console.log(`${this.canvas.width} ${this.canvas.height}`); 
+    createChurch() {
         this.#populateChurch() ;
         this.#startTime() ;
     }
 
     #populateChurch() {
+        this.room.onload = () => { this.#startTime() }
         this.room.src = this.map ;
         this.mainChar = new Entity(GameObj.mainChar);
     }
 
     #startTime = () => {
         this.handlePosition() ;
-        this.context.clearRect(0, 0, 400, 400) ;
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) ;
         this.context.drawImage(this.room, 
             this.currentX, this.currentY
         );
