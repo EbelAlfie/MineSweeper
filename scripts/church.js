@@ -58,9 +58,7 @@ class Church {
                 this.mainChar.moveEast() ;
                 this.currentX -= this.mainChar.step ;
                 break ;
-            default: 
-                this.mainChar.sprite.resetAnim() ;
-                break;
+            default: break;
         }        
     }
 

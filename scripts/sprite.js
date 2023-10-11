@@ -11,7 +11,7 @@ class Sprite extends Image {
 
     /** Must be called before drawing */
     create() { 
-        this.setCurrentAnim("default") ; 
+        this.setCurrentAnim("idleSouth") ; 
     }
 
     resetAnim() {
@@ -19,7 +19,14 @@ class Sprite extends Image {
     }
 
     setCurrentAnim(anim) {
-        this.currentAnim = this.anims[anim] ; 
+        this.currentAnim = anim ; 
+    }
+    
+    get animation() {
+        return this.anims[this.currentAnim] ;
+    }
+    get frame() {
+        return this.currentFrame || 0 ;
     }
 }
 
