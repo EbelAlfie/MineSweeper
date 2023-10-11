@@ -15,6 +15,10 @@ function main() {
 
 function setupKeyActions() { //debounce? 
     document.onkeydown = (event) => {
-        church.handleKeyPress(event.key);
+        church.handleKeyDown(event.key);
+    }
+
+    document.onkeyup = (event) => {
+        church.handleKeyUp(event.key) ;
     }
 }

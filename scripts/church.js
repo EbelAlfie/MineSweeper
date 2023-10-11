@@ -5,6 +5,7 @@ class Church {
     room = new Image() ;
     height = null ;
     width = null ;
+    keyPresses = {} ;
     constructor(church) {
         this.canvas = church.space.querySelector(".screen");
         this.context = this.canvas.getContext("2d") ;
@@ -26,6 +27,7 @@ class Church {
     }
 
     #startTime = () => {
+        this.handlePosition() ;
         this.context.clearRect(0, 0, 400, 400) ;
         this.context.drawImage(this.room, 
             this.currentX, this.currentY
@@ -36,30 +38,40 @@ class Church {
     }
     
     /** Character movement influenced by arrow key goes here */
-    handleKeyPress(key) { 
-        switch(key) { //move mapnya? optimize
-            case "ArrowUp":
-                if (!this.validateNorthPosition(this.mainChar.y)) return ;
-                this.mainChar.moveNorth() ;
-                this.currentY += this.mainChar.step ;
-                break;
-            case "ArrowDown":
-                if (!this.validateSouthPosition(this.mainChar.y)) return ;
-                this.mainChar.moveSouth() ;
-                this.currentY -= this.mainChar.step;
-                break;
-            case "ArrowLeft":
-                if (!this.validateWestPosition(this.mainChar.x)) return ;
-                this.mainChar.moveWest() ;
-                this.currentX += this.mainChar.step;
-                break;
-            case "ArrowRight":
-                if (!this.validateEastPosition(this.mainChar.x)) return ;
-                this.mainChar.moveEast() ;
-                this.currentX -= this.mainChar.step ;
-                break ;
-            default: break;
-        }        
+    handlePosition() {
+        if (this.keyPresses.ArrowUp) { this.moveNorth(); }
+        if (this.keyPresses.ArrowDown) { this.moveSouth(); }
+        if (this.keyPresses.ArrowLeft) { this.moveWest(); }
+        if (this.keyPresses.ArrowRight) { this.moveEast(); }
+    }
+    
+    handleKeyDown(key) { 
+        this.keyPresses[key] = true;
+    }
+
+    handleKeyUp(key) {
+        this.keyPresses[key] = false;
+    }
+
+    /** Move object Up */
+    moveNorth(key) {
+        this.currentY += 2;  
+        this.mainChar.movements["ArrowUp"]() ;
+    }
+    /** Move object Down */
+    moveSouth(key) {
+        this.currentY -= 2;
+        this.mainChar.movements["ArrowDown"]() ;
+    }
+    /** Move object Left */
+    moveWest(key) {
+        this.currentX += 2;
+        this.mainChar.movements["ArrowLeft"]() ;
+    }
+    /** Move object Right */
+    moveEast(key) {
+        this.currentX -= 2;
+        this.mainChar.movements["ArrowRight"]() ;
     }
 
     /** validate char and map relative to top */
@@ -82,3 +94,41 @@ class Church {
 }
 
 export default Church
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//switch(key) { //move mapnya? optimize
+        //     case "ArrowUp":
+        //         if (!this.validateNorthPosition(this.mainChar.y)) return ;
+        //         this.mainChar.moveNorth() ;
+        //         this.currentY += this.mainChar.step ;
+        //         break;
+        //     case "ArrowDown":
+        //         if (!this.validateSouthPosition(this.mainChar.y)) return ;
+        //         this.mainChar.moveSouth() ;
+        //         this.currentY -= this.mainChar.step;
+        //         break;
+        //     case "ArrowLeft":
+        //         if (!this.validateWestPosition(this.mainChar.x)) return ;
+        //         this.mainChar.moveWest() ;
+        //         this.currentX += this.mainChar.step;
+        //         break;
+        //     case "ArrowRight":
+        //         if (!this.validateEastPosition(this.mainChar.x)) return ;
+        //         this.mainChar.moveEast() ;
+        //         this.currentX -= this.mainChar.step ;
+        //         break ;
+        //     default: break;
+        // }        

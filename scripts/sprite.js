@@ -1,6 +1,6 @@
 class Sprite extends Image {
     currentFrame = 0 ;
-    currentAnim = null ;
+    #currentAnim = null ;
 
     constructor(params) {
         super() ;
@@ -11,22 +11,15 @@ class Sprite extends Image {
 
     /** Must be called before drawing */
     create() { 
-        this.setCurrentAnim("idleSouth") ; 
-    }
-
-    resetAnim() {
-        this.create() ;
+        this.setCurrentAnim("walkSouth") ; 
     }
 
     setCurrentAnim(anim) {
-        this.currentAnim = anim ; 
+        this.#currentAnim = anim ; 
     }
     
     get animation() {
-        return this.anims[this.currentAnim] ;
-    }
-    get frame() {
-        return this.currentFrame || 0 ;
+        return this.anims[this.#currentAnim || "walkSouth"] ;
     }
 }
 
