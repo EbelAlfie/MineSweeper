@@ -6,13 +6,16 @@ class Sprite extends Image {
         super() ;
         this.char = params.gameObj ; //char props
         this.anims = params.body.anims ; //all anims
-        this.img = params.body.src ;
+        this.src = params.body.src ;
     }
 
     /** Must be called before drawing */
-    create() {
-        this.src = this.img ;
+    create() { 
         this.setCurrentAnim("default") ; 
+    }
+
+    resetAnim() {
+        this.create() ;
     }
 
     setCurrentAnim(anim) {

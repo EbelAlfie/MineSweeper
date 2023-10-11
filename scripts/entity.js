@@ -2,6 +2,8 @@ import Sprite from "./sprite.js"
 
 class Entity {
     step = 8 ;
+    speed = 16 ;
+    currentTime = this.speed ;
     constructor(obj) {
         this.x = obj.x ; 
         this.y = obj.y ; 
@@ -9,18 +11,20 @@ class Entity {
             gameObj: this,
             body: obj.body
         }) ;
+        this.sprite.create() ;
+        // this.movements = {
+        //     "ArrrowUp": ,
+        //     "ArrowDown": ,
+        //     "ArrowLeft": ,
+        //     "ArrowRiwght": 
+        // }
     }
 
-    createSprite() {
-        let isLoaded = false ;
-        this.sprite.onload = (event) => {
-            isLoaded = true ;
-        }
-        this.sprite.onerror = () => {
-            isLoaded = false ;
-        }
-        this.sprite.create() ;
-        return isLoaded ;
+    manageFrameLimit() {
+        if (this.currentTime > 0) { this.currentTime-- ; return ;}
+        this.currentTime = this.speed ; //reset
+        this.sprite.currentFrame = 
+            (this.sprite.currentFrame + 1) % this.sprite.currentAnim.frames ;
     }
 
     draw(context) {
@@ -28,7 +32,8 @@ class Entity {
         const x = this.x ;
         const y = this.y ;
         const animation = this.sprite.currentAnim ;
-        this.sprite.currentFrame = (this.sprite.currentFrame + 1) % animation.frames ;
+
+        this.manageFrameLimit() ;
         
         context.drawImage(
             this.sprite,

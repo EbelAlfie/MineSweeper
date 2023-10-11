@@ -23,25 +23,21 @@ class Church {
     #populateChurch() {
         this.room.src = this.map ;
         this.mainChar = new Entity(GameObj.mainChar);
-        this.mainChar.createSprite() ;
     }
 
-    #startTime() {
-        const time = () => {
-            this.context.clearRect(0, 0, 400, 400) ;
-            this.context.drawImage(this.room, 
-                this.currentX, this.currentY
-            );
-            this.mainChar.draw(this.context) ;
+    #startTime = () => {
+        this.context.clearRect(0, 0, 400, 400) ;
+        this.context.drawImage(this.room, 
+            this.currentX, this.currentY
+        );
+        this.mainChar.draw(this.context) ;
 
-            requestAnimationFrame(() => time()) ;
-        }
-        time() ;
+        requestAnimationFrame(() => this.#startTime()) ;
     }
     
     /** Character movement influenced by arrow key goes here */
     handleKeyPress(key) { 
-        switch(key) { //move mapnya?
+        switch(key) { //move mapnya? optimize
             case "ArrowUp":
                 if (!this.validateNorthPosition(this.mainChar.y)) return ;
                 this.mainChar.moveNorth() ;
@@ -61,8 +57,10 @@ class Church {
                 if (!this.validateEastPosition(this.mainChar.x)) return ;
                 this.mainChar.moveEast() ;
                 this.currentX -= this.mainChar.step ;
+                break ;
+            default: 
+                this.mainChar.sprite.resetAnim() ;
                 break;
-            default: break;
         }        
     }
 

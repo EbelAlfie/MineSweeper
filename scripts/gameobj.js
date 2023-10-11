@@ -28,8 +28,8 @@ const mainCharAnim =  {
     }
 }
 export const mainChar = {
-    x: 150,
-    y: 75,
+    x: 140,
+    y: 65,
     body: {
         src: "../resource/assets/charachips/mc.png",
         anims: mainCharAnim
