@@ -7,11 +7,8 @@ class Stack { //custom stack map
         this.stack.unshift(value) ;
     }
 
-    pop(value) {
-        const index = this.stack.indexOf(value) ;
-        if (this.contains(value)) return false ;
+    pop(index) {
         this.stack.splice(index, 1) ;
-        return true
     }
 
     get first() { return this.stack[0] }

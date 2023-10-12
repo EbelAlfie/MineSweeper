@@ -36,7 +36,7 @@ class Church extends MoveAble {
         this.context.drawImage(this.sprite, 
             this.x, this.y
         );
-        this.mainChar.draw(this.context) ;
+        this.mainChar.drawWithAnim(this.context) ;
 
         requestAnimationFrame(() => this.#startTime()) ;
     }
@@ -56,12 +56,14 @@ class Church extends MoveAble {
         console.log(`KeyDown ${this.keyStack.stack}`) ;
     }
 
-    /** Move object Up */
+    /** Move map */
     move() {
         if (this.keyStack.isEmpty()) return ;
-        const [coord, val] = this.positions[this.keyStack.first] ;
-        this[coord] += val ;
-        this.mainChar.movements[this.keyStack.first]() ;
+        this.keyStack.stack.forEach((value) => {
+            const [coord, val] = this.positions[value] ;
+            this[coord] += val ;
+            this.mainChar.movements[value]() ;
+        }) ;
     }
 
     refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }

@@ -18,7 +18,7 @@ class Entity extends MoveAble {
         }
     }
 
-    draw(context) {
+    drawWithAnim(context) {
         if (this.sprite.animation == null) return ;
         const x = this.x ;
         const y = this.y ;
