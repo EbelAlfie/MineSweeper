@@ -1,37 +1,40 @@
 import Entity from "./entity.js"
 import * as GameObj from "./gameobj.js"
+import MoveAble from "./moveable.js";
+import Stack from "./stack.js";
  
-class Church {
-    room = new Image() ;
-    height = null ;
-    width = null ;
-    keyPresses = {} ;
+class Church extends MoveAble {
+    keyStack = new Stack() ;
+    movements = {
+        "ArrowUp": "north",
+        "ArrowDown": "south",
+        "ArrowLeft": "west",
+        "ArrowRight": "east"
+    } ;
+
     constructor(church) {
+        super(church.gameObj) ;
         this.canvas = church.space.querySelector(".screen");
         this.context = this.canvas.getContext("2d") ;
-        this.map = church.map.img ;
-        this.height = church.map.height ;
-        this.width = church.map.width ;
-        this.currentX = -180 ;
-        this.currentY = -10 ;
     }
 
     createChurch() {
         this.#populateChurch() ;
-        this.#startTime() ;
+        //this.#startTime() ;
     }
 
     #populateChurch() {
-        this.room.onload = () => { this.#startTime() }
-        this.room.src = this.map ;
+        this.sprite.onload = () => { this.#startTime() }
+        this.height = this.sprite.height ;
+        this.width = this.sprite.width ;
         this.mainChar = new Entity(GameObj.mainChar);
     }
 
     #startTime = () => {
         this.handlePosition() ;
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) ;
-        this.context.drawImage(this.room, 
-            this.currentX, this.currentY
+        this.refreshCanvas() ;        
+        this.context.drawImage(this.sprite, 
+            this.x, this.y
         );
         this.mainChar.draw(this.context) ;
 
@@ -39,59 +42,29 @@ class Church {
     }
     
     /** Character movement influenced by arrow key goes here */
-    handlePosition() {
-        if (this.keyPresses.ArrowUp) { this.moveNorth(); }
-        if (this.keyPresses.ArrowDown) { this.moveSouth(); }
-        if (this.keyPresses.ArrowLeft) { this.moveWest(); }
-        if (this.keyPresses.ArrowRight) { this.moveEast(); }
-    }
+    handlePosition() { this.move() }
     
-    handleKeyDown(key) { 
-        this.keyPresses[key] = true;
+    onKeyUp(key) { 
+        const i = this.keyStack.getIndex(this.movements[key]) ;
+        this.keyStack.pop(i) ;
+        console.log(`keyUp ${this.keyStack.stack}`) ;
     }
 
-    handleKeyUp(key) {
-        this.keyPresses[key] = false;
+    onKeyDown(key) {
+        const dir = this.movements[key] ;
+        if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }
+        console.log(`KeyDown ${this.keyStack.stack}`) ;
     }
 
     /** Move object Up */
-    moveNorth(key) {
-        this.currentY += 2;  
-        this.mainChar.movements["ArrowUp"]() ;
-    }
-    /** Move object Down */
-    moveSouth(key) {
-        this.currentY -= 2;
-        this.mainChar.movements["ArrowDown"]() ;
-    }
-    /** Move object Left */
-    moveWest(key) {
-        this.currentX += 2;
-        this.mainChar.movements["ArrowLeft"]() ;
-    }
-    /** Move object Right */
-    moveEast(key) {
-        this.currentX -= 2;
-        this.mainChar.movements["ArrowRight"]() ;
+    move() {
+        if (this.keyStack.isEmpty()) return ;
+        const [coord, val] = this.positions[this.keyStack.first] ;
+        this[coord] += val ;
+        this.mainChar.movements[this.keyStack.first]() ;
     }
 
-    /** validate char and map relative to top */
-    validateNorthPosition(y) { return this.checkNorthPosition(y); }
-    /** validate char and map relative to bottom */
-    validateSouthPosition(y) { return this.checkSouthPosition(y); }
-    /** validate char and map relative to left */
-    validateWestPosition(x) { return this.checkWestPosition(x); }
-    /** validate char and map relative to right */
-    validateEastPosition(x) { return this.checkEastPosition(x); }
-    
-    /** true if y small than canvas height */
-    checkNorthPosition(y) { return y > 40; }
-    /** true if y larger than canvas height */
-    checkSouthPosition(y) { return y <= this.height; }
-    /** true if x smaller than canvas start */
-    checkWestPosition(x) { return x > 0; }
-    /** true if x larger than canvas start */
-    checkEastPosition(x) { return x <= this.width; }
+    refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }
 }
 
 export default Church

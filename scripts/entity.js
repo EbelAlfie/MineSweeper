@@ -1,22 +1,14 @@
-import Sprite from "./sprite.js"
+import GeneralObject from "./generalobject.js";
+import MoveAble from "./moveable.js";
 
-class Entity {
-    SPEED = 8 ;
-    SPEED = 16 ;
-    currentTime = this.SPEED ;
+class Entity extends MoveAble {
     constructor(obj) {
-        this.x = obj.x ; 
-        this.y = obj.y ; 
-        this.sprite = new Sprite({
-            gameObj: this,
-            body: obj.body
-        }) ;
-        this.sprite.create() ;
+        super(obj) ;
         this.movements = {
-            "ArrowUp": () => { this.sprite.setCurrentAnim("walkNorth") },
-            "ArrowDown": () => { this.sprite.setCurrentAnim("walkSouth") ; },
-            "ArrowLeft": () => { this.sprite.setCurrentAnim("walkWest") ; },
-            "ArrowRight": () => { this.sprite.setCurrentAnim("walkEast") ; }
+            "north": () => { this.sprite.setCurrentAnim("walkNorth") },
+            "south": () => { this.sprite.setCurrentAnim("walkSouth") ; },
+            "west": () => { this.sprite.setCurrentAnim("walkWest") ; },
+            "east": () => { this.sprite.setCurrentAnim("walkEast") ; }
         }
         this.stopMovements = {
             "ArrowUp": () => { this.sprite.setCurrentAnim("idleNorth") },
@@ -24,13 +16,6 @@ class Entity {
             "ArrowLeft": () => { this.sprite.setCurrentAnim("idleWest") ; },
             "ArrowRight": () => { this.sprite.setCurrentAnim("idleEast") ; }
         }
-    }
-
-    manageFrameLimit() {
-        if (this.currentTime > 0) { this.currentTime-- ; return ;}
-        this.currentTime = this.SPEED ; //reset
-        this.sprite.currentFrame = 
-            (this.sprite.currentFrame + 1) % this.sprite.animation.frames ;
     }
 
     draw(context) {
@@ -48,21 +33,11 @@ class Entity {
         ) ; 
     }
 
-    /** Move object Up */
-    moveNorth() {
-        //this.y -= this.step ;   
-    }
-    /** Move object Down */
-    moveSouth() {
-        //this.y += this.step ;
-    }
-    /** Move object Left */
-    moveWest() {
-        //this.x -= this.step ;
-    }
-    /** Move object Right */
-    moveEast() {
-        //this.x += this.step ; 
+    manageFrameLimit() {
+        if (this.currentTime > 0) { this.currentTime-- ; return ;}
+        this.currentTime = this.SPEED ; //reset
+        this.sprite.currentFrame = 
+            (this.sprite.currentFrame + 1) % this.sprite.animation.frames ;
     }
 }
 

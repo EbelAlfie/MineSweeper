@@ -1,11 +1,15 @@
 class Sprite extends Image {
     currentFrame = 0 ;
     #currentAnim = null ;
+    isGif = false ;
 
     constructor(params) {
         super() ;
-        this.char = params.gameObj ; //char props
-        this.anims = params.body.anims ; //all anims
+        this.anims = params.body.anims || null ; //all anims
+        if (this.anims != null) {
+            console.log(this.anims) ;
+            this.isGif = true ;
+        }
         this.src = params.body.src ;
     }
 
@@ -15,11 +19,12 @@ class Sprite extends Image {
     }
 
     setCurrentAnim(anim) {
+        if (!this.isGif) return ;
         this.#currentAnim = anim ; 
     }
     
     get animation() {
-        return this.anims[this.#currentAnim || "walkSouth"] ;
+        return this.anims[this.#currentAnim] || null ;
     }
 }
 

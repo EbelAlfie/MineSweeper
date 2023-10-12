@@ -1,7 +1,9 @@
 export const churchObj = {
-    img: "../resource/assets/mapchips/map.png",
-    width: 842,
-    height: 347,
+    x: 0,
+    y: 0,
+    body: {
+        src: "../resource/assets/mapchips/map.png"
+    },
     objects: {}
 };
 /** hardcoded, depends on the char sheets */

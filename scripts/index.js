@@ -7,7 +7,7 @@ main() ;
 function main() {
     church = new Church({
         space: document.querySelector(".floor"),
-        map: GameObj.churchObj
+        gameObj: GameObj.churchObj
     });
     church.createChurch() ;
     setupKeyActions() ;
@@ -15,10 +15,10 @@ function main() {
 
 function setupKeyActions() { //debounce? 
     document.onkeydown = (event) => {
-        church.handleKeyDown(event.key);
+        church.onKeyDown(event.key);
     }
 
     document.onkeyup = (event) => {
-        church.handleKeyUp(event.key) ;
+        church.onKeyUp(event.key) ;
     }
 }
