@@ -1,5 +1,5 @@
 class Sprite extends Image {
-    currentFrame = 0 ;
+    currentAnimationFrame = 0 ;
     #currentAnimationKey = null ; 
     #isGif = false ;
 
@@ -13,20 +13,20 @@ class Sprite extends Image {
 
     /** Must be called before drawing */
     create() { 
-        this.setCurrentAnim("walkSouth") ; 
+        this.setCurrentAnimation("idleSouth") ; 
     }
 
     //Animateable exclusive
 
     /** Set current animation to string key property */
-    setCurrentAnim(anim) {
+    setCurrentAnimation(animation = "idleSouth") {
         if (!this.isAnimateable()) return ;
-        this.#currentAnimationKey = anim ; 
+        this.#currentAnimationKey = animation ; 
     }
 
-    setCurrentFrame(frame) {
+    setCurrentFrame(frame = 0) {
         if (!this.isAnimateable()) return ; 
-        this.currentFrame = frame ;
+        this.currentAnimationFrame = frame ;
     }
 
     /** Get current frame of current animation */
@@ -45,7 +45,7 @@ class Sprite extends Image {
     get frameCount() {
         if (!this.isAnimateable()) return null ;
         const currentAnimation = this.animation ;
-        return this.animation.frames.length ;
+        return currentAnimation.frames.length || 0 ;
     }
 
     isAnimateable() { return this.#isGif }

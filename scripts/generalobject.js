@@ -13,6 +13,9 @@ class GeneralObject {
         }) ;
     }
 
+    setWidth(newWidth = 0) { this.width = newWidth }
+    setHeight(newHeight = 0) { this.height = newHeight }
+
     getWidth() { return this.width }
     getHeight() { return this.height }
 }

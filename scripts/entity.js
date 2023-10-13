@@ -1,40 +1,41 @@
 import MoveAble from "./moveable.js";
 
+/** Bisa beranimasi (animateable) */
 class Entity extends MoveAble {
     constructor(obj, speed) {
         super(obj, speed) ;
         this.movements = { //refactor to get key
-            "north": () => { this.sprite.setCurrentAnim("walkNorth") },
-            "south": () => { this.sprite.setCurrentAnim("walkSouth") },
-            "west": () => { this.sprite.setCurrentAnim("walkWest") },
-            "east": () => { this.sprite.setCurrentAnim("walkEast") }
+            "north": () => { this.sprite.setCurrentAnimation("walkNorth") },
+            "south": () => { this.sprite.setCurrentAnimation("walkSouth") },
+            "west": () => { this.sprite.setCurrentAnimation("walkWest") },
+            "east": () => { this.sprite.setCurrentAnimation("walkEast") }
         }
         this.stopMovements = {
-            "north": () => { this.sprite.setCurrentAnim("idleNorth") },
-            "south": () => { this.sprite.setCurrentAnim("idleSouth") },
-            "west": () => { this.sprite.setCurrentAnim("idleWest") },
-            "east": () => { this.sprite.setCurrentAnim("idleEast") }
+            "north": () => { this.sprite.setCurrentAnimation("idleNorth") },
+            "south": () => { this.sprite.setCurrentAnimation("idleSouth") },
+            "west": () => { this.sprite.setCurrentAnimation("idleWest") },
+            "east": () => { this.sprite.setCurrentAnimation("idleEast") }
         }
     }
 
     drawWithAnim(context) {
         if (!this.sprite.isAnimateable()) return ;
-        this.observeFrameLimit() ;
+        this.updateAnimationFrame() ;
         context.drawImage(
             this.sprite,
-            this.sprite.getFrame(this.sprite.currentFrame, 0), //x
-            this.sprite.getFrame(this.sprite.currentFrame, 1), //y top left
+            this.sprite.getFrame(this.sprite.currentAnimationFrame, 0), //x
+            this.sprite.getFrame(this.sprite.currentAnimationFrame, 1), //y top left
             this.getWidth(), this.getHeight(), //crop rect width height 
             this.x, this.y, //dest x, y (char pos)
             this.getWidth(), this.getHeight() //request space dest
         ) ; 
     }
 
-    observeFrameLimit() {
+    updateAnimationFrame() {
         this.currentTime = (this.currentTime + 1) % this.FRAME_SPEED ;
         if (this.currentTime > 0) return ;
         this.sprite.setCurrentFrame(
-            (this.sprite.currentFrame + 1) % this.sprite.frameCount
+            (this.sprite.currentAnimationFrame + 1) % this.sprite.frameCount
         ) ;            
     }
 }

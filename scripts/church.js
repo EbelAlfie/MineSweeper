@@ -20,8 +20,8 @@ class Church extends MoveAble {
 
     createChurch() {
         this.sprite.onload = () => { 
-            this.height = this.sprite.height ;
-            this.width = this.sprite.width ;
+            this.setHeight(this.sprite.height) ;
+            this.setWidth(this.sprite.width) ;
             this.#startTime() 
         }
         this.#populateChurch() ;
@@ -40,7 +40,17 @@ class Church extends MoveAble {
         this.mainChar.drawWithAnim(this.context) ;
         requestAnimationFrame(() => this.#startTime()) ;
     }
-    
+
+    handlePosition() { 
+        if (this.keyStack.isEmpty()) { 
+            this.mainChar.stopMovements[this.mainChar.getDirection()]() ;
+            return 
+        }
+        this.mainChar.movements[this.keyStack.first]() ; //sama dengan setAnimation
+        this.setDirection(this.keyStack.first) ;
+        this.move() 
+    }
+
     onKeyUp(key) { 
         const i = this.keyStack.getIndex(this.movements[key]) ;
         this.keyStack.pop(i) ; //console.log(`keyUp ${this.keyStack.stack}`) ;
@@ -49,14 +59,6 @@ class Church extends MoveAble {
     onKeyDown(key) {
         const dir = this.movements[key] ;
         if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }//console.log(`KeyDown ${this.keyStack.stack}`) ;
-    }
-
-    /**Movement by arrow key*/
-    handlePosition() { 
-        if (this.keyStack.isEmpty()) { return }
-        this.mainChar.movements[this.keyStack.first]() ;
-        this.setDirection(this.keyStack.first) ;
-        this.move() 
     }
 
     refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }

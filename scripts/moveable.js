@@ -1,6 +1,6 @@
 import GeneralObject from "./generalobject.js";
 
-/** Bisa bergerak, punya */
+/** Bisa bergerak (move), punya */
 class MoveAble extends GeneralObject { 
     currentTime = 0 ;
     constructor(gameObj, speed) {
@@ -43,6 +43,8 @@ class MoveAble extends GeneralObject {
         const [coord, value] = this.positions[this.direction] ;
         this[coord] += value ;
     }
+
+    getDirection() { return this.direction || "south" } 
 }
 
 export default MoveAble

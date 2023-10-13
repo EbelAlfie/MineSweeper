@@ -50,48 +50,38 @@ export const mainChar = {
 
 const akagamiAnim = {
     idleSouth: {
-        frames: 1, 
-        frame: [[18,0]]
+        frames: [[18,0]]
     },
     walkSouth: {
-        frames: 3, 
-        frame: [[19,0], [0, 0], [38, 0]]
+        frames: [[19,0], [0, 0], [38, 0]]
     }, 
 
     idleSouthWest: {
-        frames: 1, 
-        frame: [[25,0]]
+        frames: [[25,0]]
     },
     walkSouthWest: {
-        frames: 3, 
-        frame: [[25,0], [0, 0], [50, 0]]
+        frames: [[25,0], [0, 0], [50, 0]]
     }, 
 
     idleWest: {
-        frames: 1, 
-        frame: [[18,32]]
+        frames: [[18,32]]
     },
     walkWest: {
-        frames: 3,
-        frame: [[19, 32], [0, 32], [38, 32]]
+        frames: [[19, 32], [0, 32], [38, 32]]
     },
 
     idleEast: {
-        frames: 1, 
-        frame: [[19,60]]
+        frames: [[19,60]]
     },
     walkEast: {
-        frames: 3,
-        frame: [[19, 60], [0, 60], [38, 60]]
+        frames: [[19, 60], [0, 60], [38, 60]]
     },
 
     idleNorth: {
-        frames: 1, 
-        frame: [[25,96]]
+        frames: [[25,96]]
     },
     walkNorth: {
-        frames: 3,
-        frame: [[18, 96], [0, 96], [36, 96]]
+        frames: [[18, 96], [0, 96], [36, 96]]
     }
 }
 export const akagami = {
