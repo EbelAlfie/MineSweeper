@@ -30,8 +30,8 @@ class Entity extends MoveAble {
             this.sprite.getFrame(this.sprite.currentAnimationFrame, 0), //x
             this.sprite.getFrame(this.sprite.currentAnimationFrame, 1), //y top left
             this.getWidth(), this.getHeight(), //crop rect width height 
-            this.x, this.y, //dest x, y (char pos)
-            this.getWidth(), this.getHeight() //request space dest
+            this.x, this.y, //x, y (char pos)
+            this.getWidth(), this.getHeight() //request space dest canvas
         ) ; 
     }
 
