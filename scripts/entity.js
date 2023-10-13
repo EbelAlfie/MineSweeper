@@ -18,25 +18,24 @@ class Entity extends MoveAble {
     }
 
     drawWithAnim(context) {
-        if (this.sprite.animation == null) return ;
-        const x = this.x ;
-        const y = this.y ;
+        if (!this.sprite.isAnimateable()) return ;
         this.observeFrameLimit() ;
         context.drawImage(
             this.sprite,
-            this.sprite.animation.anim[this.sprite.currentFrame][0], //x
-            this.sprite.animation.anim[this.sprite.currentFrame][1], //y top left
-            25, 32, //crop rect width height
-            x, y, //dest x, y (char pos)
-            25, 32 //request space dest
+            this.sprite.getFrame(this.sprite.currentFrame, 0), //x
+            this.sprite.getFrame(this.sprite.currentFrame, 1), //y top left
+            this.getWidth(), this.getHeight(), //crop rect width height 
+            this.x, this.y, //dest x, y (char pos)
+            this.getWidth(), this.getHeight() //request space dest
         ) ; 
     }
 
     observeFrameLimit() {
         this.currentTime = (this.currentTime + 1) % this.FRAME_SPEED ;
         if (this.currentTime > 0) return ;
-        this.sprite.currentFrame = 
-            (this.sprite.currentFrame + 1) % this.sprite.animation.frames ;
+        this.sprite.setCurrentFrame(
+            (this.sprite.currentFrame + 1) % this.sprite.frameCount
+        ) ;            
     }
 }
 

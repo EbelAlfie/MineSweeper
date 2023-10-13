@@ -10,6 +10,7 @@ function main() {
         gameObj: GameObj.churchObj
     });
     church.createChurch() ;
+    
     setupKeyActions() ;
 }
 

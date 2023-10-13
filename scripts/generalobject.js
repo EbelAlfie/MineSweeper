@@ -1,28 +1,20 @@
 import Sprite from "./sprite.js";
 
-/** dia cuman punya koordinat, karena bisa di draw di map */
+/** secara general, semua item punya koord sama gambar, sama height width (event beda lagi) */
 class GeneralObject {
-    //facing = "south" ;
     constructor(gameObj) {
+        this.hasShadow = gameObj || false ;
         this.x = gameObj.x || 0 ; 
         this.y = gameObj.y || 0 ; 
+        this.height = gameObj.height || 0 ;
+        this.width = gameObj.width || 0 ;
         this.sprite = new Sprite({
             body: gameObj.body
         }) ;
-        this.sprite.create() ;
-        // this.movements = {
-        //     "ArrowUp": () => { this.sprite.setCurrentAnim("walkNorth") },
-        //     "ArrowDown": () => { this.sprite.setCurrentAnim("walkSouth") ; },
-        //     "ArrowLeft": () => { this.sprite.setCurrentAnim("walkWest") ; },
-        //     "ArrowRight": () => { this.sprite.setCurrentAnim("walkEast") ; }
-        // }
-        // this.stopMovements = {
-        //     "ArrowUp": () => { this.sprite.setCurrentAnim("idleNorth") },
-        //     "ArrowDown": () => { this.sprite.setCurrentAnim("idleSouth") ; },
-        //     "ArrowLeft": () => { this.sprite.setCurrentAnim("idleWest") ; },
-        //     "ArrowRight": () => { this.sprite.setCurrentAnim("idleEast") ; }
-        // }
     }
+
+    getWidth() { return this.width }
+    getHeight() { return this.height }
 }
 
 export default GeneralObject
