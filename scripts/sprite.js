@@ -48,6 +48,10 @@ class Sprite extends Image {
         return currentAnimation.frames.length || 0 ;
     }
 
+    setAnimateable(enableAnimation = false) {
+        this.#isGif = enableAnimation ;
+    } 
+
     isAnimateable() { return this.#isGif }
 }
 

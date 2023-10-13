@@ -43,12 +43,12 @@ class Church extends MoveAble {
 
     handlePosition() { 
         if (this.keyStack.isEmpty()) { 
-            this.mainChar.stopMovements[this.mainChar.getDirection()]() ;
+            //this.mainChar.stopMovements[this.mainChar.getDirection()]() ;
             return 
         }
         this.mainChar.movements[this.keyStack.first]() ; //sama dengan setAnimation
         this.setDirection(this.keyStack.first) ;
-        this.move() 
+        this.move() ;
     }
 
     onKeyUp(key) { 

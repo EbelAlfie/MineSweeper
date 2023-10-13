@@ -2,8 +2,12 @@ import MoveAble from "./moveable.js";
 
 /** Bisa beranimasi (animateable) */
 class Entity extends MoveAble {
+    currentAnimationSpeed = 0 ;
+
     constructor(obj, speed) {
         super(obj, speed) ;
+        this.ANIMATION_SPEED = 20 ;
+
         this.movements = { //refactor to get key
             "north": () => { this.sprite.setCurrentAnimation("walkNorth") },
             "south": () => { this.sprite.setCurrentAnimation("walkSouth") },
@@ -32,11 +36,16 @@ class Entity extends MoveAble {
     }
 
     updateAnimationFrame() {
-        this.currentTime = (this.currentTime + 1) % this.FRAME_SPEED ;
-        if (this.currentTime > 0) return ;
+        this.currentAnimationSpeed = (this.currentAnimationSpeed + 1) % this.ANIMATION_SPEED ;
+        if (this.currentAnimationSpeed > 0) return ;
         this.sprite.setCurrentFrame(
             (this.sprite.currentAnimationFrame + 1) % this.sprite.frameCount
         ) ;            
+    }
+
+    updateFrameSpeed(newAnimationSpeed) {
+        if (newAnimationSpeed < 0 || newAnimationSpeed > 100) return ;
+        this.ANIMATION_SPEED = newAnimationSpeed ;
     }
 }
 
