@@ -52,3 +52,58 @@ export const mainChar = {
         anims: mainCharAnim
     } 
 };
+
+const akagamiAnim = {
+    idleSouth: {
+        frames: 1, 
+        anim: [[18,0]]
+    },
+    walkSouth: {
+        frames: 3, 
+        anim: [[19,0], [0, 0], [38, 0]]
+    }, 
+
+    idleSouthWest: {
+        frames: 1, 
+        anim: [[25,0]]
+    },
+    walkSouthWest: {
+        frames: 3, 
+        anim: [[25,0], [0, 0], [50, 0]]
+    }, 
+
+    idleWest: {
+        frames: 1, 
+        anim: [[18,32]]
+    },
+    walkWest: {
+        frames: 3,
+        anim: [[19, 32], [0, 32], [38, 32]]
+    },
+
+    idleEast: {
+        frames: 1, 
+        anim: [[19,60]]
+    },
+    walkEast: {
+        frames: 3,
+        anim: [[19, 60], [0, 60], [38, 60]]
+    },
+
+    idleNorth: {
+        frames: 1, 
+        anim: [[25,96]]
+    },
+    walkNorth: {
+        frames: 3,
+        anim: [[18, 96], [0, 96], [36, 96]]
+    }
+}
+export const akagami = {
+    x: 140,
+    y: 65,
+    body: {
+        src: "../resource/assets/charachips/akagami.png",
+        anims: akagamiAnim
+    } 
+};

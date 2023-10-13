@@ -1,20 +1,19 @@
-import GeneralObject from "./generalobject.js";
 import MoveAble from "./moveable.js";
 
 class Entity extends MoveAble {
-    constructor(obj) {
-        super(obj) ;
-        this.movements = {
+    constructor(obj, speed) {
+        super(obj, speed) ;
+        this.movements = { //refactor to get key
             "north": () => { this.sprite.setCurrentAnim("walkNorth") },
-            "south": () => { this.sprite.setCurrentAnim("walkSouth") ; },
-            "west": () => { this.sprite.setCurrentAnim("walkWest") ; },
-            "east": () => { this.sprite.setCurrentAnim("walkEast") ; }
+            "south": () => { this.sprite.setCurrentAnim("walkSouth") },
+            "west": () => { this.sprite.setCurrentAnim("walkWest") },
+            "east": () => { this.sprite.setCurrentAnim("walkEast") }
         }
         this.stopMovements = {
-            "ArrowUp": () => { this.sprite.setCurrentAnim("idleNorth") },
-            "ArrowDown": () => { this.sprite.setCurrentAnim("idleSouth") ; },
-            "ArrowLeft": () => { this.sprite.setCurrentAnim("idleWest") ; },
-            "ArrowRight": () => { this.sprite.setCurrentAnim("idleEast") ; }
+            "north": () => { this.sprite.setCurrentAnim("idleNorth") },
+            "south": () => { this.sprite.setCurrentAnim("idleSouth") },
+            "west": () => { this.sprite.setCurrentAnim("idleWest") },
+            "east": () => { this.sprite.setCurrentAnim("idleEast") }
         }
     }
 
@@ -22,7 +21,7 @@ class Entity extends MoveAble {
         if (this.sprite.animation == null) return ;
         const x = this.x ;
         const y = this.y ;
-        this.manageFrameLimit() ;
+        this.observeFrameLimit() ;
         context.drawImage(
             this.sprite,
             this.sprite.animation.anim[this.sprite.currentFrame][0], //x
@@ -33,9 +32,9 @@ class Entity extends MoveAble {
         ) ; 
     }
 
-    manageFrameLimit() {
-        if (this.currentTime > 0) { this.currentTime-- ; return ;}
-        this.currentTime = this.SPEED ; //reset
+    observeFrameLimit() {
+        this.currentTime = (this.currentTime + 1) % this.FRAME_SPEED ;
+        if (this.currentTime > 0) return ;
         this.sprite.currentFrame = 
             (this.sprite.currentFrame + 1) % this.sprite.animation.frames ;
     }

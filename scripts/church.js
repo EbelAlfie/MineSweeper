@@ -13,7 +13,7 @@ class Church extends MoveAble {
     } ;
 
     constructor(church) {
-        super(church.gameObj) ;
+        super(church.gameObj, 5) ;
         this.canvas = church.space.querySelector(".screen");
         this.context = this.canvas.getContext("2d") ;
     }
@@ -27,14 +27,17 @@ class Church extends MoveAble {
         this.sprite.onload = () => { this.#startTime() }
         this.height = this.sprite.height ;
         this.width = this.sprite.width ;
-        this.mainChar = new Entity(GameObj.mainChar);
+        this.mainChar = new Entity(GameObj.mainChar, 8);
     }
 
     #startTime = () => {
         this.handlePosition() ;
-        this.refreshCanvas() ;        
+        this.refreshCanvas() ; 
+        
+        //const mc = this.mainChar ;  
+
         this.context.drawImage(this.sprite, 
-            this.x, this.y
+            this.x, this.y //relatif terhadap MC
         );
         this.mainChar.drawWithAnim(this.context) ;
 
@@ -42,69 +45,54 @@ class Church extends MoveAble {
     }
     
     /** Character movement influenced by arrow key goes here */
-    handlePosition() { this.move() }
+    handlePosition() { 
+        if (this.keyStack.isEmpty()) { 
+            //this.mainChar.stopMovements[this.keyStack.first]() ;
+            return ;
+        }
+        this.mainChar.movements[this.keyStack.first]() ;
+        this.setDirection(this.keyStack.first) ;
+        this.move() 
+    }
     
     onKeyUp(key) { 
         const i = this.keyStack.getIndex(this.movements[key]) ;
-        this.keyStack.pop(i) ;
-        console.log(`keyUp ${this.keyStack.stack}`) ;
+        this.keyStack.pop(i) ; //console.log(`keyUp ${this.keyStack.stack}`) ;
     }
 
     onKeyDown(key) {
         const dir = this.movements[key] ;
-        if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }
-        console.log(`KeyDown ${this.keyStack.stack}`) ;
+        if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }//console.log(`KeyDown ${this.keyStack.stack}`) ;
     }
 
     /** Move map */
-    move() {
-        if (this.keyStack.isEmpty()) return ;
+    // move() {
+    //     if (this.keyStack.isEmpty()) { 
+    //         //this.mainChar.stopMovements[this.keyStack.first]() ;
+    //         return ;
+    //     }
+    //     const [coord, val] = this.positions[this.keyStack.first] ;
+    //     this[coord] += val ;
+    //     //this.mainChar.setMovement(this.keyStack.first)
+    //     this.mainChar.movements[this.keyStack.first]() ;
+    // }
+
+    /** Give the power to move diagonally */
+    moveDiagonal() {
+        if (this.keyStack.isEmpty())  { return } ;
         this.keyStack.stack.forEach((value) => {
             const [coord, val] = this.positions[value] ;
             this[coord] += val ;
             this.mainChar.movements[value]() ;
         }) ;
     }
-
     refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }
 }
 
 export default Church
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//switch(key) { //move mapnya? optimize
-        //     case "ArrowUp":
-        //         if (!this.validateNorthPosition(this.mainChar.y)) return ;
-        //         this.mainChar.moveNorth() ;
-        //         this.currentY += this.mainChar.step ;
-        //         break;
-        //     case "ArrowDown":
-        //         if (!this.validateSouthPosition(this.mainChar.y)) return ;
-        //         this.mainChar.moveSouth() ;
-        //         this.currentY -= this.mainChar.step;
-        //         break;
-        //     case "ArrowLeft":
-        //         if (!this.validateWestPosition(this.mainChar.x)) return ;
-        //         this.mainChar.moveWest() ;
-        //         this.currentX += this.mainChar.step;
-        //         break;
-        //     case "ArrowRight":
-        //         if (!this.validateEastPosition(this.mainChar.x)) return ;
-        //         this.mainChar.moveEast() ;
-        //         this.currentX -= this.mainChar.step ;
-        //         break ;
-        //     default: break;
-        // }        
+//diagonal
+// this.keyStack.stack.forEach((value, index) => {
+            
+// }) ;    

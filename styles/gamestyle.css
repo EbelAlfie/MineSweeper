@@ -10,7 +10,9 @@ body {
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    background-color: limegreen;
+    background-image: url("../resource/assets/backgroundgame.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .floor {
