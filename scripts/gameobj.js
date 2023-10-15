@@ -38,8 +38,8 @@ const mainCharAnim =  {
     }
 }
 export const mainChar = {
-    x: 140,
-    y: 65,
+    x: 0,
+    y: 0,
     height: 32,
     width: 25,
     body: {
@@ -86,7 +86,7 @@ const akagamiAnim = {
 }
 export const akagami = {
     x: 140,
-    y: 65,
+    y: 300,
     body: {
         src: "../resource/assets/charachips/akagami.png",
         anims: akagamiAnim

@@ -8,10 +8,10 @@ class MoveAble extends GeneralObject {
         
         this.direction = gameObj.initialDirection || "south" ;
         this.positions = {
-            "north": ["y", this.movingSpeed],
-            "south": ["y", -this.movingSpeed],
-            "west": ["x", this.movingSpeed],
-            "east": ["x", -this.movingSpeed]
+            "north": ["y", -this.movingSpeed],
+            "south": ["y", this.movingSpeed],
+            "west": ["x", -this.movingSpeed],
+            "east": ["x", this.movingSpeed]
         } ;
     }
 
@@ -27,7 +27,7 @@ class MoveAble extends GeneralObject {
         this.direction = direction ;
     }
 
-    setSpeed(newMovingSpeed) {
+    setSpeed(newMovingSpeed = 0) {
         if (newMovingSpeed < 0) return ;
         this.movingSpeed = newMovingSpeed ;
         this.positions = {

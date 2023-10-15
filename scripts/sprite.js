@@ -1,56 +1,49 @@
 class Sprite extends Image {
-    currentAnimationFrame = 0 ;
-    #currentAnimationKey = null ; 
+    #currentAnimationFrame = 0 ;
+    #currentAnimationKey = "idleSouth" ; 
     #isGif = false ;
 
-    constructor(params) {
+    constructor(body) {
         super() ;
-        this.anims = params.body.anims || null ; //kalau undefined,
+        this.src = body.src || "";
+        this.anims = body.anims || null ; //kalau undefined,
         this.#isGif = this.anims != null ;
-        this.src = params.body.src ;
-        this.create() ;
-    }
-
-    /** Must be called before drawing */
-    create() { 
-        this.setCurrentAnimation("idleSouth") ; 
     }
 
     //Animateable exclusive
-
     /** Set current animation to string key property */
     setCurrentAnimation(animation = "idleSouth") {
-        if (!this.isAnimateable()) return ;
+        if (this.#currentAnimationKey === animation || !this.isAnimateable()) return ;
         this.#currentAnimationKey = animation ; 
+        this.#currentAnimationFrame = 0 ; //reset current frame
     }
 
-    setCurrentFrame(frame = 0) {
+    /** change to next frame */
+    animateSprite() {
         if (!this.isAnimateable()) return ; 
-        this.currentAnimationFrame = frame ;
+        this.#currentAnimationFrame = (this.#currentAnimationFrame + 1) % this.frameCount ;
     }
 
-    /** Get current frame of current animation */
-    getFrame(framex, framey) { 
-        if (!this.isAnimateable()) return null ;
-        const frame = this.animation.frames[framex][framey] ;
-        return frame;
-    }
-    
-    /** Get a specific animation based on currentanim */
+    /** Get current animation 
+     * @returns array of array containing frames for current animation
+    */
     get animation() { 
         if (!this.isAnimateable()) return null ;
         return this.anims[this.#currentAnimationKey]
     }
 
-    get frameCount() {
+    /** Get current frame of current animation 
+     * @param frameIndex of animation. default to currentAnimationFrame
+    */
+    getFrame() { 
         if (!this.isAnimateable()) return null ;
-        const currentAnimation = this.animation ;
-        return currentAnimation.frames.length || 0 ;
+        return this.animation.frames[this.#currentAnimationFrame] ;
     }
 
-    setAnimateable(enableAnimation = false) {
-        this.#isGif = enableAnimation ;
-    } 
+    get frameCount() {
+        if (!this.isAnimateable()) return 0 ;
+        return this.animation["frames"].length || 0 ;
+    }
 
     isAnimateable() { return this.#isGif }
 }

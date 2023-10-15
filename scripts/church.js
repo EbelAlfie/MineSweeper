@@ -1,9 +1,9 @@
 import Entity from "./entity.js"
 import * as GameObj from "./gameobj.js"
-import MoveAble from "./moveable.js";
+import GeneralObject from "./generalobject.js";
 import Stack from "./stack.js";
  
-class Church extends MoveAble {
+class Church extends GeneralObject {
     keyStack = new Stack() ;
     movements = {
         "ArrowUp": "north",
@@ -22,33 +22,46 @@ class Church extends MoveAble {
         this.sprite.onload = () => { 
             this.setHeight(this.sprite.height) ;
             this.setWidth(this.sprite.width) ;
-            this.#startTime() 
+            this.#startTime() ;
         }
         this.#populateChurch() ;
     }
 
     #populateChurch() {
-        this.mainChar = new Entity(GameObj.mainChar, 8);
+        this.mainChar = new Entity(GameObj.mainChar, 3);
     }
 
     #startTime = () => {
-        this.handlePosition() ;
-        this.refreshCanvas() ; 
+        this.#handleMovement() ;
+        this.#refreshCanvas() ; 
         this.context.drawImage(this.sprite, 
-            this.x, this.y //relatif terhadap MC
+            this.x - this.mainChar.x, this.y - this.mainChar.y //relatif terhadap MC
         );
-        this.mainChar.drawWithAnim(this.context) ;
+        this.#renderAnimation(this.mainChar) ;
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
-    handlePosition() { 
+    #renderAnimation(npc) {
+        npc.animate() ;
+        const frame = npc.sprite.getFrame() ;
+        this.context.drawImage(
+            npc.sprite,
+            frame[0], //x
+            frame[1], //y top left
+            npc.getWidth(), npc.getHeight(), //crop rect width height 
+            npc.x + this.canvas.width/2 - this.mainChar.x, npc.y + this.canvas.height/2 - this.mainChar.y, //x, y (char pos)
+            npc.getWidth(), npc.getHeight() //request space dest canvas
+        ) ; 
+    }
+
+    #handleMovement() { 
         if (this.keyStack.isEmpty()) { 
-            //this.mainChar.stopMovements[this.mainChar.getDirection()]() ;
+            this.mainChar.stopMovements[this.mainChar.getDirection()]() ;
             return 
         }
-        this.mainChar.movements[this.keyStack.first]() ; //sama dengan setAnimation
-        this.setDirection(this.keyStack.first) ;
-        this.move() ;
+        this.mainChar.setDirection(this.keyStack.first) ;
+        this.mainChar.movements[this.mainChar.getDirection()]() ; //sama dengan setAnimation
+        this.mainChar.move()
     }
 
     onKeyUp(key) { 
@@ -61,7 +74,7 @@ class Church extends MoveAble {
         if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }//console.log(`KeyDown ${this.keyStack.stack}`) ;
     }
 
-    refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }
+    #refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }
 }
 
 export default Church
