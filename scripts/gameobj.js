@@ -13,28 +13,28 @@ const mainCharAnim =  {
         frames: [[25,0]]
     },
     walkSouth: {
-        frames: [[25,0], [0, 0], [50, 0]]
+        frames: [[0,0], [25, 0], [50, 0]]
     }, 
 
     idleWest: {
         frames: [[25,32]]
     },
     walkWest: {
-        frames: [[25, 32], [0, 32], [50, 32]]
+        frames: [[0, 32], [25, 32], [50, 32]]
     },
 
     idleEast: {
         frames: [[25,64]]
     },
     walkEast: {
-        frames: [[25, 64], [0, 64], [50, 64]]
+        frames: [[0, 64], [25, 64], [50, 64]]
     },
 
     idleNorth: {
         frames: [[25,96]]
     },
     walkNorth: {
-        frames: [[25, 96], [0, 96], [50, 96]]
+        frames: [[0, 96], [25, 96], [50, 96]]
     }
 }
 export const mainChar = {
