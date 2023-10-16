@@ -5,7 +5,9 @@ class Map extends GeneralObject {
     constructor(mapData) {
         super(mapData) ;
         this.reservedArea = mapData.walls;
-        this.entities = mapData.objects ;
+        this.entities = Object.values(mapData.objects).map((entity) => {
+            new Entity(entity) ;
+        }) ;
     }
 
     /** check for event in current tile */
