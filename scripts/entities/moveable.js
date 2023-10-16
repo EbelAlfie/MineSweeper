@@ -1,4 +1,4 @@
-import GeneralObject from "./generalobject.js";
+import GeneralObject from "../generalobject.js";
 
 /** Bisa bergerak (move), punya speed*/
 class MoveAble extends GeneralObject { 
@@ -29,7 +29,7 @@ class MoveAble extends GeneralObject {
         this.#direction = direction ;
     }
 
-    getDirection() { return this.#direction || "South" } 
+    getDirection() { return this.#direction } 
 
     _setSpeed(newMovingSpeed = 0) {
         if (newMovingSpeed < 0) return ;
@@ -40,6 +40,10 @@ class MoveAble extends GeneralObject {
             "West": ["x", this.#movingSpeed],
             "East": ["x", -this.#movingSpeed]
         } ;
+    }
+
+    getSpeed() {
+        return this.#movingSpeed ;
     }
 }
 

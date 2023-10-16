@@ -1,10 +1,10 @@
-import Entity from "./entity.js"
+import Entity from "./entities/entity.js"
 import * as GameObj from "./gameobj.js"
 import GeneralObject from "./generalobject.js";
-import Stack from "./stack.js";
+import Stack from "./custom/stack.js";
 import { centerizeX, centerizeY } from "./utils.js";
  
-class Map extends GeneralObject {
+class CustomCanvas extends GeneralObject {
     keyStack = new Stack() ;
     movements = {
         "ArrowUp": "North",
@@ -31,17 +31,17 @@ class Map extends GeneralObject {
 
     #populateChurch() {
         this.pivot = new Entity(GameObj.mainChar, 3); //pivot sementara
+        this.npc = new Entity(GameObj.akagami, 3) ;
     }
 
     #startTime = () => {
         this.#handlePivotMovement() ;
         this.#refreshCanvas() ;
-        console.log(`${this.pivot.x} and ${this.pivot.y}`);
-        console.log(`${this.x} and ${this.y}`) ;
         this.context.drawImage(this.sprite, 
             this.x - this.pivot.x, this.y - this.pivot.y //relatif terhadap MC
         );
         this.#renderAnimation(this.pivot) ;
+        this.#renderAnimation(this.npc) ;
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
@@ -54,26 +54,24 @@ class Map extends GeneralObject {
         this.movePivot() ;
     }
 
-    stopPivot() {
-        this.pivot.chooseAnimation(`idle${this.pivot.getDirection()}`) ;
-    }
+    stopPivot() { this.pivot.chooseAnimation(`idle${this.pivot.getDirection()}`) }
 
     movePivot() {
         this.pivot.chooseAnimation(`walk${this.pivot.getDirection()}`) ;
         this.pivot.move() ;
     }
 
-    #renderAnimation(npc) {
-        npc.animateCharacter() ;
-        const frame = npc.sprite.getFrame() ;
+    #renderAnimation(person) {
+        person.animateCharacter() ;
+        const frame = person.sprite.getFrame() ;
         this.context.drawImage(
-            npc.sprite,
+            person.sprite,
             frame[0], //x
             frame[1], //y top left
-            npc.getWidth(), npc.getHeight(), //crop rect width height 
-            centerizeX(npc.x, this.canvas.width) - this.pivot.x, 
-            centerizeY(npc.y, this.canvas.height)- this.pivot.y, //x, y (char pos)
-            npc.getWidth(), npc.getHeight() //request space dest canvas
+            person.getWidth(), person.getHeight(), //crop rect width height 
+            centerizeX(person.x, person.width, this.canvas.width) - this.pivot.x, 
+            centerizeY(person.y, person.height, this.canvas.height)- this.pivot.y, //x, y (char pos)
+            person.getWidth(), person.getHeight() //request space dest canvas
         ) ; 
     }
 
@@ -90,7 +88,7 @@ class Map extends GeneralObject {
     #refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }
 }
 
-export default Map
+export default CustomCanvas
 
 
 

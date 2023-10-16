@@ -5,12 +5,12 @@ export const churchObj = {
     body: {
         src: "../resource/assets/mapchips/map.png"
     },
-    walls: {
-        topLeft: [-150, -39],
-        topRight: [375, -39],
-        bottomLeft: [-150, 201],
-        bottomRight: [375, 201]
-    }, //refactor to objects
+    walls: [
+        [-150, -39], 
+        [375, -39], 
+        [-150, 201], 
+        [375, 201]]
+    , //refactor to objects
     objects: {}
 };
 /** hardcoded, depends on the char sheets */
@@ -56,7 +56,7 @@ export const mainChar = {
 
 const akagamiAnim = {
     idleSouth: {
-        frames: [[18,0]]
+        frames: [[19,0]]
     },
     walkSouth: {
         frames: [[19,0], [0, 0], [38, 0]]
@@ -66,7 +66,7 @@ const akagamiAnim = {
         frames: [[25,0]]
     },
     walkSouthWest: {
-        frames: [[25,0], [0, 0], [50, 0]]
+        frames: [[19,0], [0, 0], [50, 0]]
     }, 
 
     idleWest: {
@@ -91,10 +91,54 @@ const akagamiAnim = {
     }
 }
 export const akagami = {
-    x: 140,
-    y: 300,
+    x: 30,
+    y: 30,
+    height: 32,
+    width: 19,
+    speed: 3, 
     body: {
         src: "../resource/assets/charachips/akagami.png",
         anims: akagamiAnim
+    } 
+};
+
+const dragonAnim = {
+    idleSouth: {
+        frames: [[80,0]]
+    },
+    walkSouth: {
+        frames: [[0,0], [80, 0], [160, 0]]
+    }, 
+
+    idleWest: {
+        frames: [[80,64]]
+    },
+    walkWest: {
+        frames: [[0, 64], [80, 64], [160, 64]]
+    },
+
+    idleEast: {
+        frames: [[80,128]]
+    },
+    walkEast: {
+        frames: [[0, 128], [80, 128], [160, 128]]
+    },
+
+    idleNorth: {
+        frames: [[80,192]]
+    },
+    walkNorth: {
+        frames: [[0, 192], [80, 192], [160, 192]]
+    }
+}
+export const dragon = {
+    x: 0,
+    y: 0,
+    height: 64,
+    width: 80,
+    speed: 3, 
+    body: {
+        src: "../resource/assets/charachips/dragon.png",
+        anims: dragonAnim
     } 
 };

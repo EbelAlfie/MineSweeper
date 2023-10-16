@@ -1,11 +1,11 @@
-import Map from "./church.js"
+import CustomCanvas from "./customcanvas.js"
 import * as GameObj from "./gameobj.js"
 
 let church ;
 main() ;
 
 function main() {
-    church = new Map({
+    church = new CustomCanvas({
         space: document.querySelector(".floor"),
         gameObj: GameObj.churchObj
     });
