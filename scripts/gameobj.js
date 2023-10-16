@@ -3,7 +3,7 @@ export const churchObj = {
     x: 0,
     y: 0,
     body: {
-        src: "../resource/assets/map.png"
+        src: "../resource/assets/mapchips/map.png"
     },
     objects: {}
 };
@@ -43,7 +43,7 @@ export const mainChar = {
     height: 32,
     width: 25,
     body: {
-        src: "../resource/assets/mc.png",
+        src: "../resource/assets/charachips/mc.png",
         anims: mainCharAnim
     } 
 };

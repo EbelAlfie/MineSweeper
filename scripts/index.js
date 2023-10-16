@@ -1,25 +1,25 @@
-import Church from "./church.js"
+import Map from "./church.js"
 import * as GameObj from "./gameobj.js"
 
-let church ;
+let map ;
 main() ;
 
 function main() {
-    church = new Church({
+    map = new Map({
         space: document.querySelector(".floor"),
         gameObj: GameObj.churchObj
     });
-    church.createChurch() ;
+    map.createChurch() ;
     
     setupKeyActions() ;
 }
 
 function setupKeyActions() { //debounce? 
     document.onkeydown = (event) => {
-        church.onKeyDown(event.key);
+        map.onKeyDown(event.key);
     }
 
     document.onkeyup = (event) => {
-        church.onKeyUp(event.key) ;
+        map.onKeyUp(event.key) ;
     }
 }
