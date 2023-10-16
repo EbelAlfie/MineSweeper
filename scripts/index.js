@@ -1,13 +1,12 @@
 import CustomCanvas from "./customcanvas.js"
-import * as GameObj from "./gameobj.js"
+import * as GameObj from "./important/chardata.js"
 
 let world ;
 main() ;
 
 function main() {
     world = new CustomCanvas({
-        space: document.querySelector(".floor"),
-        mapData: GameObj.churchObj
+        space: document.querySelector(".floor")
     });
     world.createChurch() ;
     

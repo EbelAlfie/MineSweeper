@@ -4,8 +4,8 @@ import MoveAble from "./moveable.js";
 class Entity extends MoveAble {
     #currentAnimationSecond = 0 ;
 
-    constructor(obj) {
-        super(obj) ;
+    constructor(EntityObj) {
+        super(EntityObj) ;
         this.ANIMATION_SPEED = 15 ;
     }
 
@@ -22,7 +22,7 @@ class Entity extends MoveAble {
 
     /** Character movement manipulation */
     chooseAnimation(animationKey) {
-        this.sprite.setCurrentAnimation(animationKey) ;
+        this.sprite.setCurrentAnimation(animationKey + this.getDirection()) ;
     }
 }
 

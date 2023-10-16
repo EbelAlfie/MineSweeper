@@ -1,5 +1,6 @@
 import Entity from "./entities/entity.js"
-import * as GameObj from "./gameobj.js"
+import * as EntityObj from "./important/chardata.js"
+import * as MapObj from "./important/mapdata.js"
 import Stack from "./custom/stack.js";
 import Map from "./map.js"
 import { centerizeX, centerizeY } from "./utils.js";
@@ -16,36 +17,39 @@ class CustomCanvas {
     constructor(docObj) {
         this.canvas = docObj.space.querySelector(".screen");
         this.context = this.canvas.getContext("2d") ;
-        this.church = new Map(docObj.mapData) ; 
+        this.map = new Map(MapObj.churchObj) ; 
     }
 
     createChurch() {
-        this.church.sprite.onload = () => { 
-            this.church.setHeight(this.church.sprite.height) ;
-            this.church.setWidth(this.church.sprite.width) ;
+        this.map.sprite.onload = () => { 
+            this.map.setHeight(this.map.sprite.height) ;
+            this.map.setWidth(this.map.sprite.width) ;
             this.#startTime() ;
         }
         this.#populateChurch() ;
     }
 
     #populateChurch() {
-        this.pivot = new Entity(GameObj.mainChar); //pivot sementara
-        this.npc = new Entity(GameObj.akagami) ;
+        this.pivot = new Entity(EntityObj.mainChar); //pivot sementara
+        this.dragon = new Entity(EntityObj.dragon) ;
     }
 
     #startTime = () => {
         this.#handlePivotMovement() ;
+
         this.#refreshCanvas() ;
-        this.context.drawImage(this.church.sprite, 
-            this.church.x - this.pivot.x, this.church.y - this.pivot.y //relatif terhadap MC
+        this.context.drawImage(this.map.sprite, 
+            this.map.x - this.pivot.x, this.map.y - this.pivot.y //relatif terhadap MC
         );
-        this.#renderAnimation(this.pivot) ;
-        this.#renderAnimation(this.npc) ;
+        this.map.executeEvent() ;
+        this.#render(this.dragon) ;
+        this.#render(this.pivot) ;
+        
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
     #handlePivotMovement() { 
-        if (this.keyStack.isEmpty()) { 
+        if (this.keyStack.isEmpty() || !this.pivot.canMove()) { 
             this.stopPivot() ;
             return 
         }
@@ -53,14 +57,14 @@ class CustomCanvas {
         this.movePivot() ;
     }
 
-    stopPivot() { this.pivot.chooseAnimation(`idle${this.pivot.getDirection()}`) }
+    stopPivot() { this.pivot.chooseAnimation("idle") }
 
     movePivot() {
-        this.pivot.chooseAnimation(`walk${this.pivot.getDirection()}`) ;
+        this.pivot.chooseAnimation("walk") ;
         this.pivot.move() ;
     }
 
-    #renderAnimation(person) {
+    #render(person) {
         person.animateCharacter() ;
         const frame = person.sprite.getFrame() ;
         this.context.drawImage(

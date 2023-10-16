@@ -4,11 +4,12 @@ import GeneralObject from "../generalobject.js";
 class MoveAble extends GeneralObject { 
     #direction = "South" ;
     #movingSpeed = 8 ;
-    constructor(gameObj) {
-        super(gameObj);
-        this.#movingSpeed = gameObj.speed || 8 ;
+    #isAbleToMove = true; 
+    constructor(entityObj) {
+        super(entityObj);
+        this.#movingSpeed = entityObj.speed || 8 ;
         
-        this.#direction = gameObj.initialDirection || "South" ;
+        this.#direction = entityObj.initialDirection || "South" ;
         this.positions = {
             "North": ["y", -this.#movingSpeed],
             "South": ["y", this.#movingSpeed],
@@ -42,9 +43,13 @@ class MoveAble extends GeneralObject {
         } ;
     }
 
-    getSpeed() {
-        return this.#movingSpeed ;
+    get speed() { return this.#movingSpeed }
+
+    setMovementStatus(value = true) {
+        this.#isAbleToMove = value ;
     }
+
+    canMove() { return this.#isAbleToMove }
 }
 
 export default MoveAble

@@ -9,7 +9,14 @@ class Map extends GeneralObject {
     /** check for event in current tile */
     checkTile(player) {
         const [coord, value] = player.positions[player.getDirection()] ;
+        switch (player.getDirection()) {
+
+        }
     }
-}
+
+    executeEvent() {
+        
+    }
+ }
 
 export default Map 
