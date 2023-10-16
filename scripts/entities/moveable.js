@@ -4,9 +4,9 @@ import GeneralObject from "../generalobject.js";
 class MoveAble extends GeneralObject { 
     #direction = "South" ;
     #movingSpeed = 8 ;
-    constructor(gameObj, movingSpeed) {
+    constructor(gameObj) {
         super(gameObj);
-        this.#movingSpeed = movingSpeed || 8 ;
+        this.#movingSpeed = gameObj.speed || 8 ;
         
         this.#direction = gameObj.initialDirection || "South" ;
         this.positions = {

@@ -4,8 +4,8 @@ import MoveAble from "./moveable.js";
 class Entity extends MoveAble {
     #currentAnimationSecond = 0 ;
 
-    constructor(obj, speed) {
-        super(obj, speed) ;
+    constructor(obj) {
+        super(obj) ;
         this.ANIMATION_SPEED = 15 ;
     }
 

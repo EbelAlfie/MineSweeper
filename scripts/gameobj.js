@@ -48,6 +48,7 @@ export const mainChar = {
     y: 0,
     height: 32,
     width: 25,
+    speed: 3,
     body: {
         src: "../resource/assets/charachips/mc.png",
         anims: mainCharAnim

@@ -1,10 +1,10 @@
 import Entity from "./entities/entity.js"
 import * as GameObj from "./gameobj.js"
-import GeneralObject from "./generalobject.js";
 import Stack from "./custom/stack.js";
+import Map from "./map.js"
 import { centerizeX, centerizeY } from "./utils.js";
  
-class CustomCanvas extends GeneralObject {
+class CustomCanvas {
     keyStack = new Stack() ;
     movements = {
         "ArrowUp": "North",
@@ -13,32 +13,31 @@ class CustomCanvas extends GeneralObject {
         "ArrowRight": "East"
     } ;
 
-    constructor(mapObj) {
-        super(mapObj.gameObj, 5) ;
-        this.canvas = mapObj.space.querySelector(".screen");
+    constructor(docObj) {
+        this.canvas = docObj.space.querySelector(".screen");
         this.context = this.canvas.getContext("2d") ;
-        this.walls = mapObj.gameObj.walls ;
+        this.church = new Map(docObj.mapData) ; 
     }
 
     createChurch() {
-        this.sprite.onload = () => { 
-            this.setHeight(this.sprite.height) ;
-            this.setWidth(this.sprite.width) ;
+        this.church.sprite.onload = () => { 
+            this.church.setHeight(this.church.sprite.height) ;
+            this.church.setWidth(this.church.sprite.width) ;
             this.#startTime() ;
         }
         this.#populateChurch() ;
     }
 
     #populateChurch() {
-        this.pivot = new Entity(GameObj.mainChar, 3); //pivot sementara
-        this.npc = new Entity(GameObj.akagami, 3) ;
+        this.pivot = new Entity(GameObj.mainChar); //pivot sementara
+        this.npc = new Entity(GameObj.akagami) ;
     }
 
     #startTime = () => {
         this.#handlePivotMovement() ;
         this.#refreshCanvas() ;
-        this.context.drawImage(this.sprite, 
-            this.x - this.pivot.x, this.y - this.pivot.y //relatif terhadap MC
+        this.context.drawImage(this.church.sprite, 
+            this.church.x - this.pivot.x, this.church.y - this.pivot.y //relatif terhadap MC
         );
         this.#renderAnimation(this.pivot) ;
         this.#renderAnimation(this.npc) ;

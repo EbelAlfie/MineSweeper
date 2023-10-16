@@ -1,5 +1,4 @@
 import GeneralObject from "../generalobject";
-import MoveAble from "./moveable";
 
 /** Bisa beranimasi (animateable) */
 class Animateable extends GeneralObject {

@@ -1,25 +1,25 @@
 import CustomCanvas from "./customcanvas.js"
 import * as GameObj from "./gameobj.js"
 
-let church ;
+let world ;
 main() ;
 
 function main() {
-    church = new CustomCanvas({
+    world = new CustomCanvas({
         space: document.querySelector(".floor"),
-        gameObj: GameObj.churchObj
+        mapData: GameObj.churchObj
     });
-    church.createChurch() ;
+    world.createChurch() ;
     
     setupKeyActions() ;
 }
 
 function setupKeyActions() { //debounce? 
     document.onkeydown = (event) => {
-        church.onKeyDown(event.key);
+        world.onKeyDown(event.key);
     }
 
     document.onkeyup = (event) => {
-        church.onKeyUp(event.key) ;
+        world.onKeyUp(event.key) ;
     }
 }
