@@ -1,11 +1,12 @@
 import MoveAble from "./moveable.js";
 
-/** Bisa beranimasi (animateable) */
+/** Bisa beranimasi (Animateable) */
 class Entity extends MoveAble {
     #currentAnimationSecond = 0 ;
 
     constructor(EntityObj) {
         super(EntityObj) ;
+        this.isMainCharacter = EntityObj.isMainChar || false ;
         this.ANIMATION_SPEED = 15 ;
     }
 
@@ -21,7 +22,7 @@ class Entity extends MoveAble {
     }
 
     /** Character movement manipulation */
-    chooseAnimation(animationKey) {
+    chooseAnimation(animationKey = "") {
         this.sprite.setCurrentAnimation(animationKey + this.getDirection()) ;
     }
 }

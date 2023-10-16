@@ -30,6 +30,7 @@ const mainCharAnim =  {
     }
 }
 export const mainChar = {
+    isMainChar: true,
     x: 0,
     y: 0,
     height: 32,

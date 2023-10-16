@@ -1,3 +1,5 @@
+import { dragon, mainChar } from "./chardata.js";
+
 export const churchObj = {
     x: 0,
     y: 0,
@@ -10,5 +12,8 @@ export const churchObj = {
         [-150, 201], 
         [375, 201]]
     , //refactor to objects
-    objects: {}
+    objects: {
+        main: mainChar,
+        char2: dragon
+    }
 };

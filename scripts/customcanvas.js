@@ -21,30 +21,21 @@ class CustomCanvas {
     }
 
     createChurch() {
+        this.pivot = new Entity(this.map.entities["main"]) ;
         this.map.sprite.onload = () => { 
             this.map.setHeight(this.map.sprite.height) ;
             this.map.setWidth(this.map.sprite.width) ;
             this.#startTime() ;
         }
-        this.#populateChurch() ;
-    }
-
-    #populateChurch() {
-        this.pivot = new Entity(EntityObj.mainChar); //pivot sementara
-        this.dragon = new Entity(EntityObj.dragon) ;
     }
 
     #startTime = () => {
         this.#handlePivotMovement() ;
-
         this.#refreshCanvas() ;
         this.context.drawImage(this.map.sprite, 
-            this.map.x - this.pivot.x, this.map.y - this.pivot.y //relatif terhadap MC
+            this.computeX(), this.computeY() //relatif terhadap MC
         );
-        this.map.executeEvent() ;
-        this.#render(this.dragon) ;
         this.#render(this.pivot) ;
-        
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
@@ -72,8 +63,8 @@ class CustomCanvas {
             frame[0], //x
             frame[1], //y top left
             person.getWidth(), person.getHeight(), //crop rect width height 
-            centerizeX(person.x, person.width, this.canvas.width) - this.pivot.x, 
-            centerizeY(person.y, person.height, this.canvas.height)- this.pivot.y, //x, y (char pos)
+            centerizeX(person.x, person.getWidth(), this.canvas.width) - this.pivot.x, 
+            centerizeY(person.y, person.getHeight(), this.canvas.height)- this.pivot.y, //x, y (char pos)
             person.getWidth(), person.getHeight() //request space dest canvas
         ) ; 
     }
@@ -87,6 +78,9 @@ class CustomCanvas {
         const dir = this.movements[key] ;
         if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }
     }
+
+    computeX() { return this.map.x - this.pivot.x }
+    computeY() { return this.map.y - this.pivot.y }
 
     #refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }
 }
