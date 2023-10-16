@@ -5,6 +5,12 @@ export const churchObj = {
     body: {
         src: "../resource/assets/mapchips/map.png"
     },
+    walls: {
+        topLeft: [-150, -39],
+        topRight: [375, -39],
+        bottomLeft: [-150, 201],
+        bottomRight: [375, 201]
+    }, //refactor to objects
     objects: {}
 };
 /** hardcoded, depends on the char sheets */

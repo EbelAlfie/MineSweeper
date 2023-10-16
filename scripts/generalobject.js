@@ -9,7 +9,10 @@ class GeneralObject {
         this.x = gameObj.x || 0 ; 
         this.y = gameObj.y || 0 ; 
         this.sprite = new Sprite(gameObj.body) ;
-        // this.shadow = new Sprite() ;
+    }
+
+    getObjectCoord() {
+        return [this.x, this.y]
     }
 
     setWidth(newWidth = 0) { 

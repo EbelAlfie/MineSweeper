@@ -2,44 +2,45 @@ import GeneralObject from "./generalobject.js";
 
 /** Bisa bergerak (move), punya speed*/
 class MoveAble extends GeneralObject { 
+    #direction = "South" ;
+    #movingSpeed = 8 ;
     constructor(gameObj, movingSpeed) {
         super(gameObj);
-        this.movingSpeed = movingSpeed || 8 ;
+        this.#movingSpeed = movingSpeed || 8 ;
         
-        this.direction = gameObj.initialDirection || "south" ;
+        this.#direction = gameObj.initialDirection || "South" ;
         this.positions = {
-            "north": ["y", -this.movingSpeed],
-            "south": ["y", this.movingSpeed],
-            "west": ["x", -this.movingSpeed],
-            "east": ["x", this.movingSpeed]
+            "North": ["y", -this.#movingSpeed],
+            "South": ["y", this.#movingSpeed],
+            "West": ["x", -this.#movingSpeed],
+            "East": ["x", this.#movingSpeed]
         } ;
     }
 
+    /** Implement this to move */
     move() {
-        const [coord, value] = this.positions[this.direction] ;
+        const [coord, value] = this.positions[this.getDirection()] ;
         this[coord] += value ;
     }
 
-    //setter
     /** update the input direction for movements */
-    setDirection(direction = "south") {
-        if (direction === this.direction) return ;
-        this.direction = direction ;
+    setDirection(direction = "South") {
+        if (direction === this.#direction) return ;
+        this.#direction = direction ;
     }
 
-    setSpeed(newMovingSpeed = 0) {
+    getDirection() { return this.#direction || "South" } 
+
+    _setSpeed(newMovingSpeed = 0) {
         if (newMovingSpeed < 0) return ;
-        this.movingSpeed = newMovingSpeed ;
+        this.#movingSpeed = newMovingSpeed ;
         this.positions = {
-            "north": ["y", this.movingSpeed],
-            "south": ["y", -this.movingSpeed],
-            "west": ["x", this.movingSpeed],
-            "east": ["x", -this.movingSpeed]
+            "North": ["y", this.#movingSpeed],
+            "South": ["y", -this.#movingSpeed],
+            "West": ["x", this.#movingSpeed],
+            "East": ["x", -this.#movingSpeed]
         } ;
     }
-
-    //getter
-    getDirection() { return this.direction || "south" } 
 }
 
 export default MoveAble

@@ -7,31 +7,23 @@ import { centerizeX, centerizeY } from "./utils.js";
 class Map extends GeneralObject {
     keyStack = new Stack() ;
     movements = {
-        "ArrowUp": "north",
-        "ArrowDown": "south",
-        "ArrowLeft": "west",
-        "ArrowRight": "east"
+        "ArrowUp": "North",
+        "ArrowDown": "South",
+        "ArrowLeft": "West",
+        "ArrowRight": "East"
     } ;
-
-    initialStartX = 0 ;
-    initialStartY = 0 ;
-    initialEndX = 0 ;
-    initialEndY = 0 ;
 
     constructor(mapObj) {
         super(mapObj.gameObj, 5) ;
         this.canvas = mapObj.space.querySelector(".screen");
         this.context = this.canvas.getContext("2d") ;
-        this.initialStartX = mapObj.x || 0 ;
-        this.initialStartY = mapObj.y || 0 ;
+        this.walls = mapObj.gameObj.walls ;
     }
 
     createChurch() {
         this.sprite.onload = () => { 
             this.setHeight(this.sprite.height) ;
             this.setWidth(this.sprite.width) ;
-            this.initialEndX = this.getWidth() ;
-            this.initialEndY = this.getHeight() ;
             this.#startTime() ;
         }
         this.#populateChurch() ;
@@ -42,7 +34,7 @@ class Map extends GeneralObject {
     }
 
     #startTime = () => {
-        this.#handleMovement() ;
+        this.#handlePivotMovement() ;
         this.#refreshCanvas() ;
         console.log(`${this.pivot.x} and ${this.pivot.y}`);
         console.log(`${this.x} and ${this.y}`) ;
@@ -53,8 +45,26 @@ class Map extends GeneralObject {
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
+    #handlePivotMovement() { 
+        if (this.keyStack.isEmpty()) { 
+            this.stopPivot() ;
+            return 
+        }
+        this.pivot.setDirection(this.keyStack.first) ;
+        this.movePivot() ;
+    }
+
+    stopPivot() {
+        this.pivot.chooseAnimation(`idle${this.pivot.getDirection()}`) ;
+    }
+
+    movePivot() {
+        this.pivot.chooseAnimation(`walk${this.pivot.getDirection()}`) ;
+        this.pivot.move() ;
+    }
+
     #renderAnimation(npc) {
-        npc.animate() ;
+        npc.animateCharacter() ;
         const frame = npc.sprite.getFrame() ;
         this.context.drawImage(
             npc.sprite,
@@ -67,29 +77,14 @@ class Map extends GeneralObject {
         ) ; 
     }
 
-    #handleMovement() { 
-        if (!this.assertMovement()) return ;
-        if (this.keyStack.isEmpty()) { 
-            this.pivot.stopMovements[this.pivot.getDirection()]() ;
-            return 
-        }
-        this.pivot.setDirection(this.keyStack.first) ;
-        this.pivot.movements[this.pivot.getDirection()]() ; //sama dengan setAnimation
-        this.pivot.move()
-    }
-
     onKeyUp(key) { 
         const i = this.keyStack.getIndex(this.movements[key]) ;
-        this.keyStack.pop(i) ; //console.log(`keyUp ${this.keyStack.stack}`) ;
+        this.keyStack.pop(i) ; 
     }
 
     onKeyDown(key) {
         const dir = this.movements[key] ;
-        if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }//console.log(`KeyDown ${this.keyStack.stack}`) ;
-    }
-
-    assertMovement() {
-        return 
+        if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }
     }
 
     #refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }

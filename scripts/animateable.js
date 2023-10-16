@@ -1,7 +1,8 @@
-import MoveAble from "./moveable.js";
+import GeneralObject from "./generalobject";
+import MoveAble from "./moveable";
 
 /** Bisa beranimasi (animateable) */
-class Entity extends MoveAble {
+class Animateable extends GeneralObject {
     #currentAnimationSecond = 0 ;
 
     constructor(obj, speed) {
@@ -9,7 +10,7 @@ class Entity extends MoveAble {
         this.ANIMATION_SPEED = 15 ;
     }
 
-    animateCharacter() {
+    animateEntity() {
         this.#currentAnimationSecond = (this.#currentAnimationSecond + 1) % this.ANIMATION_SPEED ;
         if (this.#currentAnimationSecond > 0) return ;
         this.sprite.animateSprite() ;
@@ -21,9 +22,18 @@ class Entity extends MoveAble {
     }
 
     /** Character movement manipulation */
-    chooseAnimation(animationKey) {
+    moveCharacterAnim() {
+        this.#chooseAnimation(`walk${this.getDirection()}`) ;
+        this.move() ;
+    }
+
+    stopCharacterAnim() {
+        this.#chooseAnimation(`idle${this.pivot.getDirection()}`) ;
+    }
+
+    #chooseAnimation(animationKey) {
         this.sprite.setCurrentAnimation(animationKey) ;
     }
 }
 
-export default Entity
+export default Animateable
