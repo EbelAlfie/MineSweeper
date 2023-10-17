@@ -7,15 +7,15 @@ export const churchObj = {
     body: {
         src: "../resource/assets/mapchips/map.png"
     },
-    defaultReserved: [ 
-        [-150, -39], 
-        [375, -39], 
-        [-150, 201], 
-        [375, 201]
-    ]
+    defaultReserved: {
+        "-150, -39" : true, 
+        "375, -39" : true, 
+        "-150, 201" : true, 
+        "375, 201" : true
+    }
     , //refactor to objects
     objects: {
-        main: new Entity(dragon), 
-        char2: new Entity(mainChar),
+        main: new Entity(mainChar), 
+        char2: new Entity(dragon),
     }
 };

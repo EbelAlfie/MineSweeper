@@ -92,28 +92,28 @@ export const akagami = {
 
 const dragonAnim = {
     South: {
-        frames: [[80,0]]
+        frames: [[0,0], [80, 0], [160, 0]]
     },
     walkSouth: {
         frames: [[0,0], [80, 0], [160, 0]]
     }, 
 
     West: {
-        frames: [[80,64]]
+        frames: [[0, 64], [80, 64], [160, 64]]
     },
     walkWest: {
         frames: [[0, 64], [80, 64], [160, 64]]
     },
 
     East: {
-        frames: [[80,128]]
+        frames: [[0, 128], [80, 128], [160, 128]]
     },
     walkEast: {
         frames: [[0, 128], [80, 128], [160, 128]]
     },
 
     North: {
-        frames: [[80,192]]
+        frames: [[0, 192], [80, 192], [160, 192]]
     },
     walkNorth: {
         frames: [[0, 192], [80, 192], [160, 192]]

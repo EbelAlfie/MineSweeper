@@ -34,20 +34,20 @@ class CustomCanvas {
             this.computeX(), this.computeY() //relatif terhadap MC
         );
         Object.values(this.church.entities).forEach(entity => {
-            this.church.registerArea(centerizeX(entity.x, this.canvas.width), centerizeX(entity.y, this.canvas.height)) ;
+            this.church.registerArea(entity.x - this.pivot.x, entity.y - this.pivot.y) ;
             this.#render(entity) ;
         }) ;
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
     #handlePivotMovement() { 
-        if (this.keyStack.isEmpty()        ) { 
+        if (this.keyStack.isEmpty()) { 
             this.pivot.stopChar();
             return 
         }
-        this.church.unregisterArea(centerizeX(this.pivot.x, this.canvas.width), centerizeX(this.pivot.y, this.canvas.height)) ;
+        this.church.unregisterArea(this.pivot.x, this.pivot.y) ;
         this.pivot.moveChar(this.keyStack.first) ;
-        this.church.registerArea(centerizeX(this.pivot.x, this.canvas.width), centerizeX(this.pivot.y, this.canvas.height)) ; 
+        this.church.registerArea(this.pivot.x, this.pivot.y) ; 
     }
 
     #render(person) {
