@@ -1,5 +1,3 @@
-import Entity from "./abstracted/entity.js"
-import * as EntityObj from "./important/chardata.js"
 import * as MapObj from "./important/mapdata.js"
 import Stack from "./custom/stack.js";
 import Map from "./map.js"
@@ -35,18 +33,21 @@ class CustomCanvas {
         this.context.drawImage(this.church.sprite, 
             this.computeX(), this.computeY() //relatif terhadap MC
         );
-        Object.values(this.church.entities).forEach((entity) => {
+        Object.values(this.church.entities).forEach(entity => {
+            this.church.registerArea(centerizeX(entity.x, this.canvas.width), centerizeX(entity.y, this.canvas.height)) ;
             this.#render(entity) ;
         }) ;
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
     #handlePivotMovement() { 
-        if (this.keyStack.isEmpty()) { 
-            this.pivot.stopChar() ;
+        if (this.keyStack.isEmpty()        ) { 
+            this.pivot.stopChar();
             return 
         }
+        this.church.unregisterArea(centerizeX(this.pivot.x, this.canvas.width), centerizeX(this.pivot.y, this.canvas.height)) ;
         this.pivot.moveChar(this.keyStack.first) ;
+        this.church.registerArea(centerizeX(this.pivot.x, this.canvas.width), centerizeX(this.pivot.y, this.canvas.height)) ; 
     }
 
     #render(person) {
@@ -80,13 +81,6 @@ class CustomCanvas {
 }
 
 export default CustomCanvas
-
-
-
-
-
-
-
 
 /** Give the power to move diagonally */
     // moveDiagonal() {

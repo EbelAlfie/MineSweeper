@@ -1,6 +1,6 @@
 class Sprite extends Image {
     #currentAnimationFrame = 0 ;
-    #currentAnimationKey = "idleSouth" ; 
+    #currentAnimationKey = "South" ; 
     #isGif = false ;
 
     constructor(body) {
@@ -12,7 +12,7 @@ class Sprite extends Image {
 
     //Animateable exclusive
     /** Set current animation to string key property */
-    setCurrentAnimation(animation = "idleSouth") {
+    setCurrentAnimation(animation = "South") {
         if (this.#currentAnimationKey === animation || !this.isAnimateable()) return ;
         this.#currentAnimationKey = animation ; 
         this.#currentAnimationFrame = 0 ; //reset current frame
@@ -35,7 +35,7 @@ class Sprite extends Image {
     /** Get current frame of current animation 
      * @param frameIndex of animation. default to currentAnimationFrame
     */
-    getFrame() { 
+    getFrame() {
         if (!this.isAnimateable()) return null ;
         return this.animation.frames[this.#currentAnimationFrame] ;
     }

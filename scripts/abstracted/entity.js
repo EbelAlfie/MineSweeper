@@ -3,11 +3,21 @@ import MoveAble from "../general/moveable.js";
 /** Bisa beranimasi */
 class Entity extends MoveAble {
     #currentAnimationSecond = 0 ;
+    isMainChar = false ; //hapus?
 
     constructor(EntityObj) {
         super(EntityObj) ;
-        this.isMainCharacter = EntityObj.isMainChar || false ;
+        this.isMainChar = EntityObj.isMainChar || false ;
         this.ANIMATION_SPEED = 15 ;
+    }
+
+    //Character movement
+    stopChar() { this.chooseAnimation() }
+
+    moveChar(direction = "South") {
+        this.setDirection(direction) ;
+        this.chooseAnimation("walk") ;
+        this.move() ;
     }
 
     animateCharacter() {
@@ -16,18 +26,8 @@ class Entity extends MoveAble {
         this.sprite.animateSprite() ;
     }
     
-    /** Character movement manipulation */
     chooseAnimation(animationKey = "") {
-        this.sprite.setCurrentAnimation(animationKey + this.getDirection()) ;
-    }
-   
-    //Character movement
-    stopChar() { this.chooseAnimation("idle") }
-
-    moveChar(direction = "South") {
-        this.setDirection(direction) ;
-        this.chooseAnimation("walk") ;
-        this.move() ;
+        this.sprite.setCurrentAnimation(animationKey + this.currentDirection) ;
     }
 }
 

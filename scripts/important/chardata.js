@@ -1,28 +1,28 @@
 //TODO convert to JSON
 /** hardcoded, depends on the char sheets */
 const mainCharAnim =  {
-    idleSouth: {
+    South: {
         frames: [[25,0]]
     },
     walkSouth: {
         frames: [[0,0], [25, 0], [50, 0]]
     }, 
 
-    idleWest: {
+    West: {
         frames: [[25,32]]
     },
     walkWest: {
         frames: [[0, 32], [25, 32], [50, 32]]
     },
 
-    idleEast: {
+    East: {
         frames: [[25,64]]
     },
     walkEast: {
         frames: [[0, 64], [25, 64], [50, 64]]
     },
 
-    idleNorth: {
+    North: {
         frames: [[25,96]]
     },
     walkNorth: {
@@ -43,35 +43,35 @@ export const mainChar = {
 };
 
 const akagamiAnim = {
-    idleSouth: {
+    South: {
         frames: [[19,0]]
     },
     walkSouth: {
         frames: [[19,0], [0, 0], [38, 0]]
     }, 
 
-    idleSouthWest: {
+    SouthWest: {
         frames: [[25,0]]
     },
     walkSouthWest: {
         frames: [[19,0], [0, 0], [50, 0]]
     }, 
 
-    idleWest: {
+    West: {
         frames: [[18,32]]
     },
-    walkWest: {
+    West: {
         frames: [[19, 32], [0, 32], [38, 32]]
     },
 
-    idleEast: {
+    East: {
         frames: [[19,60]]
     },
     walkEast: {
         frames: [[19, 60], [0, 60], [38, 60]]
     },
 
-    idleNorth: {
+    North: {
         frames: [[25,96]]
     },
     walkNorth: {
@@ -91,28 +91,28 @@ export const akagami = {
 };
 
 const dragonAnim = {
-    idleSouth: {
+    South: {
         frames: [[80,0]]
     },
     walkSouth: {
         frames: [[0,0], [80, 0], [160, 0]]
     }, 
 
-    idleWest: {
+    West: {
         frames: [[80,64]]
     },
     walkWest: {
         frames: [[0, 64], [80, 64], [160, 64]]
     },
 
-    idleEast: {
+    East: {
         frames: [[80,128]]
     },
     walkEast: {
         frames: [[0, 128], [80, 128], [160, 128]]
     },
 
-    idleNorth: {
+    North: {
         frames: [[80,192]]
     },
     walkNorth: {

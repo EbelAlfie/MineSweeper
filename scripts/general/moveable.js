@@ -5,11 +5,11 @@ class MoveAble extends GeneralObject {
     #direction = "South" ;
     #movingSpeed = 8 ;
     #isAbleToMove = true; 
-    constructor(entityObj) {
-        super(entityObj);
-        this.#movingSpeed = entityObj.speed || 8 ;
+    constructor(EntityObj) {
+        super(EntityObj);
+        this.#movingSpeed = EntityObj.speed || 8 ;
         
-        this.#direction = entityObj.initialDirection || "South" ;
+        this.#direction = EntityObj.initialDirection || "South" ;
         this.positions = {
             "North": ["y", -this.#movingSpeed],
             "South": ["y", this.#movingSpeed],
@@ -18,9 +18,9 @@ class MoveAble extends GeneralObject {
         } ;
     }
 
-    /** Implement this to move */
+    /** Call this to move */
     move() {
-        const [coord, value] = this.positions[this.getDirection()] ;
+        const [coord, value] = this.positions[this.currentDirection] ;
         this[coord] += value ;
     }
 
@@ -30,9 +30,7 @@ class MoveAble extends GeneralObject {
         this.#direction = direction ;
     }
 
-    getDirection() { return this.#direction } 
-
-    _setSpeed(newMovingSpeed = 0) {
+    setSpeed(newMovingSpeed = 0) {
         if (newMovingSpeed < 0) return ;
         this.#movingSpeed = newMovingSpeed ;
         this.positions = {
@@ -42,6 +40,8 @@ class MoveAble extends GeneralObject {
             "East": ["x", -this.#movingSpeed]
         } ;
     }
+
+    get currentDirection() { return this.#direction } 
 
     get speed() { return this.#movingSpeed }
 
