@@ -1,4 +1,4 @@
-import Entity from "../entities/entity.js";
+import Entity from "../abstracted/entity.js";
 import { dragon, mainChar } from "./chardata.js";
 
 export const churchObj = {

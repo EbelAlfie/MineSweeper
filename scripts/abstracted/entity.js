@@ -1,4 +1,4 @@
-import MoveAble from "./moveable.js";
+import MoveAble from "../general/moveable.js";
 
 /** Bisa beranimasi */
 class Entity extends MoveAble {
@@ -20,10 +20,11 @@ class Entity extends MoveAble {
     chooseAnimation(animationKey = "") {
         this.sprite.setCurrentAnimation(animationKey + this.getDirection()) ;
     }
-    
-    stopPivot() { this.chooseAnimation("idle") }
+   
+    //Character movement
+    stopChar() { this.chooseAnimation("idle") }
 
-    movePivot(direction = "South") {
+    moveChar(direction = "South") {
         this.setDirection(direction) ;
         this.chooseAnimation("walk") ;
         this.move() ;

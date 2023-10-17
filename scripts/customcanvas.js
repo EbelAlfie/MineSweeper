@@ -1,4 +1,4 @@
-import Entity from "./entities/entity.js"
+import Entity from "./abstracted/entity.js"
 import * as EntityObj from "./important/chardata.js"
 import * as MapObj from "./important/mapdata.js"
 import Stack from "./custom/stack.js";
@@ -43,10 +43,10 @@ class CustomCanvas {
 
     #handlePivotMovement() { 
         if (this.keyStack.isEmpty()) { 
-            this.pivot.stopPivot() ;
+            this.pivot.stopChar() ;
             return 
         }
-        this.pivot.movePivot(this.keyStack.first) ;
+        this.pivot.moveChar(this.keyStack.first) ;
     }
 
     #render(person) {
@@ -57,8 +57,8 @@ class CustomCanvas {
             frame[0], //x
             frame[1], //y top left
             person.getWidth(), person.getHeight(), //crop rect width height 
-            centerizeX(person.x, person.getWidth(), this.canvas.width) - this.pivot.x, 
-            centerizeY(person.y, person.getHeight(), this.canvas.height)- this.pivot.y, //x, y (char pos)
+            centerizeX(person.x, this.canvas.width) - this.pivot.x, 
+            centerizeY(person.y, this.canvas.height)- this.pivot.y, //x, y (char pos)
             person.getWidth(), person.getHeight() //request space dest canvas
         ) ; 
     }

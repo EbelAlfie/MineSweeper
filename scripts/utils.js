@@ -1,9 +1,9 @@
-export const centerizeX = (x = 0, charWidth = 0, canvasWidth) => {
+export const centerizeX = (x = 0, canvasWidth) => {
     if (canvasWidth === null || canvasWidth === undefined) return x ;
     return x + (canvasWidth/2) ;
 }
 
-export const centerizeY = (y = 0, charHeight = 0, canvasHeight) => {
+export const centerizeY = (y = 0, canvasHeight) => {
     if (canvasHeight === null || canvasHeight === undefined) return y ;
     return y + (canvasHeight/2) ;
 }

@@ -1,5 +1,5 @@
-import Entity from "./entities/entity.js";
-import GeneralObject from "./generalobject.js";
+import Entity from "./abstracted/entity.js";
+import GeneralObject from "./general/generalobject.js";
 
 class Map extends GeneralObject {
     constructor(mapData) {

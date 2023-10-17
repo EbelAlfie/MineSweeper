@@ -1,4 +1,4 @@
-import GeneralObject from "../generalobject.js";
+import GeneralObject from "./generalobject.js";
 
 /** Bisa bergerak (move), punya speed*/
 class MoveAble extends GeneralObject { 
