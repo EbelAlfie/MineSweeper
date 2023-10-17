@@ -17,14 +17,14 @@ class CustomCanvas {
     constructor(docObj) {
         this.canvas = docObj.space.querySelector(".screen");
         this.context = this.canvas.getContext("2d") ;
-        this.map = new Map(MapObj.churchObj) ; 
+        this.church = new Map(MapObj.churchObj) ; 
     }
 
     createChurch() {
-        this.pivot = new Entity(this.map.entities["main"]) ;
-        this.map.sprite.onload = () => { 
-            this.map.setHeight(this.map.sprite.height) ;
-            this.map.setWidth(this.map.sprite.width) ;
+        this.pivot = this.church.entities["main"] ;
+        this.church.sprite.onload = () => { 
+            this.church.setHeight(this.church.sprite.height) ;
+            this.church.setWidth(this.church.sprite.width) ;
             this.#startTime() ;
         }
     }
@@ -32,27 +32,21 @@ class CustomCanvas {
     #startTime = () => {
         this.#handlePivotMovement() ;
         this.#refreshCanvas() ;
-        this.context.drawImage(this.map.sprite, 
+        this.context.drawImage(this.church.sprite, 
             this.computeX(), this.computeY() //relatif terhadap MC
         );
-        this.#render(this.pivot) ;
+        Object.values(this.church.entities).forEach((entity) => {
+            this.#render(entity) ;
+        }) ;
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
     #handlePivotMovement() { 
-        if (this.keyStack.isEmpty() || !this.pivot.canMove()) { 
-            this.stopPivot() ;
+        if (this.keyStack.isEmpty()) { 
+            this.pivot.stopPivot() ;
             return 
         }
-        this.pivot.setDirection(this.keyStack.first) ;
-        this.movePivot() ;
-    }
-
-    stopPivot() { this.pivot.chooseAnimation("idle") }
-
-    movePivot() {
-        this.pivot.chooseAnimation("walk") ;
-        this.pivot.move() ;
+        this.pivot.movePivot(this.keyStack.first) ;
     }
 
     #render(person) {
@@ -79,8 +73,8 @@ class CustomCanvas {
         if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }
     }
 
-    computeX() { return this.map.x - this.pivot.x }
-    computeY() { return this.map.y - this.pivot.y }
+    computeX() { return this.church.x - this.pivot.x }
+    computeY() { return this.church.y - this.pivot.y }
 
     #refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }
 }

@@ -1,3 +1,4 @@
+import Entity from "../entities/entity.js";
 import { dragon, mainChar } from "./chardata.js";
 
 export const churchObj = {
@@ -13,7 +14,7 @@ export const churchObj = {
         [375, 201]]
     , //refactor to objects
     objects: {
-        main: mainChar,
-        char2: dragon
+        main: new Entity(mainChar),
+        char2: new Entity(dragon)
     }
 };

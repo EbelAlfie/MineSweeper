@@ -4,10 +4,8 @@ import GeneralObject from "./generalobject.js";
 class Map extends GeneralObject {
     constructor(mapData) {
         super(mapData) ;
-        this.reservedArea = mapData.walls;
-        this.entities = Object.values(mapData.objects).map((entity) => {
-            new Entity(entity) ;
-        }) ;
+        this.reservedArea = mapData.defaultReserved ||  {} ;
+        this.entities = mapData.objects
     }
 
     /** check for event in current tile */
@@ -20,6 +18,11 @@ class Map extends GeneralObject {
 
     executeEvent() {
         
+    }
+
+    //Area handling
+    registerArea(x, y) {
+        this.reservedArea[x,y] = true ;
     }
  }
 

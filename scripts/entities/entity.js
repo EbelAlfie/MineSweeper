@@ -1,6 +1,6 @@
 import MoveAble from "./moveable.js";
 
-/** Bisa beranimasi (Animateable) */
+/** Bisa beranimasi */
 class Entity extends MoveAble {
     #currentAnimationSecond = 0 ;
 
@@ -15,15 +15,18 @@ class Entity extends MoveAble {
         if (this.#currentAnimationSecond > 0) return ;
         this.sprite.animateSprite() ;
     }
-
-    setFrameSpeed(newAnimationSpeed = 0) {
-        if (newAnimationSpeed < 0 || newAnimationSpeed > 100) return ;
-        this.ANIMATION_SPEED = newAnimationSpeed ;
-    }
-
+    
     /** Character movement manipulation */
     chooseAnimation(animationKey = "") {
         this.sprite.setCurrentAnimation(animationKey + this.getDirection()) ;
+    }
+    
+    stopPivot() { this.chooseAnimation("idle") }
+
+    movePivot(direction = "South") {
+        this.setDirection(direction) ;
+        this.chooseAnimation("walk") ;
+        this.move() ;
     }
 }
 
