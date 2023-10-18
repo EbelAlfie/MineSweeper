@@ -14,7 +14,11 @@ class Entity extends MoveAble {
     //Character movement
     stopChar() { this.chooseAnimation() }
 
-    moveChar(direction = "South") {
+    moveChar(direction = null) {
+        if (direction === null) { 
+            this.stopChar();
+            return 
+        }
         this.setDirection(direction) ;
         this.chooseAnimation("walk") ;
         this.move() ;
@@ -28,6 +32,15 @@ class Entity extends MoveAble {
     
     chooseAnimation(animationKey = "") {
         this.sprite.setCurrentAnimation(animationKey + this.currentDirection) ;
+    }
+
+    lookAt(direction) {
+        switch (direction) {
+            case "North" : return [this.x, this.y - this.speed] ; 
+            case "South" : return [this.x, this.y + this.speed] ;
+            case "East" : return [this.x + this.speed, this.y] ;
+            case "West" : return [this.x - this.speed, thiss.y] ;
+        }
     }
 }
 

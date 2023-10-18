@@ -120,8 +120,8 @@ const dragonAnim = {
     }
 }
 export const dragon = {
-    x: 0,
-    y: 0,
+    x: 15,
+    y: 15,
     height: 64,
     width: 80,
     speed: 3, 

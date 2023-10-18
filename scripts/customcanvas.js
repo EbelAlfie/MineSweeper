@@ -28,29 +28,23 @@ class CustomCanvas {
     }
 
     #startTime = () => {
-        this.#handlePivotMovement() ;
         this.#refreshCanvas() ;
         this.context.drawImage(this.church.sprite, 
             this.computeX(), this.computeY() //relatif terhadap MC
         );
+        //this.church.executeEvent() ;
         Object.values(this.church.entities).forEach(entity => {
-            this.church.registerArea(entity.x - this.pivot.x, entity.y - this.pivot.y) ;
+            if (entity == this.pivot) entity.moveChar(this.keyStack.first) ;
             this.#render(entity) ;
         }) ;
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
-    #handlePivotMovement() { 
-        if (this.keyStack.isEmpty()) { 
-            this.pivot.stopChar();
-            return 
-        }
-        this.church.unregisterArea(this.pivot.x, this.pivot.y) ;
-        this.pivot.moveChar(this.keyStack.first) ;
-        this.church.registerArea(this.pivot.x, this.pivot.y) ; 
-    }
-
     #render(person) {
+        this.church.registerArea(
+            centerizeX(person.x, this.canvas.width) - this.pivot.x, 
+            centerizeY(person.y, this.canvas.height)- this.pivot.y,
+        ) ;
         person.animateCharacter() ;
         const frame = person.sprite.getFrame() ;
         this.context.drawImage(
