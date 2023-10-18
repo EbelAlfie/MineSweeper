@@ -1,3 +1,5 @@
+import { toPixel } from "../utils.js";
+
 //TODO convert to JSON
 /** hardcoded, depends on the char sheets */
 const mainCharAnim =  {
@@ -31,8 +33,8 @@ const mainCharAnim =  {
 }
 export const mainChar = {
     isMainChar: true,
-    x: 0,
-    y: 0,
+    x: toPixel(17),
+    y: toPixel(3),
     height: 32,
     width: 25,
     speed: 3,
@@ -120,8 +122,8 @@ const dragonAnim = {
     }
 }
 export const dragon = {
-    x: 15,
-    y: 15,
+    x: toPixel(10),
+    y: toPixel(9),
     height: 64,
     width: 80,
     speed: 3, 

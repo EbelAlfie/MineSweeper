@@ -31,20 +31,23 @@ class CustomCanvas {
         this.#refreshCanvas() ;
         this.context.drawImage(this.church.sprite, 
             this.computeX(), this.computeY() //relatif terhadap MC
-        );
-        //this.church.executeEvent() ;
+        ); 
+
+        //setInterval(() => { this.church.executeEvent() }, 100);
+        console.log(`${this.pivot.x}, ${this.pivot.y}`) ;
         Object.values(this.church.entities).forEach(entity => {
-            if (entity == this.pivot) entity.moveChar(this.keyStack.first) ;
+            if (entity == this.pivot) this.assertMove(entity) ;
             this.#render(entity) ;
         }) ;
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
+    assertMove(entity) {
+        //if (!this.church.canMoveTo(entity.x, entity.y, this.keyStack.first, entity.speed)) return ;
+        entity.moveChar(this.keyStack.first)
+    }
+
     #render(person) {
-        this.church.registerArea(
-            centerizeX(person.x, this.canvas.width) - this.pivot.x, 
-            centerizeY(person.y, this.canvas.height)- this.pivot.y,
-        ) ;
         person.animateCharacter() ;
         const frame = person.sprite.getFrame() ;
         this.context.drawImage(
@@ -53,7 +56,7 @@ class CustomCanvas {
             frame[1], //y top left
             person.getWidth(), person.getHeight(), //crop rect width height 
             centerizeX(person.x, this.canvas.width) - this.pivot.x, 
-            centerizeY(person.y, this.canvas.height)- this.pivot.y, //x, y (char pos)
+            centerizeY(person.y, this.canvas.height) - this.pivot.y, //x, y (char pos)
             person.getWidth(), person.getHeight() //request space dest canvas
         ) ; 
     }
@@ -68,8 +71,8 @@ class CustomCanvas {
         if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }
     }
 
-    computeX() { return this.church.x - this.pivot.x }
-    computeY() { return this.church.y - this.pivot.y }
+    computeX() { return this.canvas.width/2 - this.pivot.x }
+    computeY() { return this.canvas.height/2 - this.pivot.y }
 
     #refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }
 }

@@ -23,20 +23,27 @@ class Map extends GeneralObject {
     }
 
     event = [() => { this.entities["char1"].moveChar("South") },
+    () => { this.entities["char1"].moveChar("South") },
+    () => { this.entities["char1"].moveChar("South") },
+    () => { this.entities["char1"].moveChar("South") },
+    () => { this.entities["char1"].moveChar("South") },
     () => { this.entities["char1"].moveChar("North") },
-    () => { this.entities["char1"].moveChar("West") } ] ;
+    () => { this.entities["char1"].moveChar("North") },
+    () => { this.entities["char1"].moveChar("North") },
+    () => { this.entities["char1"].moveChar("North") },
+    () => { this.entities["char1"].moveChar("West") },
+    () => { this.entities["char1"].moveChar("West") },
+    () => { this.entities["char1"].moveChar("West") },
+    () => { this.entities["char1"].moveChar("West") }, ] ;
     index = 0 ;
     executeEvent() {
-        setTimeout(() => {
-            this.event[this.index]()
-            this.index = (this.index + 1) % 3 ; 
-            console.log(this.index) ;
-        }, 5000) ;
+        this.event[this.index]()
+        this.index = (this.index + 1) % 3 ; 
     }
 
     //Area handling
     registerArea(x = null, y = null) {
-        if (this.reservedArea[`${x}, ${y}`] || x === null || y === null) return ;
+        if (x === null || y === null) return ;
         this.reservedArea[`${x}, ${y}`] = false ;
     }
     unregisterArea(x, y) {
