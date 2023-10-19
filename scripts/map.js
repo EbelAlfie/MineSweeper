@@ -13,13 +13,16 @@ class Map extends GeneralObject {
 
     /** check for event in current tile */
     canMoveTo(x, y, direction, speed) {
+        const entityX = x ;
+        const entityY = y ;
         switch (direction) {
-            case "North" : return this.reservedArea[`${x}, ${y - speed}`] ;
-            case "South" : return this.reservedArea[`${x}, ${y + speed}`] ;
-            case "East" : return this.reservedArea[`${x + speed}, ${y}`] ;
-            case "West" : return this.reservedArea[`${x - speed}, ${y}`] ;
-            default: return true ;
+            case "North" : entityY - speed ;
+            case "South" : entityY + speed ;
+            case "East" : entityX + speed ;
+            case "West" : entityX - speed ;
         }
+        console.log(this.reservedArea[`${48},${80}`]);
+        return this.reservedArea[`${entityX},${entityY}`];
     }
 
     event = [() => { this.entities["char1"].moveChar("South") },
@@ -37,17 +40,17 @@ class Map extends GeneralObject {
     () => { this.entities["char1"].moveChar("West") }, ] ;
     index = 0 ;
     executeEvent() {
-        this.event[this.index]()
-        this.index = (this.index + 1) % 3 ; 
+        // this.event[this.index]()
+        // this.index = (this.index + 1) % 3 ; 
     }
 
     //Area handling
     registerArea(x = null, y = null) {
         if (x === null || y === null) return ;
-        this.reservedArea[`${x}, ${y}`] = false ;
+        this.reservedArea[`${x},${y}`] = false ;
     }
     unregisterArea(x, y) {
-        delete this.reservedArea[`${x}, ${y}`] ; //idealnya dihapus
+        delete this.reservedArea[`${x},${y}`] ; //idealnya dihapus
     }
  }
 

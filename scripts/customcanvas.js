@@ -32,22 +32,29 @@ class CustomCanvas {
         this.context.drawImage(this.church.sprite, 
             this.computeX(), this.computeY() //relatif terhadap MC
         ); 
-
         //setInterval(() => { this.church.executeEvent() }, 100);
         console.log(`${this.pivot.x}, ${this.pivot.y}`) ;
         Object.values(this.church.entities).forEach(entity => {
-            if (entity == this.pivot) this.assertMove(entity) ;
+            if (entity === this.pivot) this.assertMove(entity) ;
             this.#render(entity) ;
         }) ;
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
     assertMove(entity) {
-        //if (!this.church.canMoveTo(entity.x, entity.y, this.keyStack.first, entity.speed)) return ;
+        if (this.keyStack.isEmpty()) { 
+            entity.stopChar();
+            return 
+        }
+        console.log(this.church.canMoveTo(entity.x, entity.y, this.keyStack.first, entity.speed)) ;
         entity.moveChar(this.keyStack.first)
     }
 
     #render(person) {
+        this.church.unregisterArea(
+            centerizeX(person.x, this.canvas.width) - this.pivot.x, 
+            centerizeY(person.y, this.canvas.height) - this.pivot.y
+        ) ;
         person.animateCharacter() ;
         const frame = person.sprite.getFrame() ;
         this.context.drawImage(
@@ -59,6 +66,10 @@ class CustomCanvas {
             centerizeY(person.y, this.canvas.height) - this.pivot.y, //x, y (char pos)
             person.getWidth(), person.getHeight() //request space dest canvas
         ) ; 
+        this.church.registerArea(
+            centerizeX(person.x, this.canvas.width) - this.pivot.x, 
+            centerizeY(person.y, this.canvas.height) - this.pivot.y
+        ) ; ;
     }
 
     onKeyUp(key) { 

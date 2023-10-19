@@ -1,4 +1,5 @@
 import Entity from "../abstracted/entity.js";
+import { toPixel } from "../utils.js";
 import { dragon, mainChar } from "./chardata.js";
 
 export const churchObj = {
@@ -8,14 +9,14 @@ export const churchObj = {
         src: "../resource/assets/mapchips/map.png"
     },
     defaultReserved: {
-        "-150, -39" : false, 
-        "375, -39" : false, 
-        "-150, 201" : false, 
-        "375, 201" : true
+        "48,80": true,
+        "64,80": true,
+        "80,80": true,
+        "96,80": true,
     }
     , //refactor to objects
     objects: {
-        main: new Entity(mainChar), 
-        char1: new Entity(dragon),
+        main: new Entity(dragon), 
+        char1: new Entity(mainChar),
     }
 };

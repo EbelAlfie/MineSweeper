@@ -15,10 +15,6 @@ class Entity extends MoveAble {
     stopChar() { this.chooseAnimation() }
 
     moveChar(direction = null) {
-        if (direction === null) { 
-            this.stopChar();
-            return 
-        }
         this.setDirection(direction) ;
         this.chooseAnimation("walk") ;
         this.move() ;
