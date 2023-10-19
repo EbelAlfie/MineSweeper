@@ -1,6 +1,6 @@
 import MoveAble from "../general/moveable.js";
 
-/** Bisa beranimasi */
+/** Handle actions related to character */
 class Entity extends MoveAble {
     #currentAnimationSecond = 0 ;
     isMainChar = false ; //hapus?
@@ -17,10 +17,11 @@ class Entity extends MoveAble {
     moveChar(direction = null) {
         this.setDirection(direction) ;
         this.chooseAnimation("walk") ;
+        this.#animateCharacter() ;
         this.move() ;
     }
 
-    animateCharacter() {
+    #animateCharacter() {
         this.#currentAnimationSecond = (this.#currentAnimationSecond + 1) % this.ANIMATION_SPEED ;
         if (this.#currentAnimationSecond > 0) return ;
         this.sprite.animateSprite() ;
