@@ -23,6 +23,7 @@ class CustomCanvas {
         this.church.sprite.onload = () => { 
             this.church.setHeight(this.church.sprite.height) ;
             this.church.setWidth(this.church.sprite.width) ;
+            setInterval(() => { this.church.executeEvent() }, 200) ;
             this.#startTime() ;
         }
     }
@@ -30,10 +31,8 @@ class CustomCanvas {
     #startTime = () => {
         this.#refreshCanvas() ;
         this.context.drawImage(this.church.sprite, 
-            this.computeX(), this.computeY() //relatif terhadap MC
+            this.computeX(), this.computeY()
         ); 
-        //setInterval(() => { this.church.executeEvent() }, 100);
-        console.log(`${this.pivot.x}, ${this.pivot.y}`) ;
         Object.values(this.church.entities).forEach(entity => {
             if (entity === this.pivot) this.assertMove(entity) ;
             this.#render(entity) ;

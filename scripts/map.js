@@ -40,8 +40,9 @@ class Map extends GeneralObject {
     () => { this.entities["char1"].moveChar("West") }, ] ;
     index = 0 ;
     executeEvent() {
-        // this.event[this.index]()
-        // this.index = (this.index + 1) % 3 ; 
+        this.event[this.index]() ;
+        console.log(this.index);
+        this.index = (this.index + 1) % 12 ; 
     }
 
     //Area handling

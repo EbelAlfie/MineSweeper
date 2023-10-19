@@ -1,5 +1,4 @@
 import CustomCanvas from "./customcanvas.js"
-import * as GameObj from "./important/chardata.js"
 
 let world ;
 main() ;

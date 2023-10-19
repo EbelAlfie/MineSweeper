@@ -13,10 +13,9 @@ export const churchObj = {
         "64,80": true,
         "80,80": true,
         "96,80": true,
-    }
-    , //refactor to objects
+    }, //refactor to objects
     objects: {
-        main: new Entity(dragon), 
-        char1: new Entity(mainChar),
+        main: new Entity(mainChar), 
+        char1: new Entity(dragon),
     }
 };
