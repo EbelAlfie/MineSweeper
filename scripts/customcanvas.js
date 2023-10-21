@@ -45,6 +45,8 @@ class CustomCanvas {
             return 
         }
         console.log(this.church.canMoveTo(entity.x, entity.y, this.keyStack.first, entity.speed)) ;
+
+        if (this.church.canMoveTo(entity.x, entity.y, this.keyStack.first, entity.speed)) return ;
         entity.moveChar(this.keyStack.first) ;
     }
 
@@ -55,8 +57,8 @@ class CustomCanvas {
             frame[0], //x
             frame[1], //y top left
             person.getWidth(), person.getHeight(), //crop rect width height 
-            centerizeX(person.x, this.canvas.width) - this.pivot.x, 
-            centerizeY(person.y, this.canvas.height) - this.pivot.y, //x, y (char pos)
+            centerizeX(person.x, this.canvas.width) - this.pivot.x - 4, 
+            centerizeY(person.y, this.canvas.height) - this.pivot.y - 16, //x, y (char pos)
             person.getWidth(), person.getHeight() //request space dest canvas
         ) ; 
     }

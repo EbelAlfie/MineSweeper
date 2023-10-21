@@ -17,3 +17,7 @@ export const shiftsWall= () => {
 }
 
 export const toPixel= (rawNumber) => { return rawNumber * 16 }
+
+export const asGridCoords = (x, y) => {
+    return `${x*16},${y*16}`
+}

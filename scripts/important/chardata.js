@@ -33,11 +33,11 @@ const mainCharAnim =  {
 }
 export const mainChar = {
     isMainChar: true,
-    x: toPixel(17),
-    y: toPixel(3),
+    x: toPixel(0),
+    y: toPixel(0),
     height: 32,
     width: 25,
-    speed: 3,
+    speed: 8,
     body: {
         src: "../resource/assets/charachips/mc.png",
         anims: mainCharAnim
@@ -85,7 +85,7 @@ export const akagami = {
     y: 30,
     height: 32,
     width: 19,
-    speed: 3, 
+    speed: 4, 
     body: {
         src: "../resource/assets/charachips/akagami.png",
         anims: akagamiAnim
@@ -126,9 +126,50 @@ export const dragon = {
     y: toPixel(9),
     height: 64,
     width: 80,
-    speed: 3, 
+    speed: 4, 
     body: {
         src: "../resource/assets/charachips/dragon.png",
         anims: dragonAnim
+    } 
+};
+
+const commonAnim = {
+    South: {
+        frames: [[25,0]]
+    },
+    walkSouth: {
+        frames: [[0,0], [25, 0], [50, 0]]
+    }, 
+
+    West: {
+        frames: [[25,32]]
+    },
+    walkWest: {
+        frames: [[0, 32], [25, 32], [50, 32]]
+    },
+
+    East: {
+        frames: [[25,64]]
+    },
+    walkEast: {
+        frames: [[0, 64], [25, 64], [50, 64]]
+    },
+
+    North: {
+        frames: [[25,96]]
+    },
+    walkNorth: {
+        frames: [[0, 96], [25, 96], [50, 96]]
+    }
+}
+export const commoner = {
+    x: toPixel(3),
+    y: toPixel(6),
+    height: 32,
+    width: 25,
+    speed: 4,
+    body: {
+        src: "../resource/assets/charachips/jemaat1.png",
+        anims: commonAnim
     } 
 };

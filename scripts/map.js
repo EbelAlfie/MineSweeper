@@ -9,6 +9,7 @@ class Map extends GeneralObject {
             mapObjects: mapData.objects, 
             mapEvents: mapData.events
         }) ;
+        console.log(this.reservedArea)
     }
 
     /** check for event in current tile */
@@ -21,7 +22,6 @@ class Map extends GeneralObject {
             case "East" : entityX + speed ;
             case "West" : entityX - speed ;
         }
-        console.log(this.reservedArea[`${48},${80}`]);
         return this.reservedArea[`${entityX},${entityY}`];
     }
 

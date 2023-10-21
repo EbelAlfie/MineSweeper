@@ -3,7 +3,7 @@ import MoveAble from "../general/moveable.js";
 /** Handle actions related to character */
 class Entity extends MoveAble {
     #currentAnimationSecond = 0 ;
-    isMainChar = false ; //hapus?
+    isMainChar = false ; 
 
     constructor(EntityObj) {
         super(EntityObj) ;
@@ -27,8 +27,8 @@ class Entity extends MoveAble {
         this.sprite.animateSprite() ;
     }
     
-    chooseAnimation(animationKey = "") {
-        this.sprite.setCurrentAnimation(animationKey + this.currentDirection) ;
+    chooseAnimation(actionKey = "") {
+        this.sprite.setCurrentAnimation(actionKey + this.currentDirection) ;
     }
 
     lookAt(direction) {
