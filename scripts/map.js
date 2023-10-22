@@ -14,13 +14,16 @@ class Map extends GeneralObject {
 
     /** check for event in current tile */
     canMoveTo(x, y, direction, speed) {
-        const entityX = x ;
-        const entityY = y ;
+        let entityX = x ;
+        let entityY = y ;
         switch (direction) {
-            case "North" : entityY - speed ;
-            case "South" : entityY + speed ;
-            case "East" : entityX + speed ;
-            case "West" : entityX - speed ;
+            case "North" : entityY -= 4 ;
+                break;
+            case "South" : entityY += 4 ;
+                break;
+            case "East" : entityX += 4 ;
+                break;
+            case "West" : entityX -= 4 ;
         }
         return this.reservedArea[`${entityX},${entityY}`];
     }

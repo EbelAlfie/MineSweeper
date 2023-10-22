@@ -33,11 +33,11 @@ const mainCharAnim =  {
 }
 export const mainChar = {
     isMainChar: true,
-    x: toPixel(0),
-    y: toPixel(0),
+    x: toPixel(16),
+    y: toPixel(3),
     height: 32,
     width: 25,
-    speed: 8,
+    speed: 4,
     body: {
         src: "../resource/assets/charachips/mc.png",
         anims: mainCharAnim
