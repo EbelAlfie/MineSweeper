@@ -3,7 +3,7 @@ import GeneralObject from "./general/generalobject.js";
 class Map extends GeneralObject {
     constructor(mapData) {
         super(mapData) ;
-        this.reservedArea = mapData.defaultReserved || {} ;
+        this.reservedArea = mapData.tileInfo || {} ;
         this.entities = mapData.objects ;
         this.events = new Event({
             mapObjects: mapData.objects, 
@@ -17,15 +17,11 @@ class Map extends GeneralObject {
         let entityX = x ;
         let entityY = y ;
         switch (direction) {
-            case "North" : entityY -= 4 ;
-                break;
-            case "South" : entityY += 4 ;
-                break;
-            case "East" : entityX += 4 ;
-                break;
-            case "West" : entityX -= 4 ;
+            case "North" : return this.reservedArea[`${entityX},${entityY - speed}`] ;
+            case "South" : return this.reservedArea[`${entityX},${entityY + speed}`] ;
+            case "East" : return this.reservedArea[`${entityX + speed},${entityY}`] ;
+            case "West" : return this.reservedArea[`${entityX - speed},${entityY}`] ;
         }
-        return this.reservedArea[`${entityX},${entityY}`];
     }
 
     event = [() => { this.entities["char1"].moveChar("South") },
