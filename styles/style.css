@@ -19,6 +19,13 @@
     src: local('Goudy Medieval Alternate Regular'), url('../resource/font/GoudyMedieval-Alternate.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'Pixel Musketeer';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Goudy Medieval Alternate Regular'), url('../resource/font/Pixel-Musketeer.woff') format('woff');
+}
+
 body {
     display: flex;
     height: 100vh;
@@ -28,7 +35,6 @@ body {
     max-width: 100vw;
     box-sizing: border-box;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     background-color: burlywood ;
     background-size: cover; 
@@ -36,19 +42,34 @@ body {
     background-image: url("../resource/assets/background.jpg");
 }
 
-.splash-box {
-    width: 85vw;
-    height: 50vh; 
-    display: flex;
-    flex-direction: row;
-    animation: load 6s none;
-}
-
 .sign-board {
     border-width: 50px;
     border-style: solid;
     border-image: url("../resource/assets/iron-border.png") 25% round ;
     background-image: url("../resource/assets/wood-background.jpg") ;
+}
+
+/* For Splash screen */
+.splash-screen {
+    margin-top: 50px ;
+}
+
+.splash-box {
+    width: 85vw;
+    height: 34vh; 
+    display: flex;
+    flex-direction: row;
+    animation: load 6s none;
+}
+
+.logo {
+    margin-right: 50px;
+}
+
+.title {
+    font-size: 8rem;
+    font-family: 'Pixel Musketeer', 'Times New Roman', 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+    align-self: center;
 }
 
 .rotated {
@@ -61,12 +82,23 @@ body {
 }
 
 .next-page {
-    font-size: 16px; 
-    font-family: 'Goudy Medieval Alternate Regular', 'Times New Roman', 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
-    align-self: self-start;
+    width: fit-content;
+    font-size: 2rem;
+    font-family: 'Pixel Musketeer', 'Times New Roman', 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+    color: saddlebrown;
+    text-align: center;
+    align-content: center;
 }
 
-.title {
-    font-size: 100px;
-    font-family: 'Goudy Medieval Alternate Regular', 'Times New Roman', 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+/* For game canvas */
+.floor {
+    display: none; 
+    position: relative ;
+    transform: scale(3);
+}
+
+.screen {
+    image-rendering: pixelated;
+    overflow: visible;
+    outline: auto;
 }

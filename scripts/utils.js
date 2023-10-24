@@ -21,3 +21,11 @@ export const toPixel= (rawNumber) => { return rawNumber * 16 }
 export const asGrid = (x, y) => {
     return `${x*16},${y*16}`
 }
+
+export const range = (startX, startY, endX, endY, object) => {
+    for (let x = toPixel(startX); x < toPixel(endX); x++) {
+        for (let y = toPixel(startY); y < toPixel(endY); y++) {
+            object[`${x},${y}`] = true 
+        }
+    } 
+}

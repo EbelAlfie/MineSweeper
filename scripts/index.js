@@ -4,12 +4,17 @@ let world ;
 main() ;
 
 function main() {
+    initSplash()
     world = new CustomCanvas({
         space: document.querySelector(".floor")
     });
     world.createChurch() ;
     
     setupKeyActions() ;
+}
+
+function initSplash() {
+    document.querySelector("splash-screen")
 }
 
 function setupKeyActions() { //debounce? 

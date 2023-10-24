@@ -1,4 +1,5 @@
 import GeneralObject from "./general/generalobject.js";
+import { range } from "./utils.js";
 
 class Map extends GeneralObject {
     constructor(mapData) {
@@ -9,7 +10,6 @@ class Map extends GeneralObject {
             mapObjects: mapData.objects, 
             mapEvents: mapData.events
         }) ;
-        console.log(this.reservedArea)
     }
 
     /** check for event in current tile */
@@ -47,7 +47,7 @@ class Map extends GeneralObject {
     //Area handling
     registerArea(x = null, y = null) {
         if (x === null || y === null) return ;
-        this.reservedArea[`${x},${y}`] = false ;
+        this.reservedArea[`${x},${y}`] = true ;
     }
     unregisterArea(x, y) {
         delete this.reservedArea[`${x},${y}`] ; //idealnya dihapus

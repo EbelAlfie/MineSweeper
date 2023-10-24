@@ -34,6 +34,7 @@ class CustomCanvas {
         ); 
         Object.values(this.church.entities).forEach(entity => {
             if (entity === this.pivot) this.assertMove(entity) ;
+            this.church.registerArea(entity.x, entity.y)
             this.#render(entity) ;
         }) ;
         requestAnimationFrame(() => this.#startTime()) ;
@@ -41,12 +42,14 @@ class CustomCanvas {
 
     assertMove(entity) {
         if (this.keyStack.isEmpty()) { 
-            entity.stopChar();
+            entity.stopChar() ;
             return 
         }
-        console.log(this.church.canMoveTo(entity.x, entity.y, this.keyStack.first, entity.speed)) ;
-
-        if (this.church.canMoveTo(entity.x, entity.y, this.keyStack.first, entity.speed)) return ;
+        if (this.church.canMoveTo(entity.x, entity.y, this.keyStack.first, entity.speed)) {
+            entity.setDirection(this.keyStack.first) ;
+            return 
+        }
+        this.church.unregisterArea(entity.x, entity.y) ;
         entity.moveChar(this.keyStack.first) ;
     }
 
