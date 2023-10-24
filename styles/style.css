@@ -53,10 +53,10 @@ body {
 
 /* For Splash screen */
 .splash-screen {
-    width: 100vh ;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     animation: idle 2s infinite ;
 }
@@ -68,7 +68,7 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     flex: 0 1; /* grow shrink */
-    animation: load 6s none;
+    animation: load 4s none;
 }
 
 .logo {
@@ -82,9 +82,9 @@ body {
     user-select: none;
 }
 
-.rotated {
+/* .rotated {
     rotate: 0 0 1 5deg;
-}
+} */
 
 @keyframes load {
     0% { opacity: 0.0; }
@@ -101,6 +101,7 @@ body {
     text-shadow: 0px 3px 1px black ;
     user-select: none;
     transition: 0.2s ;
+    animation: load 4s none;
 }
 
 .btn-start:hover {

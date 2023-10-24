@@ -34,7 +34,6 @@ class CustomCanvas {
         ); 
         Object.values(this.church.entities).forEach(entity => {
             if (entity === this.pivot) this.assertMove(entity) ;
-            this.church.registerArea(entity.x, entity.y)
             this.#render(entity) ;
         }) ;
         requestAnimationFrame(() => this.#startTime()) ;
