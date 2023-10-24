@@ -112,6 +112,7 @@ body {
 .btn-start:active {
     cursor: pointer ;
     color: black; 
+    text-shadow: none ;
 }
 
 /* For game canvas */
