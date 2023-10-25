@@ -35,6 +35,7 @@ body {
     max-width: 100vw;
     box-sizing: border-box;
     flex-direction: column;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
     background-color: burlywood ;
@@ -45,7 +46,7 @@ body {
 }
 
 .sign-board {
-    border-width: 45px;
+    border-width: 40px;
     border-style: solid;
     border-image: url("../resource/assets/iron-border.png") 25% round ;
     background-image: url("../resource/assets/wood-background.jpg") ;
