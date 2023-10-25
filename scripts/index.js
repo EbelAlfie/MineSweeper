@@ -8,14 +8,21 @@ let gameContainer = document.querySelector(".floor") ;
 main() ;
 
 function main() {
-    initSplash()
+    initGame() ;
+    //initSplash()
 }
 
 function initSplash() {
-    
     splashContainer.querySelector(".btn-start").onclick = () => {
         splashExitTransition() ;
     }
+}
+
+function initDebug() {
+    splashContainer.style.display = "none" ;
+    document.body.style.backgroundImage = "url('../resource/assets/backgroundgame.jpg')";
+    gameContainer.style.display = "block";
+    initGame() ;
 }
 
 function initGame() {
