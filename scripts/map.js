@@ -1,5 +1,4 @@
 import GeneralObject from "./base/generalobject.js";
-import { range } from "./utils.js";
 
 class Map extends GeneralObject {
     constructor(mapData) {
@@ -17,11 +16,13 @@ class Map extends GeneralObject {
         let entityX = x ;
         let entityY = y ;
         switch (direction) {
-            case "North" : return this.reservedArea[`${entityX},${entityY - speed}`] ;
-            case "South" : return this.reservedArea[`${entityX},${entityY + speed}`] ;
-            case "East" : return this.reservedArea[`${entityX + speed},${entityY}`] ;
-            case "West" : return this.reservedArea[`${entityX - speed},${entityY}`] ;
+            case "North" : entityY -= speed ;
+            case "South" : entityY += speed ;
+            case "East" : entityX += speed ;
+            case "West" : entityX -= speed ;
         }
+        if (entityX < 0 || entityY < 0 || entityY > this.getHeight() || entityX > this.getWidth()) return true ;
+        return this.reservedArea[`${entityX},${entityY}`] 
     }
 
     event = [() => { this.entities["char1"].moveChar("South") },

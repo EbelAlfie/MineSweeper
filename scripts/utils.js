@@ -1,3 +1,4 @@
+
 export const centerizeX = (x = 0, canvasWidth) => {
     if (canvasWidth === null || canvasWidth === undefined) return x ;
     return x + (canvasWidth/2) ;
@@ -17,6 +18,10 @@ export const shiftsWall= () => {
 }
 
 export const toPixel= (rawNumber) => { return rawNumber * 16 }
+
+export const computeCharX = (rawNumber) => { return toPixel(rawNumber) - 4 } 
+
+export const computeCharY = (rawNumber) => { return toPixel(rawNumber) - 16 }
 
 export const asGrid = (x, y) => {
     return `${x*16},${y*16}`
