@@ -1,6 +1,9 @@
+import { enterAnimation, exitAnimation } from "./animation.js";
 import CustomCanvas from "./customcanvas.js"
 
 let world ;
+let splashContainer = document.querySelector(".splash-screen") ;
+let gameContainer = document.querySelector(".floor") ;
 main() ;
 
 function main() {
@@ -8,16 +11,15 @@ function main() {
 }
 
 function initSplash() {
-    document.querySelector(".splash-screen")
-    .querySelector(".btn-start").onclick = () => {
-        handleTransition() ;
-        initGame() ;
+    
+    splashContainer.querySelector(".btn-start").onclick = () => {
+        splashExitTransition() ;
     }
 }
 
 function initGame() {
     world = new CustomCanvas({
-        space: document.querySelector(".floor")
+        space: gameContainer
     });
     world.createChurch() ;
     
@@ -34,8 +36,28 @@ function setupKeyActions() { //debounce?
     }
 }
 
-function handleTransition() {
-    document.body.style.backgroundImage = "url('../resource/assets/backgroundgame.jpg')";
-    document.querySelector(".splash-screen").style.display = "none" ;
-    document.querySelector(".floor").style.display = "block" ;
+function splashExitTransition() {
+    splashContainer.animate(
+        exitAnimation,
+        {
+            duration: 1000,
+            iterations: 1
+        }
+    ).onfinish = () => {
+        document.body.style.backgroundImage = "url('../resource/assets/backgroundgame.jpg')";
+        splashContainer.style.display =  "none" ;
+        gameCanvasEnterTransition() ;
+    }
+}
+
+function gameCanvasEnterTransition() {
+    gameContainer.style.display = "block" ;
+    gameContainer.animate(
+        enterAnimation,
+        {
+            duration: 2000,
+            iterations: 1
+        }
+    )
+    initGame() ;
 }
