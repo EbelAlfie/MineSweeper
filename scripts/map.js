@@ -1,4 +1,4 @@
-import GeneralObject from "./general/generalobject.js";
+import GeneralObject from "./base/generalobject.js";
 import { range } from "./utils.js";
 
 class Map extends GeneralObject {

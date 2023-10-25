@@ -4,6 +4,7 @@ import CustomCanvas from "./customcanvas.js"
 let world ;
 let splashContainer = document.querySelector(".splash-screen") ;
 let gameContainer = document.querySelector(".floor") ;
+
 main() ;
 
 function main() {

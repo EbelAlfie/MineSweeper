@@ -1,4 +1,4 @@
-import MoveAble from "../general/moveable.js";
+import MoveAble from "../base/moveable.js";
 
 /** Handle actions related to character */
 class Entity extends MoveAble {
