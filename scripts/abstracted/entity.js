@@ -4,6 +4,7 @@ import MoveAble from "../base/moveable.js";
 class Entity extends MoveAble {
     #currentAnimationSecond = 0 ;
     isMainChar = false ; 
+    status = 0 ;
 
     constructor(EntityObj) {
         super(EntityObj) ;

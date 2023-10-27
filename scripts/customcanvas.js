@@ -2,6 +2,7 @@ import * as MapObj from "./important/mapdata.js"
 import Stack from "./custom/stack.js";
 import Map from "./map.js"
 import { centerizeX, centerizeY } from "./utils.js";
+import Entity from "./abstracted/entity.js";
  
 class CustomCanvas {
     keyStack = new Stack() ;
@@ -19,7 +20,7 @@ class CustomCanvas {
     }
 
     createChurch() {
-        this.pivot = this.church.entities["main"] ;
+        this.pivot = this.church.entities[0] ;
         this.church.sprite.onload = () => { 
             this.church.setHeight(this.church.sprite.height) ;
             this.church.setWidth(this.church.sprite.width) ;
@@ -31,11 +32,17 @@ class CustomCanvas {
         this.#refreshCanvas() ;
         this.context.drawImage(this.church.sprite, 
             this.computeX(), this.computeY()
-        ) ; 
+        ) ;
+        //Bottom Layer
         Object.values(this.church.entities).forEach(entity => {
             if (entity === this.pivot) this.assertMove(entity) ;
-            this.#render(entity) ;
+            else {
+                this.#render(entity) ;
+                this.church.registerArea(entity.x, entity.y, entity) ;
+            }
         }) ;
+        this.#render(this.pivot) ;
+        //Top Layer 
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
@@ -44,11 +51,9 @@ class CustomCanvas {
             entity.stopChar() ;
             return 
         }
-        if (this.church.canMoveTo(entity.x, entity.y, this.keyStack.first, entity.speed)) {
-            entity.setDirection(this.keyStack.first) ;
+        entity.setDirection(this.keyStack.first) ;
+        if (this.church.lookFront(entity.x, entity.y, this.keyStack.first, entity.speed))
             return 
-        }
-        this.church.unregisterArea(entity.x, entity.y) ;
         entity.moveChar(this.keyStack.first) ;
     }
 
@@ -65,19 +70,22 @@ class CustomCanvas {
         ) ; 
     }
 
+    onZpressed() {
+        console.log("z is pressed") ;
+        let event = this.church.lookFront(this.pivot.x, this.pivot.y, this.keyStack.first, this.pivot.speed)
+        if (!(event instanceof Entity)) return
+        console.log(event.status) ;
+    }
+
     onKeyUp(key) { 
         const i = this.keyStack.getIndex(this.movements[key]) ;
         this.keyStack.pop(i) ; 
     }
 
     onKeyDown(key) {
-        if (key == "z") this.onZpressed()
+        if (key == "z") this.onZpressed() 
         const dir = this.movements[key] ;
         if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }
-    }
-
-    onZpressed() {
-        console.log("z is pressed") ;
     }
 
     computeX() { return this.canvas.width/2 - this.pivot.x }

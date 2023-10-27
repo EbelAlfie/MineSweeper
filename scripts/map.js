@@ -1,10 +1,12 @@
 import GeneralObject from "./base/generalobject.js";
+import MineSweeper from "./npcmodel.js";
 
 class Map extends GeneralObject {
+
     constructor(mapData) {
         super(mapData) ;
         this.reservedArea = mapData.tileInfo || {} ;
-        this.entities = mapData.objects ;
+        this.entities = new MineSweeper().riggingBomb(mapData.objects.main) ;
         this.events = new Event({
             mapObjects: mapData.objects, 
             mapEvents: mapData.events
@@ -12,7 +14,7 @@ class Map extends GeneralObject {
     }
 
     /** check for event in current tile */
-    canMoveTo(x, y, direction, speed) {
+    lookFront(x, y, direction, speed) {
         let entityX = x ;
         let entityY = y ;
         switch (direction) {
@@ -46,9 +48,9 @@ class Map extends GeneralObject {
     }
 
     //Area handling
-    registerArea(x = null, y = null) {
+    registerArea(x = null, y = null, entity = true) {
         if (x === null || y === null) return ;
-        this.reservedArea[`${x},${y}`] = true ;
+        this.reservedArea[`${x},${y}`] = entity ;
     }
     unregisterArea(x, y) {
         delete this.reservedArea[`${x},${y}`] ; //idealnya dihapus

@@ -18,7 +18,5 @@ export const churchObj = {
     }, //refactor to objects
     objects: {
         main: new Entity(mainChar), 
-        char1: new Entity(commoner),
-        char2: new Entity(commoner)
     }
 };
