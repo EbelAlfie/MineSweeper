@@ -18,13 +18,6 @@ function initSplash() {
     }
 }
 
-function initDebug() {
-    splashContainer.style.display = "none" ;
-    document.body.style.backgroundImage = "url('../resource/assets/backgroundgame.jpg')";
-    gameContainer.style.display = "block";
-    initGame() ;
-}
-
 function initGame() {
     world = new CustomCanvas({
         space: gameContainer

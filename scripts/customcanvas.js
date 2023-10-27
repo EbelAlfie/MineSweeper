@@ -9,7 +9,7 @@ class CustomCanvas {
         "ArrowUp": "North",
         "ArrowDown": "South",
         "ArrowLeft": "West",
-        "ArrowRight": "East"
+        "ArrowRight": "East",
     } ;
 
     constructor(docObj) {
@@ -31,7 +31,7 @@ class CustomCanvas {
         this.#refreshCanvas() ;
         this.context.drawImage(this.church.sprite, 
             this.computeX(), this.computeY()
-        ); 
+        ) ; 
         Object.values(this.church.entities).forEach(entity => {
             if (entity === this.pivot) this.assertMove(entity) ;
             this.#render(entity) ;
@@ -71,8 +71,13 @@ class CustomCanvas {
     }
 
     onKeyDown(key) {
+        if (key == "z") this.onZpressed()
         const dir = this.movements[key] ;
         if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }
+    }
+
+    onZpressed() {
+        console.log("z is pressed") ;
     }
 
     computeX() { return this.canvas.width/2 - this.pivot.x }
