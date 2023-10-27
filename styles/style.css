@@ -156,14 +156,15 @@ body {
 /* for game over */
 .game-over {
     display: flex;
-    height: 80vh;
+    height: auto;
     width: 60vw;
     flex-direction: column;
     font-family: 'Pixel Amiga Topaz';
     background-color: #eed29d;
-    margin: 20px;
+    margin: 0px;
     box-shadow: 5px 10px 10px black;
     border-radius: 5%;
+    user-select: none;
 }
 
 .game-over>H1 {
@@ -172,9 +173,10 @@ body {
 }
 
 .game-over>hr {
-    width: 100%;
+    width: 95%;
     text-align: left;
-    height: 3px; 
+    height: 4px; 
+    margin-top: 0px;
     background-color: #382f28;
 }
 
@@ -184,7 +186,24 @@ body {
     padding: 20px ;
 }
 
-.news-content>image {
-    height: 20%;
-    width: 20%;
+.news-content>img {
+    width: 45%;
+    height: min-content;
+    object-fit: scale-down;
+    image-rendering: pixelated;
+    align-self: flex-start;
+    -webkit-user-drag: none;
+}
+
+.news-content>article {
+    margin: 0px 0px 5px 10px ;
+    font-size: 0.5rem;
+}
+
+.news-content>article>h3 {
+    margin: 0px 0px 5px ;
+}
+
+.news-content>article>p {
+    text-indent: 10% ;
 }
