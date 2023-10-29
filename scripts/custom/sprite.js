@@ -2,12 +2,16 @@ class Sprite extends Image {
     #currentAnimationFrame = 0 ;
     #currentAnimationKey = "South" ; 
     #isGif = false ;
+    isInitialized = false ;
 
     constructor(body) {
         super() ;
         this.src = body.src || "";
         this.anims = body.anims || null ; //kalau undefined,
         this.#isGif = this.anims != null ;
+        this.onload = () => {
+            this.isInitialized = true ;
+        }
     }
 
     //Animateable exclusive

@@ -58,6 +58,7 @@ class CustomCanvas {
     }
 
     #render(person) {
+        if (!person.sprite.isInitialized) return
         const frame = person.sprite.getFrame() ;
         this.context.drawImage(
             person.sprite,

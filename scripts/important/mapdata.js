@@ -6,7 +6,7 @@ export const churchObj = {
     x: 0,
     y: 0,
     body: {
-        src: "../resource/assets/mapchips/mapex.png"
+        src: "../resource/assets/mapchips/Mapmv.png"
     },
     tileInfo: {
         [asGrid(3,5)]: true,

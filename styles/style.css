@@ -127,7 +127,7 @@ body {
 
 /* For game canvas */
 .floor {
-    display: none ; 
+    display: block ; 
     position: absolute ;
     transform: scale(3) ;
     /* animation: load 3s none; */
@@ -155,7 +155,7 @@ body {
 
 /* for game over */
 .game-over {
-    display: flex;
+    display: none;
     height: auto;
     width: 80vw;
     flex-direction: column;

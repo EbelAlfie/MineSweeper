@@ -40,6 +40,13 @@ class Entity extends MoveAble {
             case "West" : return [this.x - this.speed, thiss.y] ;
         }
     }
+
+    executeEvent() {
+
+        setTimeout(() => {
+            //event
+        }, 10)
+    }
 }
 
 export default Entity
