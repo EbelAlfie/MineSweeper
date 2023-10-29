@@ -157,19 +157,28 @@ body {
 .game-over {
     display: flex;
     height: auto;
-    width: 60vw;
+    width: 80vw;
     flex-direction: column;
     font-family: 'Pixel Amiga Topaz';
     background-color: #eed29d;
     margin: 0px;
     box-shadow: 5px 10px 10px black;
-    border-radius: 5%;
     user-select: none;
 }
 
 .game-over>H1 {
     color: #382f28;
     align-self: center;    
+}
+
+.fold {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-bottom: 70px solid #eed29d;
+    border-left: 70px solid transparent;
+    box-shadow: -5px 8px 5px #5b4b3f;
+    align-self: flex-end;
 }
 
 .game-over>hr {
@@ -187,7 +196,7 @@ body {
 }
 
 .news-content>img {
-    width: 45%;
+    width: 30%;
     height: min-content;
     object-fit: scale-down;
     image-rendering: pixelated;
@@ -205,5 +214,9 @@ body {
 }
 
 .news-content>article>p {
-    text-indent: 10% ;
+    text-indent: 5% ;
+}
+
+.news-content>article>p:after {
+    content: "nisandnioweb iew fniwenfiwnifonwefnw fafifuwasweswos jdnqwoindoiwndiwndiqnwdiqndiqwnduiqwnduiqwdn"
 }
