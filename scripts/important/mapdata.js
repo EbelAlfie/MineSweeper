@@ -6,8 +6,11 @@ export const churchObj = {
     x: 0,
     y: 0,
     body: {
-        src: "../resource/assets/mapchips/Mapmv.png"
+        src: "../resource/assets/mapchips/mapbottom.png"
     },
+    top: {
+        src: "../resource/assets/mapchips/maptop.png"
+    }, 
     tileInfo: {
         
     }, //refactor to objects

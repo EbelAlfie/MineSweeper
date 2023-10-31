@@ -1,11 +1,13 @@
 import Entity from "./abstracted/entity.js";
 import GeneralObject from "./base/generalobject.js";
+import Sprite from "./custom/sprite.js";
 import MineSweeper from "./npcmodel.js";
 
 class Map extends GeneralObject {
 
     constructor(mapData) {
         super(mapData) ;
+        this.topLayer = new Sprite(mapData.top) ;
         this.reservedArea = mapData.tileInfo || {} ;
         this.entities = new MineSweeper().riggingBomb(mapData.objects.main) ;
         this.events = new Event({

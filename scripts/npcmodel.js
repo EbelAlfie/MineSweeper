@@ -2,7 +2,6 @@ import Entity from "./abstracted/entity.js";
 import { commoner } from "./important/chardata.js";
 import { toPixel } from "./utils.js";
 
-
 const NPCENUM = {
     0: "NOT_BOMB",
     1: "gameOver",
@@ -12,7 +11,7 @@ const NPCENUM = {
 }
 
 class MineSweeper {
-    
+    memoryMap = [] ;
     probability = [] ;
     firstLine = [0, 2, 3, 0, 3, 0, 0, 0, 2, 2, 2, 2, 0, 3, 3] ;
     otherLines = [0, 2, 1, 1, 1, 4, 4, 4, 4, 3, 0, 1, 0, 2, 2, 2, 2, 0, 1, 5] ;
@@ -30,18 +29,19 @@ class MineSweeper {
                 if (y == 0) this.probability = this.firstLine ;
                 else this.probability = this.otherLines ;
 
-                let npc = this.createNpc() ;
                 
-                if (x % 3 == 0) currentX += 2 
-                this.setNpcPosition(npc, currentX, currentY) ;
-                currentX++ 
-
-                arrayOfent.push(npc) ;
             }
             currentY += 3 ;
         }
         return arrayOfent ;
     }
+
+    // let npc = this.createNpc() ;
+    // if (x % 3 == 0) currentX += 2 
+    // this.setNpcPosition(npc, currentX, currentY) ;
+    // currentX++ 
+
+    // arrayOfent.push(npc) ;
 
     createNpc() {
         let key = Math.floor(Math.random() * 4) ;

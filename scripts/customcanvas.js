@@ -43,6 +43,9 @@ class CustomCanvas {
         }) ;
         this.#render(this.pivot) ;
         //Top Layer 
+        this.context.drawImage(this.church.topLayer, 
+            this.computeX(), this.computeY()
+        ) ;
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
