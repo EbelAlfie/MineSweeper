@@ -72,10 +72,8 @@ class CustomCanvas {
     }
 
     onZpressed() {
-        console.log("z is pressed") ;
-        let event = this.church.lookFront(this.pivot.x, this.pivot.y, this.keyStack.first, this.pivot.speed)
-        if (!(event instanceof Entity)) return
-        console.log(event.status) ;
+        let event = this.church.checkForEvent(this.pivot) ;
+        this[event]() ;
     }
 
     onKeyUp(key) { 
@@ -87,6 +85,11 @@ class CustomCanvas {
         if (key == "z") this.onZpressed() 
         const dir = this.movements[key] ;
         if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }
+    }
+
+    gameOver() {
+        document.querySelector(".game-over").style.display = block; 
+        document.querySelector(".floor").style.display = none ;
     }
 
     computeX() { return this.canvas.width/2 - this.pivot.x }

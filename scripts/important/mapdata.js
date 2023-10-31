@@ -9,12 +9,7 @@ export const churchObj = {
         src: "../resource/assets/mapchips/Mapmv.png"
     },
     tileInfo: {
-        [asGrid(3,5)]: true,
-        [asGrid(4,5)]: true,
-        [asGrid(5,5)]: true,
-        [asGrid(6,5)]: true,
-        [asGrid(3,6)]: true,
-        [asGrid(7,6)]: true,
+        
     }, //refactor to objects
     objects: {
         main: new Entity(mainChar), 

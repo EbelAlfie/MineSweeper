@@ -33,7 +33,7 @@ const mainCharAnim =  {
 }
 export const mainChar = {
     isMainChar: true,
-    x: toPixel(16),
+    x: toPixel(12),
     y: toPixel(3),
     height: 32,
     width: 25,

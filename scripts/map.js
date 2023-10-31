@@ -1,3 +1,4 @@
+import Entity from "./abstracted/entity.js";
 import GeneralObject from "./base/generalobject.js";
 import MineSweeper from "./npcmodel.js";
 
@@ -27,24 +28,9 @@ class Map extends GeneralObject {
         return this.reservedArea[`${entityX},${entityY}`] 
     }
 
-    event = [() => { this.entities["char1"].moveChar("South") },
-    () => { this.entities["char1"].moveChar("South") },
-    () => { this.entities["char1"].moveChar("South") },
-    () => { this.entities["char1"].moveChar("South") },
-    () => { this.entities["char1"].moveChar("South") },
-    () => { this.entities["char1"].moveChar("North") },
-    () => { this.entities["char1"].moveChar("North") },
-    () => { this.entities["char1"].moveChar("North") },
-    () => { this.entities["char1"].moveChar("North") },
-    () => { this.entities["char1"].moveChar("West") },
-    () => { this.entities["char1"].moveChar("West") },
-    () => { this.entities["char1"].moveChar("West") },
-    () => { this.entities["char1"].moveChar("West") }, ] ;
-    index = 0 ;
-    executeEvent() {
-        this.event[this.index]() ;
-        console.log(this.index);
-        this.index = (this.index + 1) % 12 ; 
+    checkForEvent(mainChar) {
+        let event = this.lookFront(mainChar.x, mainChar.y, mainChar.direction, mainChar.speed)
+        return event ;
     }
 
     //Area handling
