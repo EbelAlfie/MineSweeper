@@ -17,10 +17,6 @@ export const shiftsWall= () => {
         
 }
 
-export const comparePosition = (ymain = 0, heightmain = 0, y2 = 0, height2 = 0) => {
-    return ymain * heightmain > y2 * height2 ;
-}
-
 export const toPixel= (rawNumber) => { return rawNumber * 16 }
 
 export const computeCharX = (rawNumber) => { return toPixel(rawNumber) - 4 } 

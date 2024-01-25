@@ -1,6 +1,4 @@
-import Entity from "./base/entity.js";
 import GeneralObject from "./base/generalobject.js";
-import Sprite from "./custom/sprite.js";
 
 class Map extends GeneralObject {
 
@@ -34,9 +32,9 @@ class Map extends GeneralObject {
     }
 
     //Area handling
-    registerArea(x = null, y = null, entity = true) {
+    registerArea(x = null, y = null, isOccupied = true) {
         if (x === null || y === null) return ;
-        this.reservedArea[`${x},${y}`] = entity ;
+        this.reservedArea[`${x},${y}`] = isOccupied ;
     }
     unregisterArea(x, y) {
         delete this.reservedArea[`${x},${y}`] ; //idealnya dihapus

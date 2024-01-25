@@ -1,4 +1,4 @@
-import { enterAnimation, exitAnimation } from "./animation/animation.js";
+import { enterAnimation, exitAnimation } from "./animation/screenanimation.js";
 import CustomCanvas from "./customcanvas.js"
 
 let world ;

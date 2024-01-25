@@ -3,12 +3,10 @@ import MoveAble from "./moveable.js";
 /** Handle actions related to character */
 class Entity extends MoveAble {
     #currentAnimationSecond = 0 ;
-    isMainChar = false ; 
     status = 0 ;
 
     constructor(EntityObj) {
         super(EntityObj) ;
-        this.isMainChar = EntityObj.isMainChar || false ;
         this.ANIMATION_SPEED = 15 ;
     }
 
