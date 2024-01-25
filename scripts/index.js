@@ -1,4 +1,4 @@
-import { enterAnimation, exitAnimation } from "./animation.js";
+import { enterAnimation, exitAnimation } from "./animation/animation.js";
 import CustomCanvas from "./customcanvas.js"
 
 let world ;
@@ -8,8 +8,8 @@ let gameContainer = document.querySelector(".floor") ;
 main() ;
 
 function main() {
-    initSplash()
-    //initGame()
+    //initSplash()
+    splashExitTransition()
 }
 
 function initSplash() {

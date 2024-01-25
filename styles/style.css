@@ -61,7 +61,7 @@ body {
 
 /* For Splash screen */
 .splash-screen {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -125,7 +125,7 @@ body {
 
 /* For game canvas */
 .floor {
-    display: none ; 
+    display: flex ; 
     position: absolute ;
     transform: scale(3) ;
     /* animation: load 3s none; */

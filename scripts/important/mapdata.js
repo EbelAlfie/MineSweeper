@@ -1,6 +1,17 @@
 import Entity from "../abstracted/entity.js";
-import { asGrid } from "../utils.js";
+import GeneralObject from "../base/generalobject.js";
+import { toPixel } from "../utils.js";
 import { commoner, dragon, mainChar } from "./chardata.js";
+
+const podium = {
+    x: toPixel(11),
+    y: toPixel(14),
+    height: 40,
+    width: 53,
+    body: {
+        src: "../resource/assets/mapchips/podium.png",
+    } 
+};
 
 export const churchObj = {
     x: 0,
@@ -8,13 +19,11 @@ export const churchObj = {
     body: {
         src: "../resource/assets/mapchips/mapbottom.png"
     },
-    top: {
-        src: "../resource/assets/mapchips/maptop.png"
-    }, 
     tileInfo: {
         
     }, //refactor to objects
     objects: {
         main: new Entity(mainChar), 
+        podium: new GeneralObject(podium)
     }
 };

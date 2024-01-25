@@ -36,18 +36,16 @@ class CustomCanvas {
         ) ;
         //Bottom Layer
 
-        this.lm.manageObjectOrder(this.church.entities) ;
-
-        Object.values(this.church.entities).forEach(entity => {
-            if (entity === this.pivot) this.assertMove(entity) ;
-            else this.church.registerArea(entity.x, entity.y, entity) ;
-            this.#render(entity) ;
-        }) ;
+        this.lm.manageObjectOrder(this.church.entities)
+            .forEach(entity => {
+                if (entity === this.pivot) 
+                    this.assertMove(entity) ;
+                else 
+                    this.church.registerArea(entity.x, entity.y, entity) ;
+                this.#render(entity) ;
+            }) ;
 
         //Top Layer 
-        this.context.drawImage(this.church.topLayer, 
-            this.computeX(), this.computeY()
-        ) ;
         requestAnimationFrame(() => this.#startTime()) ;
     }
 
@@ -62,17 +60,40 @@ class CustomCanvas {
         entity.moveChar(this.keyStack.first) ;
     }
 
-    #render(person) {
-        if (!person.sprite.isInitialized) return
-        const frame = person.sprite.getFrame() ;
+    #render(object) {
+        if (!object.sprite.isInitialized) return
+        const frame = object.sprite.getFrame() ;
+        switch(object.sprite.isAnimateable()) {
+            case true: 
+                this.#renderAnimation(object, frame);
+                break;
+            case false:
+                this.#renderObject(object);
+        }
+    
+    }
+
+    #renderAnimation(object, frame) {
         this.context.drawImage(
-            person.sprite,
+            object.sprite,
             frame[0], //x
             frame[1], //y top left
-            person.getWidth(), person.getHeight(), //crop rect width height 
-            centerizeX(person.x, this.canvas.width) - this.pivot.x - 4, 
-            centerizeY(person.y, this.canvas.height) - this.pivot.y - 16, //x, y (char pos)
-            person.getWidth(), person.getHeight() //request space dest canvas
+            object.getWidth(), object.getHeight(), //crop rect width height 
+            centerizeX(object.x, this.canvas.width) - this.pivot.x - 4, 
+            centerizeY(object.y, this.canvas.height) - this.pivot.y - 16, //x, y (char pos)
+            object.getWidth(), object.getHeight() //request space dest canvas
+        ) ; 
+    }
+
+    #renderObject(object) {
+        this.context.drawImage(
+            object.sprite,
+            0, //x
+            0, //y top left
+            object.getWidth(), object.getHeight(), //crop rect width height 
+            centerizeX(object.x, this.canvas.width) - this.pivot.x - 4, 
+            centerizeY(object.y, this.canvas.height) - this.pivot.y - 16, //x, y (char pos)
+            object.getWidth(), object.getHeight() //request space dest canvas
         ) ; 
     }
 
