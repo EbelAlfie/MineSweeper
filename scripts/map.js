@@ -1,4 +1,4 @@
-import Entity from "./abstracted/entity.js";
+import Entity from "./base/entity.js";
 import GeneralObject from "./base/generalobject.js";
 import Sprite from "./custom/sprite.js";
 

@@ -1,4 +1,4 @@
-import * as MapObj from "./important/mapdata.js"
+import * as MapObj from "./data/mapdata.js"
 import Stack from "./custom/stack.js";
 import Map from "./map.js"
 import { centerizeX, centerizeY } from "./utils.js";

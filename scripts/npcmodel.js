@@ -1,5 +1,5 @@
-import Entity from "./abstracted/entity.js";
-import { commoner } from "./important/chardata.js";
+import Entity from "./base/entity.js";
+import { commoner } from "./data/chardata.js";
 import { toPixel } from "./utils.js";
 
 const NPCENUM = {

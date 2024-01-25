@@ -1,4 +1,4 @@
-import Entity from "../abstracted/entity.js";
+import Entity from "../base/entity.js";
 import GeneralObject from "../base/generalobject.js";
 import { toPixel } from "../utils.js";
 import { commoner, dragon, mainChar } from "./chardata.js";
