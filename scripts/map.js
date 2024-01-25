@@ -9,7 +9,7 @@ class Map extends GeneralObject {
         super(mapData) ;
         this.topLayer = new Sprite(mapData.top) ;
         this.reservedArea = mapData.tileInfo || {} ;
-        this.entities = new MineSweeper().riggingBomb(mapData.objects.main) ;
+        this.entities = new MineSweeper().riggingBomb(mapData.objects) ;
         this.events = new Event({
             mapObjects: mapData.objects, 
             mapEvents: mapData.events

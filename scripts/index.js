@@ -8,8 +8,8 @@ let gameContainer = document.querySelector(".floor") ;
 main() ;
 
 function main() {
-    //initSplash()
-    initGame()
+    initSplash()
+    //initGame()
 }
 
 function initSplash() {

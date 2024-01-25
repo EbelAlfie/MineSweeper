@@ -2,7 +2,7 @@ import * as MapObj from "./important/mapdata.js"
 import Stack from "./custom/stack.js";
 import Map from "./map.js"
 import { centerizeX, centerizeY } from "./utils.js";
-import Entity from "./abstracted/entity.js";
+import LayerManager from "./layermanager.js" ;
  
 class CustomCanvas {
     keyStack = new Stack() ;
@@ -20,7 +20,8 @@ class CustomCanvas {
     }
 
     createChurch() {
-        this.pivot = this.church.entities[0] ;
+        this.pivot = this.church.entities["main"] ;
+        this.lm = new LayerManager(this.context) ;
         this.church.sprite.onload = () => { 
             this.church.setHeight(this.church.sprite.height) ;
             this.church.setWidth(this.church.sprite.width) ;
@@ -34,14 +35,15 @@ class CustomCanvas {
             this.computeX(), this.computeY()
         ) ;
         //Bottom Layer
+
+        this.lm.manageObjectOrder(this.church.entities) ;
+
         Object.values(this.church.entities).forEach(entity => {
             if (entity === this.pivot) this.assertMove(entity) ;
-            else {
-                this.#render(entity) ;
-                this.church.registerArea(entity.x, entity.y, entity) ;
-            }
+            else this.church.registerArea(entity.x, entity.y, entity) ;
+            this.#render(entity) ;
         }) ;
-        this.#render(this.pivot) ;
+
         //Top Layer 
         this.context.drawImage(this.church.topLayer, 
             this.computeX(), this.computeY()

@@ -17,31 +17,28 @@ class MineSweeper {
     otherLines = [0, 2, 1, 1, 1, 4, 4, 4, 4, 3, 0, 1, 0, 2, 2, 2, 2, 0, 1, 5] ;
     constructor() {}
 
-    riggingBomb(mainChar) {
+    riggingBomb(mapObjects) {
         let currentX ;
         let currentY = 4 ;
-
-        let arrayOfent = []
-        arrayOfent.push(mainChar) ;
+        
         for (let y = 0; y < 3; y++) {
             currentX = 3 ;
             for (let x = 0; x < 12; x++) {
                 if (y == 0) this.probability = this.firstLine ;
                 else this.probability = this.otherLines ;
 
-                
+                let npc = this.createNpc() ;
+
+                if (x != 0 && x % 3 == 0) currentX += 2 
+                if (x != 0 && x % 6 == 0) currentX++ ;
+                this.setNpcPosition(npc, currentX, currentY) ;
+                currentX++ 
+                mapObjects[`npc${x},${y}`] = npc ;   
             }
             currentY += 3 ;
         }
-        return arrayOfent ;
+        return mapObjects ;
     }
-
-    // let npc = this.createNpc() ;
-    // if (x % 3 == 0) currentX += 2 
-    // this.setNpcPosition(npc, currentX, currentY) ;
-    // currentX++ 
-
-    // arrayOfent.push(npc) ;
 
     createNpc() {
         let key = Math.floor(Math.random() * 4) ;
