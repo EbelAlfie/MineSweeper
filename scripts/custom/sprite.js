@@ -40,7 +40,7 @@ class Sprite extends Image {
      * @param frameIndex of animation. default to currentAnimationFrame
     */
     getFrame() {
-        if (!this.isAnimateable()) return null ;
+        if (!this.isAnimateable()) return [0, 0] ;
         return this.animation.frames[this.#currentAnimationFrame] ;
     }
 

@@ -63,17 +63,6 @@ class CustomCanvas {
     #render(object) {
         if (!object.sprite.isInitialized) return
         const frame = object.sprite.getFrame() ;
-        switch(object.sprite.isAnimateable()) {
-            case true: 
-                this.#renderAnimation(object, frame);
-                break;
-            case false:
-                this.#renderObject(object);
-        }
-    
-    }
-
-    #renderAnimation(object, frame) {
         this.context.drawImage(
             object.sprite,
             frame[0], //x
@@ -83,18 +72,7 @@ class CustomCanvas {
             centerizeY(object.y, this.canvas.height) - this.pivot.y - 16, //x, y (char pos)
             object.getWidth(), object.getHeight() //request space dest canvas
         ) ; 
-    }
 
-    #renderObject(object) {
-        this.context.drawImage(
-            object.sprite,
-            0, //x
-            0, //y top left
-            object.getWidth(), object.getHeight(), //crop rect width height 
-            centerizeX(object.x, this.canvas.width) - this.pivot.x - 4, 
-            centerizeY(object.y, this.canvas.height) - this.pivot.y - 16, //x, y (char pos)
-            object.getWidth(), object.getHeight() //request space dest canvas
-        ) ; 
     }
 
     onZpressed() {
