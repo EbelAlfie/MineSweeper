@@ -3,6 +3,12 @@ import Sprite from "../custom/sprite.js";
 /** secara general, semua item punya koord sama gambar, sama height width (event beda lagi) */
 class GeneralObject {
     isPivot = false ;
+    hitBox = { 
+        topLeft: ,
+        topRight: ,
+        bottomLeft: ,
+        bottomRight: 
+    }
     constructor(EntityObj) {
         this.hasShadow = EntityObj.hasShadow || false ;
         this.height = EntityObj.height || 0 ;
