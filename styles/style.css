@@ -2,35 +2,35 @@
     font-family: 'Goudy Mediaeval Regular';
     font-style: normal;
     font-weight: normal;
-    src: local('Goudy Mediaeval Regular'), url('./resource/font/GoudyMediaeval-Regular.woff') format('woff');
+    src: local('Goudy Mediaeval Regular'), url('../resource/font/GoudyMediaeval-Regular.woff') format('woff');
 }
     
 @font-face {
     font-family: 'Goudy Mediaeval Bold';
     font-style: normal;
     font-weight: normal;
-    src: local('Goudy Mediaeval Bold'), url('./resource/font/GoudyMediaeval-DemiBold.woff') format('woff');
+    src: local('Goudy Mediaeval Bold'), url('../resource/font/GoudyMediaeval-DemiBold.woff') format('woff');
 }
     
 @font-face {
     font-family: 'Goudy Medieval Alternate Regular';
     font-style: normal;
     font-weight: normal;
-    src: local('Goudy Medieval Alternate Regular'), url('./resource/font/GoudyMedieval-Alternate.woff') format('woff');
+    src: local('Goudy Medieval Alternate Regular'), url('../resource/font/GoudyMedieval-Alternate.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Pixel Musketeer';
     font-style: normal;
     font-weight: normal;
-    src: local('Goudy Medieval Alternate Regular'), url('./resource/font/Pixel-Musketeer.woff') format('woff');
+    src: local('Goudy Medieval Alternate Regular'), url('../resource/font/Pixel-Musketeer.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Pixel Amiga Topaz';
     font-style: normal;
     font-weight: normal;
-    src: url('./resource/font/JSE_AmigaTopaz.woff') format('woff') ;
+    src: url('../resource/font/JSE_AmigaTopaz.woff') format('woff') ;
 }
 
 body {
@@ -48,15 +48,15 @@ body {
     background-color: burlywood ;
     background-size: cover; 
     background-repeat: no-repeat;
-    background-image: url("./resource/assets/background.jpg");
+    background-image: url("../resource/assets/background.jpg");
     transition: 3s; 
 }
 
 .sign-board {
     border-width: 40px;
     border-style: solid;
-    border-image: url("./resource/assets/iron-border.png") 25% round ;
-    background-image: url("./resource/assets/wood-background.jpg") ;
+    border-image: url("../resource/assets/iron-border.png") 25% round ;
+    background-image: url("../resource/assets/wood-background.jpg") ;
 }
 
 /* For Splash screen */
