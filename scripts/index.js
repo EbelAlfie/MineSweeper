@@ -44,13 +44,13 @@ function splashExitTransition() {
             iterations: 1
         }
     ).onfinish = () => {
-        document.body.style.backgroundImage = "url('resource/assets/backgroundgame.jpg')";
         splashContainer.style.display =  "none" ;
         gameCanvasEnterTransition() ;
     }
 }
 
 function gameCanvasEnterTransition() {
+    document.body.style.backgroundImage = 'url("resource/assets/backgroundgame.jpg")';
     gameContainer.style.display = "block" ;
     gameContainer.animate(
         enterAnimation,

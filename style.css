@@ -128,7 +128,6 @@ body {
     display: none ; 
     position: absolute ;
     transform: scale(3) ;
-    background-image: url("resource/assets/backgroundgame.jpg") ;
     /* animation: load 3s none; */
 }
 
