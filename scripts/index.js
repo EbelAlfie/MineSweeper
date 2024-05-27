@@ -44,7 +44,7 @@ function splashExitTransition() {
             iterations: 1
         }
     ).onfinish = () => {
-        document.body.style.backgroundImage = "url('../resource/assets/backgroundgame.jpg')";
+        document.body.style.backgroundImage = "url('resource/assets/backgroundgame.jpg')";
         splashContainer.style.display =  "none" ;
         gameCanvasEnterTransition() ;
     }
