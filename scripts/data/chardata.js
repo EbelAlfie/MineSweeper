@@ -46,7 +46,7 @@ export const mainChar = {
     width: 20,
     speed: 4,
     body: {
-        src: "../resource/assets/charachips/mc.png",
+        src: "resource/assets/charachips/mc.png",
         anims: mainCharAnim
     } 
 };
@@ -94,7 +94,7 @@ export const akagami = {
     width: 19,
     speed: 4, 
     body: {
-        src: "../resource/assets/charachips/akagami.png",
+        src: "resource/assets/charachips/akagami.png",
         anims: akagamiAnim
     } 
 };
@@ -135,7 +135,7 @@ export const dragon = {
     width: 80,
     speed: 4, 
     body: {
-        src: "../resource/assets/charachips/dragon.png",
+        src: "resource/assets/charachips/dragon.png",
         anims: dragonAnim
     } 
 };
@@ -176,7 +176,7 @@ export const commoner = {
     width: 25,
     speed: 4,
     body: {
-        src: "../resource/assets/charachips/jemaat1.png",
+        src: "resource/assets/charachips/jemaat1.png",
         anims: commonAnim
     } 
 };

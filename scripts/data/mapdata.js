@@ -9,7 +9,7 @@ const podium = {
     height: 40,
     width: 53,
     body: {
-        src: "../resource/assets/mapchips/podium.png",
+        src: "resource/assets/mapchips/podium.png",
     } 
 };
 
@@ -17,7 +17,7 @@ export const churchObj = {
     x: 0,
     y: 0,
     body: {
-        src: "../resource/assets/mapchips/mapbottom.png"
+        src: "resource/assets/mapchips/mapbottom.png"
     },
     tileInfo: {
         
