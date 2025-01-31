@@ -3,6 +3,8 @@ import GeneralObject from "../base/generalobject.js";
 import { toPixel } from "../utils.js";
 import { commoner, dragon, mainChar } from "./chardata.js";
 
+export const MAIN_CHARACTER = "main"
+
 const podium = {
     x: toPixel(11),
     y: toPixel(14),

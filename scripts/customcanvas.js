@@ -2,8 +2,10 @@ import * as MapObj from "./data/mapdata.js"
 import Stack from "./custom/stack.js";
 import Map from "./map.js"
 import { centerizeX, centerizeY } from "./utils.js";
-import LayerManager from "./layermanager.js" ;
+import LayerManager from "./ObjectLayerManager.js" ;
+import MineSweeper from "./MineSweeper.js";
  
+//Should manager main char movement and maps
 class CustomCanvas {
     keyStack = new Stack() ;
     movements = {
@@ -17,11 +19,13 @@ class CustomCanvas {
         this.canvas = docObj.space.querySelector(".screen");
         this.context = this.canvas.getContext("2d") ;
         this.church = new Map(MapObj.churchObj) ; 
-    }
-
-    createChurch() {
-        this.pivot = this.church.entities["main"] ;
+        
+        this.pivot = this.church.entities[MapObj.MAIN_CHARACTER] ;
         this.lm = new LayerManager(this.context) ;
+
+        const mineSweeper = new MineSweeper()
+        mineSweeper.riggingBomb(this.church)
+        
         this.church.sprite.onload = () => { 
             this.church.setHeight(this.church.sprite.height) ;
             this.church.setWidth(this.church.sprite.width) ;
@@ -72,12 +76,12 @@ class CustomCanvas {
             centerizeY(object.y, this.canvas.height) - this.pivot.y - 16, //x, y (char pos)
             object.getWidth(), object.getHeight() //request space dest canvas
         ) ; 
-
     }
 
     onZpressed() {
-        let event = this.church.checkForEvent(this.pivot) ;
-        this[event]() ;
+        let entity = this.church.checkForEvent(this.pivot) ;
+        console.log(entity)
+        entity.executeEvent() 
     }
 
     onKeyUp(key) { 
@@ -89,11 +93,6 @@ class CustomCanvas {
         if (key == "z") this.onZpressed() 
         const dir = this.movements[key] ;
         if (dir && !this.keyStack.contains(dir)) { this.keyStack.pushToTop(dir) }
-    }
-
-    gameOver() {
-        document.querySelector(".game-over").style.display = block; 
-        document.querySelector(".floor").style.display = none ;
     }
 
     computeX() { return this.canvas.width/2 - this.pivot.x }

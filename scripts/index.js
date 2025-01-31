@@ -22,7 +22,6 @@ function initGame() {
     world = new CustomCanvas({
         space: gameContainer
     });
-    world.createChurch() ;
     
     setupKeyActions() ;
 }

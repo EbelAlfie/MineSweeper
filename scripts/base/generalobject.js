@@ -10,13 +10,13 @@ class GeneralObject {
     //     bottomRight: 
     // }
     constructor(EntityObj) {
-        this.hasShadow = EntityObj.hasShadow || false ;
-        this.height = EntityObj.height || 0 ;
-        this.width = EntityObj.width || 0 ;
-        this.x = EntityObj.x || 0 ; 
-        this.y = EntityObj.y || 0 ; 
-        this.isPivot = EntityObj.isMainChar || false ;
-        this.sprite = new Sprite(EntityObj.body) ;
+        this.hasShadow = EntityObj?.hasShadow || false ;
+        this.height = EntityObj?.height || 0 ;
+        this.width = EntityObj?.width || 0 ;
+        this.x = EntityObj?.x || 0 ; 
+        this.y = EntityObj?.y || 0 ; 
+        this.isPivot = EntityObj?.isMainChar || false ;
+        this.sprite = new Sprite(EntityObj?.body) ;
     }
 
     getObjectCoord() {
@@ -34,6 +34,8 @@ class GeneralObject {
 
     getWidth() { return this.width }
     getHeight() { return this.height }
+
+    area() {}
 }
 
 export default GeneralObject

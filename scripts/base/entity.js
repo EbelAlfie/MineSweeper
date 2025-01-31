@@ -3,7 +3,7 @@ import MoveAble from "./moveable.js";
 /** Handle actions related to character */
 class Entity extends MoveAble {
     #currentAnimationSecond = 0 ;
-    status = 0 ;
+    status = 0 ; //temporary flag maybe 
 
     constructor(EntityObj) {
         super(EntityObj) ;
@@ -39,10 +39,13 @@ class Entity extends MoveAble {
         }
     }
 
-    executeEvent() {
+    registerEvent(interaction) {
+        this.interaction = interaction
+    }
 
+    executeEvent() {
         setTimeout(() => {
-            //event
+            this.interaction()
         }, 10)
     }
 }

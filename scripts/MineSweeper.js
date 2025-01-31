@@ -4,7 +4,7 @@ import { toPixel } from "./utils.js";
 
 const NPCENUM = {
     0: "NOT_BOMB",
-    1: "gameOver",
+    1: "GAME_OVER",
     2: "CABBAGE",
     3: "IRON_ORE",
     4: "CONTROLLER", 
@@ -17,39 +17,52 @@ class MineSweeper {
     otherLines = [0, 2, 1, 1, 1, 4, 4, 4, 4, 3, 0, 1, 0, 2, 2, 2, 2, 0, 1, 5] ;
     constructor() {}
 
-    riggingBomb(mapObjects) {
+    riggingBomb(map) {
+        let mapObjects = map.entities
+
         let currentX ;
         let currentY = 4 ;
         
-        for (let y = 0; y < 3; y++) {
+        for (let chairRow = 0; chairRow < 3; chairRow++) {
             currentX = 3 ;
-            for (let x = 0; x < 12; x++) {
-                if (y == 0) this.probability = this.firstLine ;
+            for (let chairAt = 0; chairAt < 12; chairAt++) {
+                if (chairRow == 0) this.probability = this.firstLine ;
                 else this.probability = this.otherLines ;
 
-                let npc = this.createNpc() ;
+                let npc = this._createNpc() ;
 
-                if (x != 0 && x % 3 == 0) currentX += 2 
-                if (x != 0 && x % 6 == 0) currentX++ ;
+                if (chairAt != 0 && chairAt % 3 == 0) currentX += 2 
+                if (chairAt != 0 && chairAt % 6 == 0) currentX++ ;
                 this.setNpcPosition(npc, currentX, currentY) ;
                 currentX++ 
-                mapObjects[`npc${x},${y}`] = npc ;   
+                mapObjects[`${chairAt},${chairRow}`] = npc ;   
             }
             currentY += 3 ;
         }
         return mapObjects ;
     }
 
-    createNpc() {
+    _createNpc() {
         let key = Math.floor(Math.random() * 4) ;
         let npc = new Entity(commoner) ;
         npc.status = NPCENUM[key] ;
+        switch(npc.status) {
+            case NPCENUM[1]: 
+                npc.registerEvent(this.gameOver)
+                break 
+            default:     
+        }
         return npc ;
     }
 
     setNpcPosition(npc, currentX, currentY) {
         npc.x = toPixel(currentX) ;
         npc.y = toPixel(currentY) ;
+    }
+
+    gameOver() {
+        document.querySelector(".game-over").style.display = block; 
+        document.querySelector(".floor").style.display = none ;
     }
 }
 

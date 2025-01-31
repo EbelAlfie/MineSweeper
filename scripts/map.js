@@ -27,8 +27,8 @@ class Map extends GeneralObject {
     }
 
     checkForEvent(mainChar) {
-        let event = this.lookFront(mainChar.x, mainChar.y, mainChar.direction, mainChar.speed)
-        return event ;
+        let entity = this.lookFront(mainChar.x, mainChar.y, mainChar.direction, mainChar.speed)
+        return entity ;
     }
 
     //Area handling
