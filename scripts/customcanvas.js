@@ -1,7 +1,7 @@
 import * as MapObj from "./data/mapdata.js"
 import Stack from "./custom/stack.js";
 import Map from "./map.js"
-import { centerizeX, centerizeY } from "./utils.js";
+import { absoluteX, absoluteY } from "./utils.js";
 import LayerManager from "./ObjectLayerManager.js" ;
 import MineSweeper from "./MineSweeper.js";
  
@@ -42,7 +42,7 @@ class CustomCanvas {
 
         this.lm.manageObjectOrder(this.church.entities)
             .forEach(entity => {
-                if (entity === this.pivot) 
+                if (entity === this.pivot)
                     this.assertMove(entity) ;
                 else 
                     this.church.registerArea(entity.x, entity.y, entity) ;
@@ -67,13 +67,18 @@ class CustomCanvas {
     #render(object) {
         if (!object.sprite.isInitialized) return
         const frame = object.sprite.getFrame() ;
+        
+        this.drawPointPivot(object.hitBox)
+
+        this.drawPointObj(object.hitBox, object)
+
         this.context.drawImage(
             object.sprite,
             frame[0], //x
             frame[1], //y top left
             object.getWidth(), object.getHeight(), //crop rect width height 
-            centerizeX(object.x, this.canvas.width) - this.pivot.x - 4, 
-            centerizeY(object.y, this.canvas.height) - this.pivot.y - 16, //x, y (char pos)
+            absoluteX(object.x, this.canvas.width, this.pivot.x),
+            absoluteY(object.y, this.canvas.height, this.pivot.y), //x, y (char pos)
             object.getWidth(), object.getHeight() //request space dest canvas
         ) ; 
     }
@@ -99,6 +104,48 @@ class CustomCanvas {
     computeY() { return this.canvas.height/2 - this.pivot.y }
 
     #refreshCanvas() { this.context.clearRect(0, 0, this.canvas.width, this.canvas.height) }
+
+    //Helper
+    drawPointPivot(coordinates) {
+        this.context.fillStyle = "blue"
+        
+        this.context.fillRect(
+            absoluteX(coordinates.topLeft[0], this.canvas.width, this.pivot.x),
+            absoluteY(coordinates.topLeft[1], this.canvas.height, this.pivot.y),
+            2, 1) ;
+        this.context.fillRect(
+            absoluteX(coordinates.topRight[0], this.canvas.width, this.pivot.x),
+            absoluteY(coordinates.topRight[1], this.canvas.height, this.pivot.y),
+            2, 1) ;
+        this.context.fillRect(
+            absoluteX(coordinates.bottomLeft[0], this.canvas.width, this.pivot.x),
+            absoluteY(coordinates.bottomLeft[1], this.canvas.height, this.pivot.y),
+            2, 1) ;
+        this.context.fillRect(
+            absoluteX(coordinates.bottomRight[0], this.canvas.width, this.pivot.x),
+            absoluteY(coordinates.bottomRight[1], this.canvas.height, this.pivot.y),
+            2, 1) ;
+    }
+    drawPointObj(coordinates, object) {
+        this.context.fillStyle = "red"
+        
+        this.context.fillRect(
+            absoluteX(coordinates.topLeft[0], this.canvas.width, this.pivot.x),
+            absoluteY(coordinates.topLeft[1], this.canvas.height, this.pivot.y),
+            2, 1) ;
+        this.context.fillRect(
+            absoluteX(coordinates.topRight[0], this.canvas.width, this.pivot.x),
+            absoluteY(coordinates.topRight[1], this.canvas.height, this.pivot.y),
+            2, 1) ;
+        this.context.fillRect(
+            absoluteX(coordinates.bottomLeft[0], this.canvas.width, this.pivot.x),
+            absoluteY(coordinates.bottomLeft[1], this.canvas.height, this.pivot.y),
+            2, 1) ;
+        this.context.fillRect(
+            absoluteX(coordinates.bottomRight[0], this.canvas.width, this.pivot.x),
+            absoluteY(coordinates.bottomRight[1], this.canvas.height, this.pivot.y),
+            2, 1) ;
+    }
 }
 
 export default CustomCanvas

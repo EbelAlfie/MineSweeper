@@ -23,6 +23,14 @@ export const computeCharX = (rawNumber) => { return toPixel(rawNumber) - 4 }
 
 export const computeCharY = (rawNumber) => { return toPixel(rawNumber) - 16 }
 
+export const absoluteX = (x, viewWidth, pivotX) => {
+    return centerizeX(x, viewWidth) - pivotX - 4
+}
+
+export const absoluteY = (y, viewHeight, pivotY) => {
+    return centerizeY(y, viewHeight) - pivotY - 16
+}
+
 export const asGrid = (x, y) => {
     return `${x*16},${y*16}`
 }

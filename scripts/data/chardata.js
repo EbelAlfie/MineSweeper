@@ -31,15 +31,22 @@ const mainCharAnim =  {
         frames: [[0, 96], [25, 96], [50, 96]]
     }
 }
+
+/**
+ * x and y represent logically coordinate
+ * height and width represent logical value
+ * 
+ * the imagery value is actually the coordinate at the frames. Which is above
+ */
 export const mainChar = {
     isMainChar: true,
     x: toPixel(12),
     y: toPixel(3),
     height: 32,
-    width: 25,
+    width: 20,
     speed: 2,
     body: {
-        src: "../resource/assets/charachips/mc.png",
+        src: "resource/assets/charachips/mc.png",
         anims: mainCharAnim
     } 
 };
@@ -87,7 +94,7 @@ export const akagami = {
     width: 19,
     speed: 4, 
     body: {
-        src: "../resource/assets/charachips/akagami.png",
+        src: "resource/assets/charachips/akagami.png",
         anims: akagamiAnim
     } 
 };
@@ -128,7 +135,7 @@ export const dragon = {
     width: 80,
     speed: 4, 
     body: {
-        src: "../resource/assets/charachips/dragon.png",
+        src: "resource/assets/charachips/dragon.png",
         anims: dragonAnim
     } 
 };
@@ -169,7 +176,7 @@ export const commoner = {
     width: 25,
     speed: 4,
     body: {
-        src: "../resource/assets/charachips/jemaat1.png",
+        src: "resource/assets/charachips/jemaat1.png",
         anims: commonAnim
     } 
 };
