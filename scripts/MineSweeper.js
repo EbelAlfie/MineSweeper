@@ -56,8 +56,7 @@ class MineSweeper {
     }
 
     setNpcPosition(npc, currentX, currentY) {
-        npc.x = toPixel(currentX) ;
-        npc.y = toPixel(currentY) ;
+        npc.updatePosition(toPixel(currentX), toPixel(currentY))
     }
 
     gameOver() {

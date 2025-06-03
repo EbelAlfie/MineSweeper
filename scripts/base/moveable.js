@@ -20,9 +20,9 @@ class MoveAble extends GeneralObject {
 
     /** Call this to move */
     move() {
-        const [coord, value] = this.positions[this.currentDirection] ;
-        this[coord] += value ;
-        this.updateHitBox() ;
+        const [coord, speed] = this.positions[this.currentDirection] ;
+        this[coord] += speed
+        this.updateHitBox()
     }
 
     /** update the input direction for movements */

@@ -18,7 +18,7 @@ class CustomCanvas {
     constructor(docObj) {
         this.canvas = docObj.space.querySelector(".screen");
         this.context = this.canvas.getContext("2d") ;
-        this.church = new Map(MapObj.churchObj) ; 
+        this.church = new Map(MapObj.churchObj, this.canvas) ; 
         
         this.pivot = this.church.entities[MapObj.MAIN_CHARACTER] ;
         this.lm = new LayerManager(this.context) ;
@@ -43,7 +43,7 @@ class CustomCanvas {
         this.lm.manageObjectOrder(this.church.entities)
             .forEach(entity => {
                 if (entity === this.pivot)
-                    this.assertMove(entity) ;
+                    this.assertMove(entity) ; 
                 else 
                     this.church.registerArea(entity.x, entity.y, entity) ;
                 this.#render(entity) ;
@@ -68,18 +68,17 @@ class CustomCanvas {
         if (!object.sprite.isInitialized) return
         const frame = object.sprite.getFrame() ;
         
-        this.drawPointPivot(object.hitBox)
-
-        this.drawPointObj(object.hitBox, object)
+        if (object === this.pivot) this.drawPointPivot(object.hitBox)
+        else this.drawPointObj(object.hitBox, object)
 
         this.context.drawImage(
             object.sprite,
-            frame[0], //x
-            frame[1], //y top left
-            object.getWidth(), object.getHeight(), //crop rect width height 
-            absoluteX(object.x, this.canvas.width, this.pivot.x),
-            absoluteY(object.y, this.canvas.height, this.pivot.y), //x, y (char pos)
-            object.getWidth(), object.getHeight() //request space dest canvas
+            frame[0], //x sx img
+            frame[1], //y top left sy img
+            object.getWidth(), object.getHeight(), //crop rect width height sWidth sHeight img
+            absoluteX(object.x, this.canvas.width, this.pivot.x), //dx map
+            absoluteY(object.y, this.canvas.height, this.pivot.y), //x, y (char pos) dy map
+            object.getWidth(), object.getHeight() //request space dest canvas dW, dH map
         ) ; 
     }
 
@@ -112,6 +111,11 @@ class CustomCanvas {
         this.context.fillRect(
             absoluteX(coordinates.topLeft[0], this.canvas.width, this.pivot.x),
             absoluteY(coordinates.topLeft[1], this.canvas.height, this.pivot.y),
+            this.pivot.getWidth(), this.pivot.getHeight()) ;
+
+        this.context.fillRect(
+            absoluteX(coordinates.topLeft[0], this.canvas.width, this.pivot.x),
+            absoluteY(coordinates.topLeft[1], this.canvas.height, this.pivot.y),
             2, 1) ;
         this.context.fillRect(
             absoluteX(coordinates.topRight[0], this.canvas.width, this.pivot.x),
@@ -128,7 +132,13 @@ class CustomCanvas {
     }
     drawPointObj(coordinates, object) {
         this.context.fillStyle = "red"
-        
+
+        this.context.fillRect(
+            absoluteX(coordinates.topLeft[0], this.canvas.width, this.pivot.x),
+            absoluteY(coordinates.topLeft[1], this.canvas.height, this.pivot.y),
+            object.getWidth(), object.getHeight()
+        ) ;
+
         this.context.fillRect(
             absoluteX(coordinates.topLeft[0], this.canvas.width, this.pivot.x),
             absoluteY(coordinates.topLeft[1], this.canvas.height, this.pivot.y),

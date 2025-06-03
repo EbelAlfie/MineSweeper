@@ -33,6 +33,12 @@ class GeneralObject {
         this.height = newHeight ;
     }
 
+    updatePosition(x, y) {
+        this.x = x
+        this.y = y
+        this.updateHitBox()
+    }
+
     updateHitBox() {
         this.hitBox = { 
             topLeft: [this.x, this.y],
