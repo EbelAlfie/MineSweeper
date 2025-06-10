@@ -45,7 +45,7 @@ class CustomCanvas {
                 if (entity === this.pivot)
                     this.assertMove(entity) ; 
                 else 
-                    this.church.registerArea(entity.x, entity.y, entity) ;
+                    this.church.registerArea(entity) ;
                 this.#render(entity) ;
             }) ;
 
@@ -59,7 +59,7 @@ class CustomCanvas {
             return 
         }
         entity.setDirection(this.keyStack.first) ;
-        if (this.church.lookFront(entity.x, entity.y, this.keyStack.first, entity.speed))
+        if (this.church.lookFront(entity, this.keyStack.first))
             return 
         entity.moveChar(this.keyStack.first) ;
     }
@@ -83,7 +83,8 @@ class CustomCanvas {
     }
 
     onZpressed() {
-        let entity = this.church.checkForEvent(this.pivot) ;
+        const entity = this.church.checkForEvent(this.pivot) ;
+        if (!entity) return 
         console.log(entity)
         entity.executeEvent() 
     }

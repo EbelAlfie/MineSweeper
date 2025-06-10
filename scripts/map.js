@@ -18,44 +18,106 @@ class Map extends GeneralObject {
     }
 
     /** check for event in current tile */
-    lookFront(x, y, direction, speed) {
-        let entityX = x ;
-        let entityY = y ;
-        switch (direction) {
-            case "North" : entityY -= speed ;
-            case "South" : entityY += speed ;
-            case "East" : entityX += speed ;
-            case "West" : entityX -= speed ;
+    lookFront(mainChar, direction) {
+        const { x, y, width, height, speed } = mainChar
+
+        let entityX = x 
+        let entityY = y 
+
+        let hitBox = {
+            edgeOne: null,
+            edgeTwo: null
         }
-        console.log(this.reservedArea)
+        switch (direction) {
+            case "North" : {
+                entityY -= speed
+                const topLeft = [entityX, entityY]
+                const topRight = [entityX + width, entityY]
+                
+                hitBox = {
+                    edgeOne: `${topLeft[0]},${topLeft[1]}`,
+                    edgeTwo: `${topRight[0]},${topRight[1]}`
+                }
+                break 
+            }
+            case "South" : {
+                entityY += speed 
+                const bottomLeft = [entityX, entityY + height]
+                const bottomRight = [entityX + width, entityY + height] 
+                hitBox = {
+                    edgeOne: `${bottomLeft[0]},${bottomLeft[1]}`,
+                    edgeTwo: `${bottomRight[0]},${bottomRight[1]}`
+                }
+                break 
+            }
+            case "East" : {
+                entityX += speed 
+                const topRight = [entityX + width, entityY]
+                const bottomRight = [entityX + width, entityY + height] 
+                hitBox = {
+                    edgeOne: `${topRight[0]},${topRight[1]}`,
+                    edgeTwo: `${bottomRight[0]},${bottomRight[1]}`
+                }
+                break
+            }
+            case "West" : {
+                entityX -= speed 
+                const topLeft = [entityX, entityY]
+                const bottomLeft = [entityX, entityY + height]
+                hitBox = {
+                    edgeOne: `${topLeft[0]},${topLeft[1]}`,
+                    edgeTwo: `${bottomLeft[0]},${bottomLeft[1]}`
+                }
+                break
+            }
+        }
+        console.log(this.reservedArea[`${entityX},${entityY}`])
+        console.log(`edge one ${hitBox.edgeOne}`)
+        console.log(`my coord ${entityX} ${entityY}`)
+
         if (entityX < 0 || entityY < 0 || entityY > this.getHeight() || entityX > this.getWidth()) return true ;
-        return this.reservedArea[`${entityX},${entityY}`] 
+        return this.reservedArea[hitBox.edgeOne] ?? this.reservedArea[hitBox.edgeTwo] 
     }
 
     checkForEvent(mainChar) {
-        let entity = this.lookFront(mainChar.x, mainChar.y, mainChar.direction, mainChar.speed)
+        const entity = this.lookFront(mainChar, mainChar.direction)
         return entity ;
     }
 
-    //Area handling
-    registerAreaBlock(entityObject, pivot) {
-        const charWidth = entityObject.getWidth()
-        const charHeight = entityObject.getHeight()
-
-        const charTopX = absoluteX(entityObject.x, this.canvas.width, pivot.x)
-        const charTopY = absoluteY(entityObject.y, this.canvas.height, pivot.y)
-        
-    }
     unregisterAreaBlock() {
         this.reservedArea = {}
     }
 
-    registerArea(x = null, y = null, isOccupied = true) {
+    registerArea(entity) {
+        const x = entity.x
+        const y = entity.y
         if (!x || !y) return ;
-        this.reservedArea[`${x},${y}`] = isOccupied ;
+        const hitBox = entity.hitBox
+        const charWidth = entity.getWidth()
+        const charHeight = entity.getHeight()
+        // const charTopX = absoluteX(hitBox.topLeft[0], this.canvas.width, pivot.x)
+        // const charTopXEnd = absoluteY(hitBox.topRight[0], this.canvas.height, pivot.x)
+        // const charBotY = absoluteX(hitBox.bottomLeft[1], this.canvas.width, pivot.y)
+        // const charTopYEnd = absoluteY(hitBox.topLeft[1], this.canvas.height, pivot.y)
+        for(let i = hitBox.topLeft[0]; i < hitBox.topRight[0]; i++) { //X
+            for(let j = hitBox.topLeft[1] - charHeight/2; j < hitBox.bottomLeft[1]; j++) {
+                this.reservedArea[`${i},${j}`] = entity
+            }
+        }
     }
-    unregisterArea(x, y) {
-        delete this.reservedArea[`${x},${y}`] ; //idealnya dihapus
+    unregisterArea(entity) {
+        const hitBox = entity.hitBox
+        const charWidth = entity.getWidth()
+        const charHeight = entity.getHeight()
+        const charTopX = absoluteX(hitBox.topLeft[0], this.canvas.width, pivot.x)
+        const charTopXEnd = absoluteY(hitBox.topRight[0], this.canvas.height, pivot.x)
+        const charBotY = absoluteX(hitBox.bottomLeft[1], this.canvas.width, pivot.y)
+        const charTopYEnd = absoluteY(hitBox.topLeft[1], this.canvas.height, pivot.y)
+        for(let i = charTopX; i < charTopXEnd; i++) { //X
+            for(let j = charBotY; j < charTopYEnd; j--) {
+                delete this.reservedArea[`${i},${j}`]
+            }
+        }
     }
  }
 
