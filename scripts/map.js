@@ -31,8 +31,8 @@ class Map extends GeneralObject {
         switch (direction) {
             case "North" : {
                 entityY -= speed
-                const topLeft = [entityX, entityY]
-                const topRight = [entityX + width, entityY]
+                const topLeft = [entityX, entityY + height/2]
+                const topRight = [entityX + width, entityY + height/2]
                 
                 hitBox = {
                     edgeOne: `${topLeft[0]},${topLeft[1]}`,
@@ -52,7 +52,7 @@ class Map extends GeneralObject {
             }
             case "East" : {
                 entityX += speed 
-                const topRight = [entityX + width, entityY]
+                const topRight = [entityX + width, entityY + height/2]
                 const bottomRight = [entityX + width, entityY + height] 
                 hitBox = {
                     edgeOne: `${topRight[0]},${topRight[1]}`,
@@ -62,7 +62,7 @@ class Map extends GeneralObject {
             }
             case "West" : {
                 entityX -= speed 
-                const topLeft = [entityX, entityY]
+                const topLeft = [entityX, entityY + height/2]
                 const bottomLeft = [entityX, entityY + height]
                 hitBox = {
                     edgeOne: `${topLeft[0]},${topLeft[1]}`,
@@ -100,7 +100,7 @@ class Map extends GeneralObject {
         // const charBotY = absoluteX(hitBox.bottomLeft[1], this.canvas.width, pivot.y)
         // const charTopYEnd = absoluteY(hitBox.topLeft[1], this.canvas.height, pivot.y)
         for(let i = hitBox.topLeft[0]; i < hitBox.topRight[0]; i++) { //X
-            for(let j = hitBox.topLeft[1] - charHeight/2; j < hitBox.bottomLeft[1]; j++) {
+            for(let j = hitBox.topLeft[1] + charHeight/2; j < hitBox.bottomLeft[1]; j++) {
                 this.reservedArea[`${i},${j}`] = entity
             }
         }
