@@ -164,19 +164,21 @@ body {
     user-select: none;
 }
 
-.game-over>H1 {
+.game-over>h1 {
     color: #382f28;
-    align-self: center;    
+    font-size: xx-large;
+    align-self: center;
+    margin-left: 20px;
 }
 
 .fold {
-    width: 0px;
-    height: 0px;
+    width: 40px;
+    height: 40px;
     position: absolute;
     border-bottom: 70px solid #eed29d;
     border-left: 70px solid transparent;
-    box-shadow: -5px 8px 5px #5b4b3f;
-    align-self: flex-end;
+    box-shadow: 6px 9px 6px #5b4b3f;
+    align-self: flex-start;
 }
 
 .game-over>hr {
@@ -208,6 +210,7 @@ body {
 }
 
 .news-content>article>h3 {
+    font-size: x-large;
     margin: 0px 0px 5px ;
 }
 
@@ -216,5 +219,6 @@ body {
 }
 
 .news-content>article>p:after {
-    content: "nisandnioweb iew fniwenfiwnifonwefnw fafifuwasweswos jdnqwoindoiwndiwndiqnwdiqndiqwnduiqwnduiqwdn"
+    font-size: large;
+    content: "Shock and panic rippled through a small town today as a bomb rocked a local church during Sunday services. Worshipers fled in terror as windows shattered and dust filled the air. The community is still reeling from the violence, with many seeking comfort and support in the aftermath of the attack"
 }

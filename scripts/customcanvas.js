@@ -67,9 +67,6 @@ class CustomCanvas {
     #render(object) {
         if (!object.sprite.isInitialized) return
         const frame = object.sprite.getFrame() ;
-        
-        if (object === this.pivot) this.drawPointPivot(object.hitBox)
-        else this.drawPointObj(object.hitBox, object)
 
         this.context.drawImage(
             object.sprite,

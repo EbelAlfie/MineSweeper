@@ -4,6 +4,7 @@ import MoveAble from "./moveable.js";
 class Entity extends MoveAble {
     #currentAnimationSecond = 0 ;
     status = 0 ; //temporary flag maybe 
+    interaction = null
 
     constructor(EntityObj) {
         super(EntityObj) ;

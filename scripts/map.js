@@ -71,51 +71,24 @@ class Map extends GeneralObject {
                 break
             }
         }
-        console.log(this.reservedArea[`${entityX},${entityY}`])
-        console.log(`edge one ${hitBox.edgeOne}`)
-        console.log(`my coord ${entityX} ${entityY}`)
-
-        if (entityX < 0 || entityY < 0 || entityY > this.getHeight() || entityX > this.getWidth()) return true ;
+        
         return this.reservedArea[hitBox.edgeOne] ?? this.reservedArea[hitBox.edgeTwo] 
     }
 
     checkForEvent(mainChar) {
-        const entity = this.lookFront(mainChar, mainChar.direction)
+        const entity = this.lookFront(mainChar, mainChar.currentDirection)
         return entity ;
     }
 
-    unregisterAreaBlock() {
-        this.reservedArea = {}
-    }
-
-    registerArea(entity) {
-        const x = entity.x
-        const y = entity.y
+    registerArea(entity, register = true) {
+        const { x, y } = entity
         if (!x || !y) return ;
         const hitBox = entity.hitBox
-        const charWidth = entity.getWidth()
         const charHeight = entity.getHeight()
-        // const charTopX = absoluteX(hitBox.topLeft[0], this.canvas.width, pivot.x)
-        // const charTopXEnd = absoluteY(hitBox.topRight[0], this.canvas.height, pivot.x)
-        // const charBotY = absoluteX(hitBox.bottomLeft[1], this.canvas.width, pivot.y)
-        // const charTopYEnd = absoluteY(hitBox.topLeft[1], this.canvas.height, pivot.y)
-        for(let i = hitBox.topLeft[0]; i < hitBox.topRight[0]; i++) { //X
+        for(let i = hitBox.topLeft[0] + 5; i < hitBox.topRight[0] - 5; i++) { //X
             for(let j = hitBox.topLeft[1] + charHeight/2; j < hitBox.bottomLeft[1]; j++) {
-                this.reservedArea[`${i},${j}`] = entity
-            }
-        }
-    }
-    unregisterArea(entity) {
-        const hitBox = entity.hitBox
-        const charWidth = entity.getWidth()
-        const charHeight = entity.getHeight()
-        const charTopX = absoluteX(hitBox.topLeft[0], this.canvas.width, pivot.x)
-        const charTopXEnd = absoluteY(hitBox.topRight[0], this.canvas.height, pivot.x)
-        const charBotY = absoluteX(hitBox.bottomLeft[1], this.canvas.width, pivot.y)
-        const charTopYEnd = absoluteY(hitBox.topLeft[1], this.canvas.height, pivot.y)
-        for(let i = charTopX; i < charTopXEnd; i++) { //X
-            for(let j = charBotY; j < charTopYEnd; j--) {
-                delete this.reservedArea[`${i},${j}`]
+                if (register) this.reservedArea[`${i},${j}`] = entity
+                else delete this.reservedArea[`${i},${j}`]
             }
         }
     }

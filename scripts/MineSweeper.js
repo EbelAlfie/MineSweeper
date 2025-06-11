@@ -48,7 +48,7 @@ class MineSweeper {
         npc.status = NPCENUM[key] ;
         switch(npc.status) {
             case NPCENUM[1]: 
-                npc.registerEvent(this.gameOver)
+                npc.registerEvent(this.gameOver.bind(this))
                 break 
             default:     
         }
@@ -60,8 +60,8 @@ class MineSweeper {
     }
 
     gameOver() {
-        document.querySelector(".game-over").style.display = block; 
-        document.querySelector(".floor").style.display = none ;
+        document.querySelector(".game-over").style.display = "flex"; 
+        document.querySelector(".floor").style.display = "none" ;
     }
 }
 
